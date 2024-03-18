@@ -241,16 +241,17 @@ void Menu::Balance_Load() {
     for(auto v : s.getVertexSet()) {
         double total_diff = 0.0;
         double n_edges = 0.0;
-        for (auto e: v->getAdj()) {
+        for (auto e: v->getIncoming()) {
             n_edges++;
             total_diff += (e->getWeight() - e->getFlow());
         }
         total_diff /= n_edges;
-        for(auto e : v->getAdj()){
+        for(auto e : v->getIncoming()){
             if(e->getWeight() - e->getFlow() > total_diff)e->setFlow(e->getFlow() + ((e->getWeight() - e->getFlow()) - total_diff));
             else if(e->getWeight() - e->getFlow() < total_diff) e->setFlow(e->getFlow() - (total_diff - (e->getWeight() - e->getFlow())));
         }
     }
+
     variance = 0;
     average = 0;
     maxdiff = 0;
