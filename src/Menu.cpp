@@ -172,7 +172,7 @@ list<pair<City,double>> Menu::Meet_Costumer_needs(){
     s.addVertex(super_source);
     s.addVertex(super_target);
     for(Vertex<string>* v : s.getVertexSet()){
-        if(v->getInfo()[0] == 'R') s.addEdge(super_source,v->getInfo(),d.getReservoiers()[v->getInfo()].getMaxDelivery());
+        if(v->getInfo()[0] == 'R') s.addEdge(super_source,v->getInfo(),DBL_MAX);
     }
     //create a super sink
     for(Vertex<string>* v : s.getVertexSet()){
@@ -197,6 +197,8 @@ list<pair<City,double>> Menu::Meet_Costumer_needs(){
 void Menu::Balance_Load() {
     //pensar melhor nisto
     Graph<string> s = d.getSupply();
+    list<pair<City,double>> result;
+
     //first need to create a super source
     string super_source = "SS";
     string super_target = "ST";
@@ -245,10 +247,14 @@ void Menu::Balance_Load() {
             n_edges++;
             total_diff += (e->getWeight() - e->getFlow());
         }
-        total_diff /= n_edges;
-        for(auto e : v->getIncoming()){
-            if(e->getWeight() - e->getFlow() > total_diff)e->setFlow(e->getFlow() + ((e->getWeight() - e->getFlow()) - total_diff));
-            else if(e->getWeight() - e->getFlow() < total_diff) e->setFlow(e->getFlow() - (total_diff - (e->getWeight() - e->getFlow())));
+        if(n_edges != 0) {
+            total_diff /= n_edges;
+            for (auto e: v->getIncoming()) {
+                if (e->getWeight() - e->getFlow() > total_diff)
+                    e->setFlow(e->getFlow() + ((e->getWeight() - e->getFlow()) - total_diff));
+                else if (e->getWeight() - e->getFlow() < total_diff)
+                    e->setFlow(e->getFlow() - (total_diff - (e->getWeight() - e->getFlow())));
+            }
         }
     }
 
@@ -299,7 +305,7 @@ bool Menu::Remove_Water_Reservoir(std::string reservoi_code) {
     s.addVertex(super_source);
     s.addVertex(super_target);
     for(Vertex<string>* v : s.getVertexSet()){
-        if(v->getInfo()[0] == 'R') s.addEdge(super_source,v->getInfo(),d.getReservoiers()[v->getInfo()].getMaxDelivery());
+        if(v->getInfo()[0] == 'R') s.addEdge(super_source,v->getInfo(),DBL_MAX);
     }
     //create a super sink
     for(Vertex<string>* v : s.getVertexSet()){
@@ -326,7 +332,6 @@ bool Menu::Remove_Water_Reservoir(std::string reservoi_code) {
 }
 
 bool Menu::Maintenance_Station(string station_code){
-    //Nao esta totalmente fucional
     if(d.getStations().find(station_code) == d.getStations().end()) return false;
     Graph<string> s = d.getSupply();
     list<pair<City,double>> l = Meet_Costumer_needs();
@@ -352,7 +357,7 @@ bool Menu::Maintenance_Station(string station_code){
     s.addVertex(super_source);
     s.addVertex(super_target);
     for(Vertex<string>* v : s.getVertexSet()){
-        if(v->getInfo()[0] == 'R') s.addEdge(super_source,v->getInfo(),d.getReservoiers()[v->getInfo()].getMaxDelivery());
+        if(v->getInfo()[0] == 'R') s.addEdge(super_source,v->getInfo(),DBL_MAX);
     }
     //create a super sink
     for(Vertex<string>* v : s.getVertexSet()){
