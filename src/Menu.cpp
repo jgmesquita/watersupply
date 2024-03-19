@@ -331,23 +331,23 @@ bool Menu::Remove_Water_Reservoir(std::string reservoi_code) {
     return true;
 }
 
-bool Menu::Maintenance_Station(string station_code){
-    if(d.getStations().find(station_code) == d.getStations().end()) return false;
+bool Menu::Maintenance_Station(string station_code) {
+    if (d.getStations().find(station_code) == d.getStations().end()) return false;
     Graph<string> s = d.getSupply();
-    list<pair<City,double>> l = Meet_Costumer_needs();
-    list<pair<City,double>> r;
-    for(auto v : s.getVertexSet()){
+    list<pair<City, double>> l = Meet_Costumer_needs();
+    list<pair<City, double>> r;
+    for (auto v: s.getVertexSet()) {
 
-        for(auto e: v->getAdj()){
-            if(e->getDest()->getInfo() == station_code)
-                s.removeEdge(e->getDest()->getInfo(),station_code);
+        for (auto e: v->getAdj()) {
+            if (e->getDest()->getInfo() == station_code)
+                s.removeEdge(e->getDest()->getInfo(), station_code);
         }
 
     }
-    for(auto v : s.getVertexSet()){
-        if(v->getInfo() == station_code){
-            for(auto e: v->getAdj()){
-                s.removeEdge(station_code,e->getDest()->getInfo());
+    for (auto v: s.getVertexSet()) {
+        if (v->getInfo() == station_code) {
+            for (auto e: v->getAdj()) {
+                s.removeEdge(station_code, e->getDest()->getInfo());
             }
         }
     }
@@ -356,31 +356,70 @@ bool Menu::Maintenance_Station(string station_code){
     string super_target = "ST";
     s.addVertex(super_source);
     s.addVertex(super_target);
-    for(Vertex<string>* v : s.getVertexSet()){
-        if(v->getInfo()[0] == 'R') s.addEdge(super_source,v->getInfo(),DBL_MAX);
+    for (Vertex<string> *v: s.getVertexSet()) {
+        if (v->getInfo()[0] == 'R') s.addEdge(super_source, v->getInfo(), DBL_MAX);
     }
     //create a super sink
-    for(Vertex<string>* v : s.getVertexSet()){
-        if(v->getInfo()[0] == 'C') s.addEdge(v->getInfo(),super_target,DBL_MAX);
+    for (Vertex<string> *v: s.getVertexSet()) {
+        if (v->getInfo()[0] == 'C') s.addEdge(v->getInfo(), super_target, DBL_MAX);
     }
-    edmondsKarp(&s,super_source,super_target);
-    for(Vertex<string>* v : s.getVertexSet()){
-        if(v->getInfo()[0] == 'C'){
+    edmondsKarp(&s, super_source, super_target);
+    for (Vertex<string> *v: s.getVertexSet()) {
+        if (v->getInfo()[0] == 'C') {
             double value = 0.0;
-            for(auto e : v->getIncoming()){
+            for (auto e: v->getIncoming()) {
                 value += e->getFlow();
             }
             City temp = d.getCities()[v->getInfo()];
-            if(value < temp.getDemand()) r.push_back(make_pair(temp,value));
+            if (value < temp.getDemand()) r.push_back(make_pair(temp, value));
 
         }
     }
     vector<string> t;
     cout << "The affected cities by the removal of the Station are:\n";
-    for(auto p : r){
-        if(std::find(l.begin(), l.end(),p) == l.end()) cout << p.first.getNameCity() << ' '<< p.second << '\n';
+    for (auto p: r) {
+        if (std::find(l.begin(), l.end(), p) == l.end()) cout << p.first.getNameCity() << ' ' << p.second << '\n';
     }
     return true;
+}
 
+bool Menu::Remove_Pipe(std::string source, std::string target, bool bidirectional) {
+    Graph<string> s = d.getSupply();
+    //Check for already existent problems with supply
+    list<pair<City, double>> l = Meet_Costumer_needs();
+    list<pair<City, double>> r;
+    //Check for invalid source or target
+    auto v_source = s.findVertex(source);
+    auto v_target = s.findVertex(target);
+    if (v_source == nullptr || v_target) {
+        return false;
+    }
+    if (bidirectional) {
+        s.removeEdge(source, target);
+        s.removeEdge(target, source);
+    }
+    else {
+        s.removeEdge(source, target);
+    }
+    //Solve for EdmondKarp
+    string super_source = "SS";
+    string super_target = "ST";
+    s.addVertex(super_source);
+    s.addVertex(super_target);
+    //Super Source
+    for(Vertex<string>* v : s.getVertexSet()){
+        if(v->getInfo()[0] == 'R') s.addEdge(super_source,v->getInfo(),DBL_MAX);
+    }
+    //Super Target
+    for(Vertex<string>* v : s.getVertexSet()){
+        if(v->getInfo()[0] == 'C') s.addEdge(v->getInfo(),super_target,DBL_MAX);
+    }
+    edmondsKarp(&s,super_source,super_target);
+    //Print result
+    cout << "The affected cities by the removal of the respective edge are:" << endl;
+    for (auto p: r) {
+        if (std::find(l.begin(), l.end(), p) == l.end()) cout << p.first.getNameCity() << ' ' << p.second << endl;
+    }
+    return true;
 }
 

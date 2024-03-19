@@ -22,7 +22,6 @@ public:
     double findMinResidualAlongPath(Vertex<string> *s, Vertex<string> *t);
     bool findAugmentingPath(Graph<string> *g, Vertex<string> *s, Vertex<string> *t);
     void testAndVisit(std::queue< Vertex<string>*> &q, Edge<string> *e, Vertex<string> *w, double residual);
-
-
+    bool Remove_Pipe(string source, string target, bool bidirectional);
 };
 #endif //PROJETO_DA_MENU_H
