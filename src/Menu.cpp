@@ -415,6 +415,18 @@ bool Menu::Remove_Pipe(std::string source, std::string target, bool bidirectiona
         if(v->getInfo()[0] == 'C') s.addEdge(v->getInfo(),super_target,DBL_MAX);
     }
     edmondsKarp(&s,super_source,super_target);
+    //Evalute the context
+    for (Vertex<string> *v: s.getVertexSet()) {
+        if (v->getInfo()[0] == 'C') {
+            double value = 0.0;
+            for (auto e: v->getIncoming()) {
+                value += e->getFlow();
+            }
+            City temp = d.getCities()[v->getInfo()];
+            if (value < temp.getDemand()) r.push_back(make_pair(temp, value));
+
+        }
+    }
     //Print result
     cout << "The affected cities by the removal of the respective edge are:" << endl;
     for (auto p: r) {
