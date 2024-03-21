@@ -79,10 +79,13 @@ public:
     void setSelected(bool selected);
     void setReverse(Edge<T> *reverse);
     void setFlow(double flow);
+    void setWeight(double weight);
+    double getRestore() const;
+    void SetRestore(double restore);
 protected:
     Vertex<T> * dest; // destination vertex
     double weight; // edge weight, can also be used for capacity
-
+    double restore;
     // auxiliary fields
     bool selected = false;
 
@@ -296,6 +299,18 @@ template <class T>
 Edge<T>::Edge(Vertex<T> *orig, Vertex<T> *dest, double w): orig(orig), dest(dest), weight(w) {}
 
 template <class T>
+void Edge<T>::setWeight(double weight) {
+    this->weight = weight;
+}
+template <class T>
+double Edge<T>::getRestore() const {
+    return this->restore;
+}
+template <class T>
+void Edge<T>::SetRestore(double restore){
+    this->restore = restore;
+}
+template <class T>
 Vertex<T> * Edge<T>::getDest() const {
     return this->dest;
 }
@@ -419,6 +434,7 @@ bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
     if (v1 == nullptr || v2 == nullptr)
         return false;
     v1->addEdge(v2, w);
+
     return true;
 }
 

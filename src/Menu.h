@@ -13,11 +13,14 @@ public:
     Menu();
     void Max_Amount_Water();
     bool Max_Amount_Water_specific(string city_code);
-    list<pair<City,double>> Meet_Costumer_needs();
+    Graph<string> getSupy();
+    list<pair<City,double>> Meet_Costumer_needs(const Graph<string> supply);
     void Balance_Load();
-    bool Remove_Water_Reservoir(string reservoi_code);
-    bool Maintenance_Station(string station_code);
-    void edmondsKarp(Graph<string> *g, string source, string target);
+    bool Remove_Water_Reservoir(string reservoi_code,Graph<string> s);
+    bool Maintenance_Station(string station_code,const Graph<string> a);
+    bool Remove_Pipe(Graph<string> s,std::string source, std::string target);
+    void Remove_Pipe2(Graph<string> s);
+    list<pair<City,double>> edmondsKarp(Graph<string> g);
     void augmentFlowAlongPath(Vertex<string> *s, Vertex<string> *t, double f);
     double findMinResidualAlongPath(Vertex<string> *s, Vertex<string> *t);
     bool findAugmentingPath(Graph<string> *g, Vertex<string> *s, Vertex<string> *t);
