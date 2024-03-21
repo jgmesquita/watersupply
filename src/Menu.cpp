@@ -1,6 +1,14 @@
 //
 // Created by afdom on 16/03/2024.
 //
+
+
+//Funçoes remocao de reservatorios, arestas e pipes dar output a cidades que ficaram ainda mais prejudicadas
+//alterar a ultima fucnçao para dar os pipes que removidos afetariam cada cidade
+//compor erros na ultima funçao
+//compor falta de novas cidades afetadas
+// pensar naquela funçao de aplicar so uma vex o maxflow <<<< pouco importante ???
+//mostrar as cidades que passaram a estar afetadas depois de aplicar o algoritmo de balance
 #include "Menu.h"
 #include "cfloat"
 #include <cmath>
@@ -33,9 +41,12 @@ void Menu::Max_Amount_Water() {
     std::ofstream outputfile("Output.txt");
     //first need to create s super source
     list<pair<City,double>> r = edmondsKarp(s);
+    double total = 0;
     for (auto p : r) {
         cout << p.first.getNameCity() << " - " << p.first.getCodeCity() << " - " << p.second << '\n';
+        total += p.second;
     }
+    cout << total << "\n";
     outputfile.close();
 
 
@@ -179,34 +190,16 @@ list<pair<City,double>> Menu::Meet_Costumer_needs(const Graph<string> a){
     }
     return result;
 }
-/*
-void Menu::Balance_Load() {
+//falta dar outpt a cidades que passaram a estar afetadas
+void Menu::Balance_Load(Graph<string> s) {
     //pensar melhor nisto
-    Graph<string> s = d.getSupply();
+    list<pair<City,double>> l = Meet_Costumer_needs(s);
+    set<string> cities_affected;
+    for(auto p : l) cities_affected.insert(p.first.getCodeCity());
     list<pair<City,double>> result;
 
-    //first need to create s super source
-    string super_source = "SS";
-    string super_target = "ST";
-    s.addVertex(super_source);
-    s.addVertex(super_target);
-    for(Vertex<string>* v : s.getVertexSet()){
-        s.addEdge(super_source,v->getInfo(),d.getReservoiers()[v->getInfo()].getMaxDelivery());
-    }
-    //create s super sink
-    for(Vertex<string>* v : s.getVertexSet()){
-        if(v->getInfo()[0] == 'C') s.addEdge(v->getInfo(),super_target,d.getCities()[v->getInfo()].getDemand());
-    }
-    edmondsKarp(&s,super_source,super_target);
-    for(Vertex<string>* v : s.getVertexSet()){
-        if(v->getInfo()[0] == 'R') s.removeEdge(super_source,v->getInfo());
-    }
-    //create s super sink
-    for(Vertex<string>* v : s.getVertexSet()){
-        if(v->getInfo()[0] == 'C') s.removeEdge(v->getInfo(),super_target);
-    }
-    s.removeVertex(super_source);
-    s.removeVertex(super_target);
+    result = edmondsKarp(s);
+
     double counter = 0.0;
     double average = 0, variance = 0, maxdiff=0;
     for(auto v : s.getVertexSet()){
@@ -226,27 +219,31 @@ void Menu::Balance_Load() {
     variance /= (counter - 1);
     cout << "The inicial metrics are: \n";
     cout << "Average:" << fixed << setprecision(2) << average << ' ' << "Variance:"  << fixed << setprecision(2) << variance << ' ' << "Max-Difference:" << maxdiff << '\n';
+    //balancing functioon
     for(auto v : s.getVertexSet()) {
         double total_diff = 0.0;
         double n_edges = 0.0;
-        for (auto e: v->getIncoming()) {
-            n_edges++;
-            total_diff += (e->getWeight() - e->getFlow());
-        }
-        if(n_edges != 0) {
-            total_diff /= n_edges;
-            for (auto e: v->getIncoming()) {
-                if (e->getWeight() - e->getFlow() > total_diff)
-                    e->setFlow(e->getFlow() + ((e->getWeight() - e->getFlow()) - total_diff));
-                else if (e->getWeight() - e->getFlow() < total_diff)
-                    e->setFlow(e->getFlow() - (total_diff - (e->getWeight() - e->getFlow())));
+        if(cities_affected.find(v->getInfo()) == cities_affected.end()) {
+            for (auto e: v->getAdj()) {
+                n_edges++;
+                total_diff += (e->getWeight() - e->getFlow());
+            }
+            if (n_edges != 0) {
+                total_diff /= n_edges;
+                for (auto e: v->getAdj()) {
+                    if (e->getWeight() - e->getFlow() > total_diff)
+                        e->setFlow(e->getFlow() + ((e->getWeight() - e->getFlow()) - total_diff));
+                    else if (e->getWeight() - e->getFlow() < total_diff)
+                        e->setFlow(e->getFlow() - (total_diff - (e->getWeight() - e->getFlow())));
+                }
             }
         }
     }
-
+    //final metrics
     variance = 0;
     average = 0;
     maxdiff = 0;
+
     for(auto v : s.getVertexSet()){
         for(auto e : v->getAdj()){
             if(e->getWeight() - e->getFlow() > maxdiff) maxdiff = (e->getWeight() - e->getFlow());
@@ -267,7 +264,7 @@ void Menu::Balance_Load() {
 
 }
 
-*/
+
 bool Menu::Remove_Water_Reservoir(std::string reservoi_code,Graph<string> s) {
     if(d.getReservoiers().find(reservoi_code) == d.getReservoiers().end()) return false;
     list<pair<City,double>> l = Meet_Costumer_needs(s);
@@ -301,9 +298,9 @@ bool Menu::Remove_Water_Reservoir(std::string reservoi_code,Graph<string> s) {
             }
         }
     }
-    for(auto v : s.getVertexSet()){
-        if(v->getInfo() == reservoi_code){
-            for(auto e: v->getAdj()){
+    for(auto v : s.getVertexSet()) {
+        if (v->getInfo() == reservoi_code) {
+            for (auto e: v->getAdj()) {
                 e->setWeight(restore_weights[e]);
             }
         }
@@ -374,7 +371,7 @@ bool Menu::Remove_Pipe(Graph<string> s,std::string source, std::string target) {
     auto v_source = s.findVertex(source);
     auto v_target = s.findVertex(target);
     bool exits = false;
-    if (v_source == nullptr || v_source == v_target) {
+    if (v_source == nullptr || v_source == v_target || v_target== nullptr) {
         return false;
     }
 
@@ -461,7 +458,7 @@ bool Menu::Remove_Pipe(Graph<string> s,std::string source, std::string target) {
     }
     return true;
 }
-/*
+//funçao a falhar nao esta a restaurante corretamente as capacidades das arestas
 void Menu::Remove_Pipe2(Graph<string> s){
     for(auto v : s.getVertexSet()){
         for(auto e : v->getAdj()){
@@ -529,5 +526,5 @@ void Menu::Remove_Pipe2(Graph<string> s){
         }
     }
 }
- */
+
 

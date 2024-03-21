@@ -58,7 +58,7 @@ int main() {
                 break;
             }
             case 3: {
-                //m.Balance_Load();
+                m.Balance_Load(s);
                 break;
             }
             case 4: {
@@ -86,7 +86,7 @@ int main() {
                 break;
             }
             case 7: {
-                m.Remove_Pipe2(s);
+                m.Remove_Pipe2(s); //fucnçao esta a dar erro
 
                 break;
             }

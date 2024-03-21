@@ -15,7 +15,7 @@ public:
     bool Max_Amount_Water_specific(string city_code);
     Graph<string> getSupy();
     list<pair<City,double>> Meet_Costumer_needs(const Graph<string> supply);
-    void Balance_Load();
+    void Balance_Load(Graph<string> s);
     bool Remove_Water_Reservoir(string reservoi_code,Graph<string> s);
     bool Maintenance_Station(string station_code,const Graph<string> a);
     bool Remove_Pipe(Graph<string> s,std::string source, std::string target);
