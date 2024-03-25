@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 #include <sstream>
 #include <fstream>
 #include "Graph.h"
@@ -78,23 +79,23 @@ int main() {
             }
             case 6:{
                 vector<string> temp = m.Remove_Station_noeffect(s);
+                sort(temp.begin(), temp.end());
                 cout << "The Station use maintenance doesnt have an effect on the grid are:\n";
                 for(auto v : temp) cout << v << '\n';
                 break;
             }
             case 7: {
                 string source;
-                cout << "Please insert a valid Source code (Station or Reservoir):";
+                cout << "Please insert a valid Source code (Station or Reservoir):\n";
                 cin >> source;
                 string target;
-                cout << "Please insert a valid Target code (Station or City):";
+                cout << "Please insert a valid Target code (Station or City):\n";
                 cin >> target;
                 if(!m.Remove_Pipe(s,source,target)) cout << "Not a valid Pipe!" << '\n';
                 break;
             }
             case 8: {
-                m.Remove_Pipe2(s); //fucnçao esta a dar erro
-
+                m.Remove_Pipe2(s);
                 break;
             }
             default:

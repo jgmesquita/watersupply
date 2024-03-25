@@ -3,17 +3,21 @@
 //
 
 
-//Funçoes remocao de reservatorios, arestas e pipes dar output a cidades que ficaram ainda mais prejudicadas
-//alterar a ultima fucnçao para dar os pipes que removidos afetariam cada cidade
-//compor erros na ultima funçao
-//compor falta de novas cidades afetadas
+//Funçoes remocao de reservatorios, arestas e pipes dar output a cidades que ficaram ainda mais prejudicadas - done
+//alterar a ultima fucnçao para dar os pipes que removidos afetariam cada cidade - done
+//compor erros na ultima funçao - done
+//compor falta de novas cidades afetadas - done
 // pensar naquela funçao de aplicar so uma vex o maxflow <<<< pouco importante ???
 //mostrar as cidades que passaram a estar afetadas depois de aplicar o algoritmo de balance
-//fazer output para ficheiro
+//fazer output para ficheiro - done
 #include "Menu.h"
-#include "cfloat"
+#include <sstream>
+#include <fstream>
 #include <cmath>
 #include <iomanip>
+#include <map>
+#include <cstdio>
+
 Menu::Menu() {
     this->d = Data();
     d.parseReservoir();
@@ -27,31 +31,30 @@ Graph<string> Menu::getSupy(){
 bool Menu::Max_Amount_Water_specific(string city_code){
     if(d.getCities().find(city_code) == d.getCities().end()) return false;
     Graph<string> s = d.getSupply();
-    std::ofstream outputfile("Output.txt");
-    //first need to create s super source
     list<pair<City,double>> r = edmondsKarp(s);
     for (auto p : r) {
         if(p.first.getCodeCity() == city_code)
         cout << p.first.getNameCity() << " - " << p.first.getCodeCity() << " - " << p.second << '\n';
     }
-    outputfile.close();
     return false;
 }
 void Menu::Max_Amount_Water() {
     Graph<string> s = d.getSupply();
-    std::ofstream outputfile("Output.txt");
-    //first need to create s super source
+    ofstream of;
+    of.open("../../output.txt", ios::app);
     list<pair<City,double>> r = edmondsKarp(s);
     double total = 0;
     for (auto p : r) {
         cout << p.first.getNameCity() << " - " << p.first.getCodeCity() << " - " << p.second << '\n';
+        of << p.first.getNameCity() << " - " << p.first.getCodeCity() << " - " << p.second << '\n';
         total += p.second;
+        of.flush();
     }
-    cout << total << "\n";
-    outputfile.close();
-
-
+    cout << "The maxflow for the virtual super sink is: " << total << '\n';
+    of << "The maxflow for the virtual super sink is: " << total << '\n';
+    of.close();
 }
+
 
 void Menu::testAndVisit(std::queue< Vertex<string>*> &q, Edge<string> *e, Vertex<string> *w, double residual) {
 // Check if the vertex 'w' is not visited and there is residual capacity
@@ -293,7 +296,18 @@ bool Menu::Remove_Water_Reservoir(std::string reservoi_code,Graph<string> s) {
     for (auto e: v->getAdj()) {
         e->setWeight(restore_weights[e]);
     }
-
+    bool flag = false;
+    for(auto p : r){
+        if(p.second < p.first.getDemand()) {
+            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) {
+                flag = true;
+            }
+        }
+    }
+    if (!flag) {
+        cout << "None of the cities were affected by the removal!\n";
+        return true;
+    }
 
     cout << "The affected cities by the removal of the Reservoi are:\n";
     for(auto p : r){
@@ -337,7 +351,18 @@ bool Menu::Maintenance_Station(string station_code,const Graph<string> b){
         e->setWeight(restore_weights[e]);
     }
 
-
+    bool flag = false;
+    for(auto p : r){
+        if(p.second < p.first.getDemand()) {
+            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) {
+                flag = true;
+            }
+        }
+    }
+    if (!flag) {
+        cout << "None of the cities were affected by the removal!\n";
+        return true;
+    }
     cout << "The affected cities by the removal of the Station are:\n";
     for(auto p : r){
         if(p.second < p.first.getDemand()) {
@@ -346,11 +371,8 @@ bool Menu::Maintenance_Station(string station_code,const Graph<string> b){
         }
     }
 
-
     return true;
 }
-/*
- * reve esta funçao por favor n tive tempo
 vector<string> Menu::Remove_Station_noeffect(Graph<string> s){
     vector<string> caixa;
     for(auto r : d.getStations()) {
@@ -397,8 +419,11 @@ vector<string> Menu::Remove_Station_noeffect(Graph<string> s){
     }
     return caixa;
 }
-*/
+
 bool Menu::Remove_Pipe(Graph<string> s,std::string source, std::string target) {
+    unordered_map<string,double> temp;
+    list<pair<City,double>> l = Meet_Costumer_needs(s);
+    for(auto p : l) temp[p.first.getCodeCity()] = p.second;
     bool bidirectional = false;
     auto v_source = s.findVertex(source);
     auto v_target = s.findVertex(target);
@@ -423,7 +448,6 @@ bool Menu::Remove_Pipe(Graph<string> s,std::string source, std::string target) {
 
     if(!exits) return false;
     //Check for already existent problems with supply
-    list<pair<City, double>> l = Meet_Costumer_needs(s);
     set<string> cities_affected;
     for(auto p : l) cities_affected.insert(p.first.getCodeCity());
     //Check for invalid source or target
@@ -481,17 +505,33 @@ bool Menu::Remove_Pipe(Graph<string> s,std::string source, std::string target) {
             }
         }
     }
+    bool flag = false;
+    for(auto p : r){
+        if(p.second < p.first.getDemand()) {
+            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) {
+                flag = true;
+            }
+        }
+    }
+    if (!flag) {
+        cout << "None of the cities were affected by the removal!\n";
+        return true;
+    }
     //Print result
     cout << "The affected cities by the removal of the Pipe are:\n";
     for(auto p : r){
         if(p.second < p.first.getDemand()) {
-            if (cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << '\n';
+            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << '\n';
         }
     }
     return true;
 }
 //funçao a falhar nao esta a restaurante corretamente as capacidades das arestas
 void Menu::Remove_Pipe2(Graph<string> s){
+    map<string, vector<string>> all_cities{};
+    unordered_map<string,double> temp;
+    list<pair<City,double>> l = Meet_Costumer_needs(s);
+    for(auto p : l) temp[p.first.getCodeCity()] = p.second;
     for(auto v : s.getVertexSet()){
         for(auto e : v->getAdj()){
             bool bidirectional = false;
@@ -534,8 +574,6 @@ void Menu::Remove_Pipe2(Graph<string> s){
             if (bidirectional) {
                 e->setWeight(restore_weights[e]);
 
-
-
                 for(auto p : e->getDest()->getAdj()){
                     if(p->getDest()->getInfo() == v->getInfo()){
                         e->setWeight(restore_weights[e]);
@@ -549,13 +587,22 @@ void Menu::Remove_Pipe2(Graph<string> s){
 
             }
             //Print result
-            cout << "The affected cities by the removal of the Pipe " << v->getInfo() << " --> " << e->getDest()->getInfo() << " are:\n";
             for(auto p : r){
                 if(p.second < p.first.getDemand()) {
-                    if (cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << '\n';
+                    if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) {
+                        all_cities[p.first.getNameCity()].push_back(v->getInfo() + "-->" + e->getDest()->getInfo());
+                    }
                 }
             }
         }
+    }
+    cout << "The critical pipes for each city are: " << endl;
+    for (auto it : all_cities) {
+        cout << it.first << ":" << endl;
+        for (auto it2 : it.second) {
+            cout << it2 << endl;
+        }
+        cout << endl;
     }
 }
 
