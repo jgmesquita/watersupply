@@ -13,6 +13,8 @@
 #include "cfloat"
 #include <cmath>
 #include <iomanip>
+#include <map>
+
 Menu::Menu() {
     this->d = Data();
     d.parseReservoir();
@@ -458,8 +460,10 @@ bool Menu::Remove_Pipe(Graph<string> s,std::string source, std::string target) {
     }
     return true;
 }
+
 //funçao a falhar nao esta a restaurante corretamente as capacidades das arestas
-void Menu::Remove_Pipe2(Graph<string> s){
+void Menu::Remove_Pipe2(Graph<string> s) {
+    map<string, vector<string>> all_cities{};
     for(auto v : s.getVertexSet()){
         for(auto e : v->getAdj()){
             bool bidirectional = false;
@@ -516,14 +520,22 @@ void Menu::Remove_Pipe2(Graph<string> s){
                 e->setWeight(restore_weights[e]);
 
             }
-            //Print result
-            cout << "The affected cities by the removal of the Pipe " << v->getInfo() << " --> " << e->getDest()->getInfo() << " are:\n";
-            for(auto p : r){
+            for (auto p : r){
                 if(p.second < p.first.getDemand()) {
-                    if (cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << '\n';
+                    if (cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) {
+                        all_cities[p.first.getNameCity()].push_back(v->getInfo() + "-->" + e->getDest()->getInfo());
+                    }
                 }
             }
         }
+    }
+    cout << "The critical pipes for each city are: " << endl;
+    for (auto it : all_cities) {
+        cout << it.first << ":" << endl;
+        for (auto it2 : it.second) {
+            cout << it2 << endl;
+        }
+        cout << endl;
     }
 }
 
