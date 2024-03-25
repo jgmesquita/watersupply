@@ -9,6 +9,7 @@
 //compor falta de novas cidades afetadas
 // pensar naquela funçao de aplicar so uma vex o maxflow <<<< pouco importante ???
 //mostrar as cidades que passaram a estar afetadas depois de aplicar o algoritmo de balance
+//fazer output para ficheiro
 #include "Menu.h"
 #include "cfloat"
 #include <cmath>
@@ -177,9 +178,6 @@ list<pair<City,double>> Menu::edmondsKarp(Graph<string> g) {
 
 list<pair<City,double>> Menu::Meet_Costumer_needs(const Graph<string> a){
     list<pair<City,double>> result;
-    //std::ofstream outputfile("Output.txt");
-    //first need to create s super source
-
 
     list<pair<City,double>> r = edmondsKarp(a);
 
@@ -223,21 +221,20 @@ void Menu::Balance_Load(Graph<string> s) {
     for(auto v : s.getVertexSet()) {
         double total_diff = 0.0;
         double n_edges = 0.0;
-        if(cities_affected.find(v->getInfo()) == cities_affected.end()) {
+        for (auto e: v->getAdj()) {
+            n_edges++;
+            total_diff += (e->getWeight() - e->getFlow());
+        }
+        if (n_edges != 0) {
+            total_diff /= n_edges;
             for (auto e: v->getAdj()) {
-                n_edges++;
-                total_diff += (e->getWeight() - e->getFlow());
-            }
-            if (n_edges != 0) {
-                total_diff /= n_edges;
-                for (auto e: v->getAdj()) {
-                    if (e->getWeight() - e->getFlow() > total_diff)
-                        e->setFlow(e->getFlow() + ((e->getWeight() - e->getFlow()) - total_diff));
-                    else if (e->getWeight() - e->getFlow() < total_diff)
-                        e->setFlow(e->getFlow() - (total_diff - (e->getWeight() - e->getFlow())));
-                }
+                if (e->getWeight() - e->getFlow() > total_diff)
+                    e->setFlow(e->getFlow() + ((e->getWeight() - e->getFlow()) - total_diff));
+                else if (e->getWeight() - e->getFlow() < total_diff)
+                    e->setFlow(e->getFlow() - (total_diff - (e->getWeight() - e->getFlow())));
             }
         }
+
     }
     //final metrics
     variance = 0;
@@ -262,6 +259,7 @@ void Menu::Balance_Load(Graph<string> s) {
     cout << "The final metrics are: \n";
     cout << "Average:" << fixed << setprecision(2) << average << ' ' << "Variance:"  << fixed << setprecision(2) << variance << ' ' << "Max-Difference:" << maxdiff << '\n';
 
+
 }
 
 
@@ -270,45 +268,37 @@ bool Menu::Remove_Water_Reservoir(std::string reservoi_code,Graph<string> s) {
     list<pair<City,double>> l = Meet_Costumer_needs(s);
     set<string> cities_affected;
     for(auto p : l) cities_affected.insert(p.first.getCodeCity());
+    unordered_map<string,double> temp;
+    for(auto p : l) temp[p.first.getCodeCity()] = p.second;
     unordered_map<Edge<string>*,double> restore_weights;
-    for(auto v : s.getVertexSet()){
-        if(v->getInfo() == reservoi_code){
-            for(auto e: v->getIncoming()){
-                restore_weights[e] = e->getWeight();
-                e->setWeight(0.0);
-            }
-        }
+    Vertex<string>* v = s.findVertex(reservoi_code);
+    for(auto e: v->getIncoming()){
+        restore_weights[e] = e->getWeight();
+        e->setWeight(0.0);
     }
-    for(auto v : s.getVertexSet()){
-        if(v->getInfo() == reservoi_code){
-            for(auto e: v->getAdj()){
-                restore_weights[e] = e->getWeight();
-                e->setWeight(0.0);
-            }
-        }
+
+    for(auto e: v->getAdj()){
+        restore_weights[e] = e->getWeight();
+        e->setWeight(0.0);
     }
 
     list<pair<City,double>> r = edmondsKarp(s);
     //restore weights
 
-    for(auto v : s.getVertexSet()){
-        if(v->getInfo() == reservoi_code){
-            for(auto e: v->getIncoming()){
-                e->setWeight(restore_weights[e]);
-            }
-        }
+
+    for(auto e: v->getIncoming()){
+        e->setWeight(restore_weights[e]);
     }
-    for(auto v : s.getVertexSet()) {
-        if (v->getInfo() == reservoi_code) {
-            for (auto e: v->getAdj()) {
-                e->setWeight(restore_weights[e]);
-            }
-        }
+
+    for (auto e: v->getAdj()) {
+        e->setWeight(restore_weights[e]);
     }
+
+
     cout << "The affected cities by the removal of the Reservoi are:\n";
     for(auto p : r){
         if(p.second < p.first.getDemand()) {
-            if (cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << '\n';
+            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << '\n';
         }
     }
     return true;
@@ -319,53 +309,95 @@ bool Menu::Maintenance_Station(string station_code,const Graph<string> b){
     if(d.getStations().find(station_code) == d.getStations().end()) return false;
     set<string> cities_affected;
     list<pair<City,double>> l = Meet_Costumer_needs(b);
-
+    unordered_map<string,double> temp;
     for(auto p : l) cities_affected.insert(p.first.getCodeCity());
+    for(auto p : l) temp[p.first.getCodeCity()] = p.second;
     unordered_map<Edge<string>*,double> restore_weights;
-    for(auto v : b.getVertexSet()){
-        if(v->getInfo() == station_code){
-            for(auto e: v->getIncoming()){
-                restore_weights[e] = e->getWeight();
-                e->setWeight(0.0);
-            }
-        }
+
+    auto v = b.findVertex(station_code);
+
+
+    for(auto e: v->getIncoming()){
+        restore_weights[e] = e->getWeight();
+        e->setWeight(0.0);
     }
-    for(auto v : b.getVertexSet()){
-        if(v->getInfo() == station_code){
-            for(auto e: v->getAdj()){
-                restore_weights[e] = e->getWeight();
-                e->setWeight(0.0);
-            }
-        }
+
+    for(auto e: v->getAdj()){
+        restore_weights[e] = e->getWeight();
+        e->setWeight(0.0);
     }
 
     list<pair<City,double>> r = edmondsKarp(b);
     //restore weights
+    for(auto e: v->getIncoming()){
+        e->setWeight(restore_weights[e]);
+    }
 
-    for(auto v : b.getVertexSet()){
-        if(v->getInfo() == station_code){
-            for(auto e: v->getIncoming()){
-                e->setWeight(restore_weights[e]);
-            }
-        }
+    for(auto e: v->getAdj()){
+        e->setWeight(restore_weights[e]);
     }
-    for(auto v : b.getVertexSet()){
-        if(v->getInfo() == station_code){
-            for(auto e: v->getAdj()){
-                e->setWeight(restore_weights[e]);
-            }
-        }
-    }
+
+
     cout << "The affected cities by the removal of the Station are:\n";
     for(auto p : r){
         if(p.second < p.first.getDemand()) {
-            if (cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << '\n';
+            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << '\n';
+
         }
     }
 
 
     return true;
 }
+/*
+ * reve esta funçao por favor n tive tempo
+vector<string> Menu::Remove_Station_noeffect(Graph<string> s){
+    vector<string> caixa;
+    for(auto r : d.getStations()) {
+        list<pair<City, double>> l = Meet_Costumer_needs(s);
+        set<string> cities_affected;
+        unordered_map<string,double> temp;
+        for(auto p : l) temp[p.first.getCodeCity()] = p.second;
+        for (auto p: l) cities_affected.insert(p.first.getCodeCity());
+        unordered_map<Edge<string> *, double> restore_weights;
+        Vertex<string> *v = s.findVertex(r.first);
+        for (auto e: v->getIncoming()) {
+            restore_weights[e] = e->getWeight();
+            e->setWeight(0.0);
+        }
+
+        for (auto e: v->getAdj()) {
+            restore_weights[e] = e->getWeight();
+            e->setWeight(0.0);
+        }
+
+        list<pair<City, double>> r1 = edmondsKarp(s);
+        //restore weights
+
+
+        for (auto e: v->getIncoming()) {
+            e->setWeight(restore_weights[e]);
+        }
+
+        for (auto e: v->getAdj()) {
+            e->setWeight(restore_weights[e]);
+        }
+
+        bool flag = false;
+        for(auto p : r1){
+            if(p.second < p.first.getDemand()) {
+                if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)){
+                    flag = true;
+                    break;
+                }
+
+            }
+        }
+        if(!flag) caixa.push_back(r.first);
+    }
+    return caixa;
+}
+*/
 bool Menu::Remove_Pipe(Graph<string> s,std::string source, std::string target) {
     bool bidirectional = false;
     auto v_source = s.findVertex(source);

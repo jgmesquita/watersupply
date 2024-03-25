@@ -24,8 +24,9 @@ int main() {
         cout << "|3.  Balance Load across network          |" << '\n';
         cout << "|4.  Remove Water Reservoir               |" << '\n';
         cout << "|5.  Pumping Station Maintenance          |" << '\n';
-        cout << "|6.  Remove Pipe                          |" << '\n';
-        cout << "|7.  Remove each pipe                     |" << '\n';
+        cout << "|6.  Station Maintenance - no effect      |" << '\n';
+        cout << "|7.  Remove Pipe                          |" << '\n';
+        cout << "|8.  Remove each pipe                     |" << '\n';
         cout << "|_________________________________________|" << "\n";
         cout << "Please enter your choice:";
         cin >> choice;
@@ -75,7 +76,13 @@ int main() {
                 if(!m.Maintenance_Station(station_code,s)) cout << "Not a valid Station code!" << '\n';
                 break;
             }
-            case 6: {
+            case 6:{
+                vector<string> temp = m.Remove_Station_noeffect(s);
+                cout << "The Station use maintenance doesnt have an effect on the grid are:\n";
+                for(auto v : temp) cout << v << '\n';
+                break;
+            }
+            case 7: {
                 string source;
                 cout << "Please insert a valid Source code (Station or Reservoir):";
                 cin >> source;
@@ -85,7 +92,7 @@ int main() {
                 if(!m.Remove_Pipe(s,source,target)) cout << "Not a valid Pipe!" << '\n';
                 break;
             }
-            case 7: {
+            case 8: {
                 m.Remove_Pipe2(s); //fucnçao esta a dar erro
 
                 break;
