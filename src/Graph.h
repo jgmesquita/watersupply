@@ -19,6 +19,12 @@ class Edge;
 /************************* Vertex  **************************/
 
 template <class T>
+/**
+* @class Vertex
+* @tparam T
+* @brief For this specific project, a vertex's info is the code of any of the multiple structures
+ * that composes the water supply network(Pumping Stations, Cities or Reservoirs)
+*/
 class Vertex {
 public:
     Vertex(T in);
@@ -65,6 +71,12 @@ protected:
 /********************** Edge  ****************************/
 
 template <class T>
+/**
+* @class Edge
+* @tparam T
+* @brief For this specific project, an edge represents a Pipe that can be either unidirectional or bidirectional
+ * that connects to structures
+*/
 class Edge {
 public:
     Edge(Vertex<T> *orig, Vertex<T> *dest, double w);
@@ -85,7 +97,6 @@ public:
 protected:
     Vertex<T> * dest; // destination vertex
     double weight; // edge weight, can also be used for capacity
-    double restore;
     // auxiliary fields
     bool selected = false;
 
@@ -99,6 +110,11 @@ protected:
 /********************** Graph  ****************************/
 
 template <class T>
+/**
+* @class Graph
+* @brief The main class, where the structure used for all the project resides.
+*
+*/
 class Graph {
 public:
     ~Graph();
@@ -302,14 +318,7 @@ template <class T>
 void Edge<T>::setWeight(double weight) {
     this->weight = weight;
 }
-template <class T>
-double Edge<T>::getRestore() const {
-    return this->restore;
-}
-template <class T>
-void Edge<T>::SetRestore(double restore){
-    this->restore = restore;
-}
+
 template <class T>
 Vertex<T> * Edge<T>::getDest() const {
     return this->dest;

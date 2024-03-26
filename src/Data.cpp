@@ -3,21 +3,45 @@
 //
 
 #include "Data.h"
-
+/**
+ * function that retrieves the graph that contains all the information about the water supply management system - complexity O(1)
+ * @return graph whose vertexes correspond to any of the structures (City, Reservoirs or Pumping stations) and the Edges to pipes
+ */
 Graph<string> Data::getSupply() {
     return this->supply;
 }
+/**
+ * function that retrieves an unordered_map that stores key value pairs
+ * of city codes and their corresponding Cities, allowing for constant lookup of Cities by their code - complexity O(1)
+ * @return unordered_map that stores key value pairs
+ * of city codes and their corresponding Cities
+ */
 unordered_map<string,City> Data::getCities() {
     return this->cities_;
 }
-unordered_map<string,Reservoir> Data::getReservoiers() {
+/**
+ * function that retrieves an unordered_map that stores key value pairs
+ * of reservoir codes and their corresponding Reservoirs, allowing for constant lookup of Reservoirs by their code - complexity O(1)
+ * @return unordered_map that stores key value pairs
+ * of reservoir codes and their corresponding Reservoirs
+ */
+unordered_map<string,Reservoir> Data::getReservoirs() {
     return this->reservoirs_;
 }
+/**
+ * function that retrieves an unordered_map that stores key value pairs
+ * of Pumping Station codes and their corresponding Pumping Stations, allowing for constant lookup of Pumping Stations by their code - complexity O(1)
+ * @return unordered_map that stores key value pairs
+ * of Pumping Stations codes and their corresponding Pumping Stations
+ */
 unordered_map<string,Station> Data::getStations(){
     return this->stations_;
 }
-
- void Data::parseReservoir() {
+/**
+ * function that parses the data from the Reservoir.csv file and uses it to build a graph accordingly
+ * - complexity O(N) where N is the number of lines in the file
+ */
+void Data::parseReservoir() {
     ifstream reservoirs("../dataset/Reservoir.csv");
     string line;
     getline(reservoirs,line); //read and ignore first line
@@ -35,7 +59,10 @@ unordered_map<string,Station> Data::getStations(){
      }
 
 }
-
+/**
+ * function that parses the data from the Stations.csv file and uses it to build a graph accordingly
+ * - complexity O(N) where N is the number of lines in the file
+ */
 void Data::parseStation() {
     ifstream stations("../dataset/Stations.csv");
     string line;
@@ -50,7 +77,10 @@ void Data::parseStation() {
         supply.addVertex(code);
     }
 }
-
+/**
+ * function that parses the data from the Cities.csv file and uses it to build a graph accordingly
+ * - complexity O(N) where N is the number of lines in the file
+ */
 void Data::parseCity() {
     ifstream cities("../dataset/Cities.csv");
     string line;
@@ -69,7 +99,10 @@ void Data::parseCity() {
     }
 
 }
-
+/**
+ * function that parses the data from the Pipes.csv file and uses it to build a graph accordingly
+ * - complexity O(N) where N is the number of lines in the file
+ */
 void Data::parsePipes() {
     ifstream pipes("../dataset/Pipes.csv");
     string line;
@@ -87,6 +120,4 @@ void Data::parsePipes() {
         }
         else supply.addEdge(source,target, stod(capacity));
     }
-
-
 }

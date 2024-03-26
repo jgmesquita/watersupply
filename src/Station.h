@@ -8,7 +8,10 @@
 #include "string"
 
 using namespace std;
-
+/**
+ * @class Station
+ * @brief Identifies the Station class by its id and code.
+ */
 class Station {
 private:
     string id_;

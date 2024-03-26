@@ -3,17 +3,23 @@
 //
 
 
-//Funçoes remocao de reservatorios, arestas e pipes dar output a cidades que ficaram ainda mais prejudicadas
-//alterar a ultima fucnçao para dar os pipes que removidos afetariam cada cidade
-//compor erros na ultima funçao
-//compor falta de novas cidades afetadas
+//Funçoes remocao de reservatorios, arestas e pipes dar output a cidades que ficaram ainda mais prejudicadas - done
+//alterar a ultima fucnçao para dar os pipes que removidos afetariam cada cidade - done
+//compor erros na ultima funçao - done
+//compor falta de novas cidades afetadas - done
 // pensar naquela funçao de aplicar so uma vex o maxflow <<<< pouco importante ???
-//mostrar as cidades que passaram a estar afetadas depois de aplicar o algoritmo de balance
-//fazer output para ficheiro
+//mostrar as cidades que passaram a estar afetadas depois de aplicar o algoritmo de balance - done
+//fazer output para ficheiro - !!!!!
 #include "Menu.h"
-#include "cfloat"
+#include <sstream>
+#include <fstream>
 #include <cmath>
 #include <iomanip>
+#include <map>
+#include <cstdio>
+/**
+ * Menu constructor - creates a Data object and parse the csv files
+ */
 Menu::Menu() {
     this->d = Data();
     d.parseReservoir();
@@ -21,37 +27,50 @@ Menu::Menu() {
     d.parseCity();
     d.parsePipes();
 }
+/**
+ * function that retrieves the graph that contains all the information about the water supply management system - complexity O(1)
+ * @return graph whose vertexes correspond to any of the structures (City, Reservoirs or Pumping stations) and the Edges to pipes
+ */
 Graph<string> Menu::getSupy(){
     return d.getSupply();
 }
-bool Menu::Max_Amount_Water_specific(string city_code){
+/**
+ * calculates the max amount of water that can reach a specif city - complexity O(VE^2), where V is the number of vertices and E is the number of edges in the graph s
+ * @param s graph that contain all the information about the water supply management system
+ * @param city_code code of the specific city that we want to calculate the max amount of water that reaching it
+ * @return true if the the desired city exits, along with its max amount of water, and false otherwise
+ */
+bool Menu::Max_Amount_Water_specific(string city_code, Graph<string> s){
     if(d.getCities().find(city_code) == d.getCities().end()) return false;
-    Graph<string> s = d.getSupply();
-    std::ofstream outputfile("Output.txt");
-    //first need to create s super source
     list<pair<City,double>> r = edmondsKarp(s);
     for (auto p : r) {
         if(p.first.getCodeCity() == city_code)
-        cout << p.first.getNameCity() << " - " << p.first.getCodeCity() << " - " << p.second << '\n';
+            cout << p.first.getNameCity() << " - " << p.first.getCodeCity() << " - " << p.second << '\n';
     }
-    outputfile.close();
-    return false;
+    return true;
 }
-void Menu::Max_Amount_Water() {
-    Graph<string> s = d.getSupply();
-    std::ofstream outputfile("Output.txt");
-    //first need to create s super source
+/**
+ * calculates the max amount of water that can reach any city - complexity O(VE^2), where V is the number of vertices and E is the number of edges in the graph s
+ * @param s graph that contain all the information about the water supply management system
+ * @return it outputs directly to the console the max amount of water for each city
+ */
+void Menu::Max_Amount_Water(Graph<string> s) {
+    ofstream of;
+    of.open("../../output.txt", ios::app);
     list<pair<City,double>> r = edmondsKarp(s);
     double total = 0;
     for (auto p : r) {
         cout << p.first.getNameCity() << " - " << p.first.getCodeCity() << " - " << p.second << '\n';
+        of << p.first.getNameCity() << " - " << p.first.getCodeCity() << " - " << p.second << '\n';
         total += p.second;
+        of.flush();
     }
-    cout << total << "\n";
-    outputfile.close();
-
+    cout << "The maxflow for the virtual super sink is: " << total << '\n';
+    of << "The maxflow for the virtual super sink is: " << total << '\n';
+    of.close();
 
 }
+
 
 void Menu::testAndVisit(std::queue< Vertex<string>*> &q, Edge<string> *e, Vertex<string> *w, double residual) {
 // Check if the vertex 'w' is not visited and there is residual capacity
@@ -131,7 +150,7 @@ list<pair<City,double>> Menu::edmondsKarp(Graph<string> g) {
     g.addVertex(super_target);
     for(Vertex<string>* v : g.getVertexSet()){
         if(v->getInfo()[0] == 'R')
-            g.addEdge(super_source,v->getInfo(),d.getReservoiers()[v->getInfo()].getMaxDelivery());
+            g.addEdge(super_source,v->getInfo(),d.getReservoirs()[v->getInfo()].getMaxDelivery());
     }
     //create s super sink
     for(Vertex<string>* v : g.getVertexSet()){
@@ -175,7 +194,11 @@ list<pair<City,double>> Menu::edmondsKarp(Graph<string> g) {
 
     return r;
 }
-
+/**
+ * function that retrieves the cities where there is a deficit in its water demand - complexity O(VE^2), where V is the number of vertices and E is the number of edges in the graph s
+ * @param a graph that contain all the information about the water supply management system
+ * @return a list of pairs of each city where there is a deficit in its water demand and its corresponding water deficit
+ */
 list<pair<City,double>> Menu::Meet_Costumer_needs(const Graph<string> a){
     list<pair<City,double>> result;
 
@@ -188,16 +211,25 @@ list<pair<City,double>> Menu::Meet_Costumer_needs(const Graph<string> a){
     }
     return result;
 }
-//falta dar outpt a cidades que passaram a estar afetadas
+
+/**
+ * function that calculates the maximum difference, the variance and the average of the difference between the capacity and the flow that passes through each pipe,
+ * before and after applying a balancing function. This balancing function calculates the average difference between the capacity and flow that
+ * passes through the adjacent pipes of each vertex and tries distribute in a way that in each adjacent pipe the difference corresponds to
+ * the average of the difference - complexity O(VE^2 + f(n)), where V is the number of vertices, E is the number of edges in the graph s and f(n) the time complexity of the Meet_Costumer_needs() function
+ * @param s graph that contain all the information about the water supply management system
+ * @return it outputs directly to the console the before mentioned metrics before and after applying the balancing
+ * algorithm and the cities which water supply  ended up being affect by this balancing algorithm.
+ */
 void Menu::Balance_Load(Graph<string> s) {
     //pensar melhor nisto
     list<pair<City,double>> l = Meet_Costumer_needs(s);
     set<string> cities_affected;
     for(auto p : l) cities_affected.insert(p.first.getCodeCity());
+    unordered_map<string,double> temp;
+    for(auto p : l) temp[p.first.getCodeCity()] = p.second;
     list<pair<City,double>> result;
-
     result = edmondsKarp(s);
-
     double counter = 0.0;
     double average = 0, variance = 0, maxdiff=0;
     for(auto v : s.getVertexSet()){
@@ -258,20 +290,42 @@ void Menu::Balance_Load(Graph<string> s) {
     variance /= (counter - 1);
     cout << "The final metrics are: \n";
     cout << "Average:" << fixed << setprecision(2) << average << ' ' << "Variance:"  << fixed << setprecision(2) << variance << ' ' << "Max-Difference:" << maxdiff << '\n';
+    list<pair<City,double>> r;
+    for(Vertex<string>* v : s.getVertexSet()){
+        if(v->getInfo()[0] == 'C'){
+            double value = 0.0;
+            for(auto e : v->getIncoming()){
+                value += e->getFlow();
+            }
+            City temp = d.getCities()[v->getInfo()];
+            r.push_back(make_pair(temp,value));
 
+        }
+    }
+    cout << "The affected cities by the balancing of the network are:\n";
+    for(auto p : r){
+        if(p.second < p.first.getDemand()) {
+            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << '\n';
+        }
+    }
 
 }
+/**
+ * function that removes a specific reservoir from the system and verifies which cities have their supply affected - complexity O(VE^2 + f(n)), where V is the number of vertices, E is the number of edges in the graph s and f(n) the time complexity of the Meet_Costumer_needs() function
+ * @param s graph that contain all the information about the water supply management system
+ * @param reservoir_code code of the specific reservoir that will be removed from the system
+ * @return true if the given reservoir exists and it outputs directly to the console the cities whose supply is affected by this removal and false otherwise
+ */
 
-
-bool Menu::Remove_Water_Reservoir(std::string reservoi_code,Graph<string> s) {
-    if(d.getReservoiers().find(reservoi_code) == d.getReservoiers().end()) return false;
+bool Menu::Remove_Water_Reservoir(std::string reservoir_code,Graph<string> s) {
+    if(d.getReservoirs().find(reservoir_code) == d.getReservoirs().end()) return false;
     list<pair<City,double>> l = Meet_Costumer_needs(s);
     set<string> cities_affected;
     for(auto p : l) cities_affected.insert(p.first.getCodeCity());
     unordered_map<string,double> temp;
     for(auto p : l) temp[p.first.getCodeCity()] = p.second;
     unordered_map<Edge<string>*,double> restore_weights;
-    Vertex<string>* v = s.findVertex(reservoi_code);
+    Vertex<string>* v = s.findVertex(reservoir_code);
     for(auto e: v->getIncoming()){
         restore_weights[e] = e->getWeight();
         e->setWeight(0.0);
@@ -293,7 +347,19 @@ bool Menu::Remove_Water_Reservoir(std::string reservoi_code,Graph<string> s) {
     for (auto e: v->getAdj()) {
         e->setWeight(restore_weights[e]);
     }
-
+    bool flag = false;
+    for(auto p : r){
+        if(p.second < p.first.getDemand()) {
+            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) {
+                flag = true;
+                break;
+            }
+        }
+    }
+    if (!flag) {
+        cout << "None of the cities were affected by the removal!\n";
+        return true;
+    }
 
     cout << "The affected cities by the removal of the Reservoi are:\n";
     for(auto p : r){
@@ -304,7 +370,12 @@ bool Menu::Remove_Water_Reservoir(std::string reservoi_code,Graph<string> s) {
     return true;
 }
 
-
+/**
+ * function that removes a specific pumping station from the system and verifies which cities have their supply affected  - complexity O(VE^2 + f(n)), where V is the number of vertices, E is the number of edges in the graph s and f(n) the time complexity of the Meet_Costumer_needs() function
+ * @param b graph that contain all the information about the water supply management system
+ * @param station_code code of the specific pumping station that will be removed from the system
+ * @return true if the given pumping station exists and it outputs directly to the console the cities whose supply is affected by this removal and false otherwise
+ */
 bool Menu::Maintenance_Station(string station_code,const Graph<string> b){
     if(d.getStations().find(station_code) == d.getStations().end()) return false;
     set<string> cities_affected;
@@ -337,7 +408,19 @@ bool Menu::Maintenance_Station(string station_code,const Graph<string> b){
         e->setWeight(restore_weights[e]);
     }
 
-
+    bool flag = false;
+    for(auto p : r){
+        if(p.second < p.first.getDemand()) {
+            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) {
+                flag = true;
+                break;
+            }
+        }
+    }
+    if (!flag) {
+        cout << "None of the cities were affected by the removal!\n";
+        return true;
+    }
     cout << "The affected cities by the removal of the Station are:\n";
     for(auto p : r){
         if(p.second < p.first.getDemand()) {
@@ -346,11 +429,13 @@ bool Menu::Maintenance_Station(string station_code,const Graph<string> b){
         }
     }
 
-
     return true;
 }
-/*
- * reve esta funçao por favor n tive tempo
+/**
+ * function that checks which of the pumping stations can be removed without having any effect on the system -  complexity O(n(VE^2 + f(n))), where V is the number of vertices, E is the number of edges in the graph s, f(n) the time complexity of the Meet_Costumer_needs() function and n the number of stations to iterate
+ * @param s graph that contain all the information about the water supply management system
+ * @return a vector of the Pumping stations codes whose removal doesnt affect the system delivery capacity
+ */
 vector<string> Menu::Remove_Station_noeffect(Graph<string> s){
     vector<string> caixa;
     for(auto r : d.getStations()) {
@@ -390,15 +475,23 @@ vector<string> Menu::Remove_Station_noeffect(Graph<string> s){
                     flag = true;
                     break;
                 }
-
             }
         }
         if(!flag) caixa.push_back(r.first);
     }
     return caixa;
 }
-*/
+/**
+ * function that removes a specific pipe from the system by checking first if it exists and if it is bidirectional or unidirectional pipe and verifies which cities have their supply affected - complexity O(VE^2 + f(n)), where V is the number of vertices, E is the number of edges in the graph s and f(n) the time complexity of the Meet_Costumer_needs() function
+ * @param s graph that contain all the information about the water supply management system
+ * @param source code of the source vertex of the specific pipe
+ * @param target code of the target vertex of the specific pipe
+ * @return true if the given pipe exists and it outputs directly to the console the cities whose supply is affected by this removal and false otherwise
+ */
 bool Menu::Remove_Pipe(Graph<string> s,std::string source, std::string target) {
+    unordered_map<string,double> temp;
+    list<pair<City,double>> l = Meet_Costumer_needs(s);
+    for(auto p : l) temp[p.first.getCodeCity()] = p.second;
     bool bidirectional = false;
     auto v_source = s.findVertex(source);
     auto v_target = s.findVertex(target);
@@ -423,19 +516,18 @@ bool Menu::Remove_Pipe(Graph<string> s,std::string source, std::string target) {
 
     if(!exits) return false;
     //Check for already existent problems with supply
-    list<pair<City, double>> l = Meet_Costumer_needs(s);
     set<string> cities_affected;
     for(auto p : l) cities_affected.insert(p.first.getCodeCity());
     //Check for invalid source or target
     unordered_map<Edge<string>*,double> restore_weights;
     if (bidirectional) {
-       for(auto e : v_source->getAdj()){
-           if(e->getDest()->getInfo() == target){
-               restore_weights[e] = e->getWeight();
-               e->setWeight(0.0);
-               break;
-           }
-       }
+        for(auto e : v_source->getAdj()){
+            if(e->getDest()->getInfo() == target){
+                restore_weights[e] = e->getWeight();
+                e->setWeight(0.0);
+                break;
+            }
+        }
         for(auto e : v_target->getAdj()){
             if(e->getDest()->getInfo() == target){
                 restore_weights[e] = e->getWeight();
@@ -481,17 +573,38 @@ bool Menu::Remove_Pipe(Graph<string> s,std::string source, std::string target) {
             }
         }
     }
+    bool flag = false;
+    for(auto p : r){
+        if(p.second < p.first.getDemand()) {
+            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) {
+                flag = true;
+                break;
+            }
+        }
+    }
+    if (!flag) {
+        cout << "None of the cities were affected by the removal!\n";
+        return true;
+    }
     //Print result
     cout << "The affected cities by the removal of the Pipe are:\n";
     for(auto p : r){
         if(p.second < p.first.getDemand()) {
-            if (cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << '\n';
+            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << '\n';
         }
     }
     return true;
 }
-//funçao a falhar nao esta a restaurante corretamente as capacidades das arestas
+/**
+ * function that checks for each city the pipes that when removed have an effect on its water supply -  complexity O(VE(VE^2 + f(n))), where V is the number of vertices, E is the number of edges in the graph s, f(n) the time complexity of the Meet_Costumer_needs() function and n the number of stations to iterate
+ * @param s graph that contain all the information about the water supply management system
+ * @return it outputs directly to the console for each city the pipes that when removed cause an effect on the its supply.
+ */
 void Menu::Remove_Pipe2(Graph<string> s){
+    map<string, vector<string>> all_cities{};
+    unordered_map<string,double> temp;
+    list<pair<City,double>> l = Meet_Costumer_needs(s);
+    for(auto p : l) temp[p.first.getCodeCity()] = p.second;
     for(auto v : s.getVertexSet()){
         for(auto e : v->getAdj()){
             bool bidirectional = false;
@@ -534,8 +647,6 @@ void Menu::Remove_Pipe2(Graph<string> s){
             if (bidirectional) {
                 e->setWeight(restore_weights[e]);
 
-
-
                 for(auto p : e->getDest()->getAdj()){
                     if(p->getDest()->getInfo() == v->getInfo()){
                         e->setWeight(restore_weights[e]);
@@ -549,14 +660,21 @@ void Menu::Remove_Pipe2(Graph<string> s){
 
             }
             //Print result
-            cout << "The affected cities by the removal of the Pipe " << v->getInfo() << " --> " << e->getDest()->getInfo() << " are:\n";
             for(auto p : r){
                 if(p.second < p.first.getDemand()) {
-                    if (cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << '\n';
+                    if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) {
+                        all_cities[p.first.getNameCity()].push_back(v->getInfo() + "-->" + e->getDest()->getInfo());
+                    }
                 }
             }
         }
     }
+    cout << "The critical pipes for each city are: " << endl;
+    for (auto it : all_cities) {
+        cout << it.first << ":" << endl;
+        for (auto it2 : it.second) {
+            cout << it2 << endl;
+        }
+        cout << endl;
+    }
 }
-
-

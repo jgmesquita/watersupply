@@ -7,7 +7,10 @@
 #include "iostream"
 #include "string"
 using namespace std;
-
+/**
+ * @class City
+ * @brief Portrays a Reservoir, identified it by name, municipality where it is located, id, its max_delivery(maximum delivery of water) and code.
+ */
 
 class Reservoir {
     private:

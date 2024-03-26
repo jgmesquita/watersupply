@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 #include <sstream>
 #include <fstream>
 #include "Graph.h"
@@ -26,7 +27,7 @@ int main() {
         cout << "|5.  Pumping Station Maintenance          |" << '\n';
         cout << "|6.  Station Maintenance - no effect      |" << '\n';
         cout << "|7.  Remove Pipe                          |" << '\n';
-        cout << "|8.  Remove each pipe                     |" << '\n';
+        cout << "|8.  Key pipes for each city              |" << '\n';
         cout << "|_________________________________________|" << "\n";
         cout << "Please enter your choice:";
         cin >> choice;
@@ -42,12 +43,12 @@ int main() {
                 cout << "|_________________________________________|" << "\n";
                 cout << "Please choose the desired option:";
                 cin >> opcao;
-                if(opcao ==1) m.Max_Amount_Water();
+                if(opcao ==1) m.Max_Amount_Water(s);
                 else{
                     string code_city;
                     cout << "Please insert the desired city code:";
                     cin >> code_city;
-                    if(!m.Max_Amount_Water_specific(code_city)) cout << "Not a valid city code!" << '\n';
+                    if(!m.Max_Amount_Water_specific(code_city,s)) cout << "Not a valid city code!" << '\n';
 
                 }
                 break;
@@ -55,7 +56,7 @@ int main() {
             case 2: {
                 list<pair<City,double>> r = m.Meet_Costumer_needs(s);
                 for(auto temp : r)
-                cout << temp.first.getNameCity() << " - " << temp.first.getCodeCity() << " - " << temp.second << '\n';
+                    cout << temp.first.getNameCity() << " - " << temp.first.getCodeCity() << " - " << temp.second << '\n';
                 break;
             }
             case 3: {
@@ -84,17 +85,16 @@ int main() {
             }
             case 7: {
                 string source;
-                cout << "Please insert a valid Source code (Station or Reservoir):";
+                cout << "Please insert a valid Source code (Station or Reservoir):\n";
                 cin >> source;
                 string target;
-                cout << "Please insert a valid Target code (Station or City):";
+                cout << "Please insert a valid Target code (Station or City):\n";
                 cin >> target;
                 if(!m.Remove_Pipe(s,source,target)) cout << "Not a valid Pipe!" << '\n';
                 break;
             }
             case 8: {
-                m.Remove_Pipe2(s); //fucnçao esta a dar erro
-
+                m.Remove_Pipe2(s);
                 break;
             }
             default:

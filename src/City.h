@@ -8,7 +8,10 @@
 #include "string"
 
 using namespace std;
-
+/**
+ * @class City
+ * @brief Identifies the City class by its name, id, code, demand(rate of demand or need of delivery of water) and population (total population).
+ */
 class City {
     private:
 

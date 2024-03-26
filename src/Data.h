@@ -16,6 +16,10 @@
 #include "list"
 #include "set"
 using namespace std;
+/**
+ * @class Data
+ * @brief Represents the data that was parsed from the csv files.
+ */
 class Data {
 private:
     Graph<string> supply;
@@ -30,7 +34,7 @@ public:
     void parsePipes();
     Graph<string> getSupply();
     unordered_map<string,City> getCities();
-    unordered_map<string,Reservoir> getReservoiers();
+    unordered_map<string,Reservoir> getReservoirs();
     unordered_map<string,Station> getStations();
 
 };

@@ -5,14 +5,20 @@
 #ifndef PROJETO_DA_MENU_H
 #define PROJETO_DA_MENU_H
 #include "Data.h"
-
+/**
+ * @class Menu
+ * @brief Represents the user-friendly interface for the water supply management system.
+ * It shows available functionalities and their corresponding outputs in a clear, organized,
+ * and logical manner, facilitating seamless program utilization and straightforward result
+ * interpretation.
+ */
 class Menu {
 private:
     Data d;
 public:
     Menu();
-    void Max_Amount_Water();
-    bool Max_Amount_Water_specific(string city_code);
+    void Max_Amount_Water(Graph<string> s);
+    bool Max_Amount_Water_specific(string city_code,Graph<string> s);
     Graph<string> getSupy();
     list<pair<City,double>> Meet_Costumer_needs(const Graph<string> supply);
     void Balance_Load(Graph<string> s);
