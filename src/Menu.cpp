@@ -620,14 +620,15 @@ void Menu::Remove_Pipe2(Graph<string> s){
             //Check for invalid source or target
             unordered_map<Edge<string>*,double> restore_weights;
             if (bidirectional) {
-
-                restore_weights[e] = e->getWeight();
-                e->setWeight(0.0);
-
-
-
+                for(auto p : v->getAdj()){
+                    if(p->getDest()->getInfo() == e->getDest()->getInfo()){
+                        restore_weights[p] = p->getWeight();
+                        p->setWeight(0.0);
+                        break;
+                    }
+                }
                 for(auto p : e->getDest()->getAdj()){
-                    if(p->getDest()->getInfo() == v->getInfo()){
+                    if(p->getDest()->getInfo() == e->getDest()->getInfo()){
                         restore_weights[p] = p->getWeight();
                         p->setWeight(0.0);
                         break;
@@ -636,28 +637,40 @@ void Menu::Remove_Pipe2(Graph<string> s){
 
             }
             else {
-
-                restore_weights[e] = e->getWeight();
-                e->setWeight(0.0);
+                for(auto p : v->getAdj()){
+                    if(p->getDest()->getInfo() == e->getDest()->getInfo()){
+                        restore_weights[p] = p->getWeight();
+                        p->setWeight(0.0);
+                        break;
+                    }
+                }
             }
             //Solve for EdmondKarp
 
             list<pair<City, double>> r = edmondsKarp(s);
             //Evalute the context
             if (bidirectional) {
-                e->setWeight(restore_weights[e]);
-
+                for(auto p : v->getAdj()){
+                    if(p->getDest()->getInfo() == e->getDest()->getInfo()){
+                        p->setWeight(restore_weights[p]);
+                        break;
+                    }
+                }
                 for(auto p : e->getDest()->getAdj()){
-                    if(p->getDest()->getInfo() == v->getInfo()){
-                        e->setWeight(restore_weights[e]);
+                    if(p->getDest()->getInfo() == e->getDest()->getInfo()){
+                        p->setWeight(restore_weights[p]);
                         break;
                     }
                 }
 
             }
             else {
-                e->setWeight(restore_weights[e]);
-
+                for(auto p : v->getAdj()){
+                    if(p->getDest()->getInfo() == e->getDest()->getInfo()){
+                        p->setWeight(restore_weights[p]);
+                        break;
+                    }
+                }
             }
             //Print result
             for(auto p : r){

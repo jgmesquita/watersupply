@@ -79,7 +79,7 @@ int main() {
             }
             case 6:{
                 vector<string> temp = m.Remove_Station_noeffect(s);
-                cout << "The Station use maintenance doesnt have an effect on the grid are:\n";
+                cout << "The Stations whose maintenance doesnt have an effect on the grid are:\n";
                 for(auto v : temp) cout << v << '\n';
                 break;
             }
