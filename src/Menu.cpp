@@ -52,7 +52,7 @@ bool Menu::Max_Amount_Water_specific(string city_code, Graph<string> s){
 /**
  * calculates the max amount of water that can reach any city - complexity O(VE^2), where V is the number of vertices and E is the number of edges in the graph s
  * @param s graph that contain all the information about the water supply management system
- * @return it outputs directly to the console the max amount of water for each city
+ * @return it outputs to both a file and directly to the console the max amount of water for each city
  */
 void Menu::Max_Amount_Water(Graph<string> s) {
     ofstream of;
@@ -71,7 +71,14 @@ void Menu::Max_Amount_Water(Graph<string> s) {
 
 }
 
-
+/**
+ * auxiliary function to the edmondsKarp algorithm that checks if a vertex has been visited and if the residual capacity of an edge is not null- complexity O(1)
+ * @param q queue of the vertexes that belong to the augmenting path
+ * @param w vertex of an augmenting path that is verified if it has not been visited
+ * @param residual is the edge residual capacity
+ * @param e edge of a augmenting path
+ * @return
+ */
 void Menu::testAndVisit(std::queue< Vertex<string>*> &q, Edge<string> *e, Vertex<string> *w, double residual) {
 // Check if the vertex 'w' is not visited and there is residual capacity
     if (! w->isVisited() && residual > 0) {
@@ -81,7 +88,13 @@ void Menu::testAndVisit(std::queue< Vertex<string>*> &q, Edge<string> *e, Vertex
         q.push(w);
     }
 }
-
+/**
+ * auxiliary function to the edmondsKarp algorithm that finds the shortest unvisited augmenting path of the graph g- complexity O(V + E), where V is the number of vertices and E is the number of edges in the graph g
+ * @param g graph that contain all the information about the water supply management system
+ * @param s is the virtual super source of the graph
+ * @param t is the virtual super sink of the graph
+ * @return true if it finds a new shortest path and false otherwise
+ */
 bool Menu::findAugmentingPath(Graph<string> *g, Vertex<string> *s, Vertex<string> *t) {
 // Mark all vertices as not visited
     for(auto v : g->getVertexSet()) {
@@ -107,7 +120,12 @@ bool Menu::findAugmentingPath(Graph<string> *g, Vertex<string> *s, Vertex<string
 // Return true if s path to the target is found, false otherwise
     return t->isVisited();
 }
-
+/**
+ * auxiliary function to the edmondsKarp algorithm that finds the minimum residual capacity along an augmenting path- complexity O(V), where V is the number of vertices in the graph g
+ * @param s is the virtual super source of the graph
+ * @param t is the virtual super sink of the graph
+ * @return the minimum residual capacity along an augmenting path
+ */
 double Menu::findMinResidualAlongPath(Vertex<string> *s, Vertex<string> *t) {
     double f = INF;
 // Traverse the augmenting path to find the minimum residual capacity
@@ -125,7 +143,13 @@ double Menu::findMinResidualAlongPath(Vertex<string> *s, Vertex<string> *t) {
 // Return the minimum residual capacity
     return f;
 }
-
+/**
+ * auxiliary function to the edmondsKarp algorithm that updates the flow along an augmenting path- complexity O(V), where V is the number of vertices int the graph g
+ * @param s is the virtual super source of the graph
+ * @param t is the virtual super sink of the graph
+ * @param f is the minimum residual capacity along an augmenting path used to update the flow of the edges that compose the path
+ * @return
+ */
 void Menu::augmentFlowAlongPath(Vertex<string> *s, Vertex<string> *t, double f) {
     for (auto v = t; v != s; ) {
         auto e = v->getPath();
@@ -141,7 +165,12 @@ void Menu::augmentFlowAlongPath(Vertex<string> *s, Vertex<string> *t, double f) 
     }
 }
 
-
+/**
+ * function that applies the edmondsKarp algorithm to system graph in order to find the flow that passes/gets to the different
+ * structures of the water supply system- complexity O(VE^2), where V is the number of vertices and E is the number of edges in the graph g
+ * @param g graph that contain all the information about the water supply management system
+ * @return a list of pairs of each city and its corresponding supply of water
+ */
 list<pair<City,double>> Menu::edmondsKarp(Graph<string> g) {
     list<pair<City,double>> r;
     string super_source = "SS";
@@ -195,7 +224,7 @@ list<pair<City,double>> Menu::edmondsKarp(Graph<string> g) {
     return r;
 }
 /**
- * function that retrieves the cities where there is a deficit in its water demand - complexity O(VE^2), where V is the number of vertices and E is the number of edges in the graph s
+ * function that retrieves the cities where there is a deficit in its water demand - complexity O(VE^2), where V is the number of vertices and E is the number of edges in the graph a
  * @param a graph that contain all the information about the water supply management system
  * @return a list of pairs of each city where there is a deficit in its water demand and its corresponding water deficit
  */
@@ -371,7 +400,7 @@ bool Menu::Remove_Water_Reservoir(std::string reservoir_code,Graph<string> s) {
 }
 
 /**
- * function that removes a specific pumping station from the system and verifies which cities have their supply affected  - complexity O(VE^2 + f(n)), where V is the number of vertices, E is the number of edges in the graph s and f(n) the time complexity of the Meet_Costumer_needs() function
+ * function that removes a specific pumping station from the system and verifies which cities have their supply affected  - complexity O(VE^2 + f(n)), where V is the number of vertices, E is the number of edges in the graph b and f(n) the time complexity of the Meet_Costumer_needs() function
  * @param b graph that contain all the information about the water supply management system
  * @param station_code code of the specific pumping station that will be removed from the system
  * @return true if the given pumping station exists and it outputs directly to the console the cities whose supply is affected by this removal and false otherwise
@@ -528,8 +557,8 @@ bool Menu::Remove_Pipe(Graph<string> s,std::string source, std::string target) {
                 break;
             }
         }
-        for(auto e : v_target->getAdj()){
-            if(e->getDest()->getInfo() == target){
+        for(auto e : v_source->getIncoming()){
+            if(e->getOrig()->getInfo() == target){
                 restore_weights[e] = e->getWeight();
                 e->setWeight(0.0);
                 break;
@@ -557,8 +586,8 @@ bool Menu::Remove_Pipe(Graph<string> s,std::string source, std::string target) {
                 break;
             }
         }
-        for(auto e : v_target->getAdj()){
-            if(e->getDest()->getInfo() == target){
+        for(auto e : v_source->getIncoming()){
+            if(e->getOrig()->getInfo() == target){
                 e->setWeight(restore_weights[e]);
                 break;
             }
@@ -620,15 +649,13 @@ void Menu::Remove_Pipe2(Graph<string> s){
             //Check for invalid source or target
             unordered_map<Edge<string>*,double> restore_weights;
             if (bidirectional) {
-                for(auto p : v->getAdj()){
-                    if(p->getDest()->getInfo() == e->getDest()->getInfo()){
-                        restore_weights[p] = p->getWeight();
-                        p->setWeight(0.0);
-                        break;
-                    }
-                }
+
+
+                restore_weights[e] = e->getWeight();
+                e->setWeight(0.0);
+
                 for(auto p : e->getDest()->getAdj()){
-                    if(p->getDest()->getInfo() == e->getDest()->getInfo()){
+                    if(p->getDest()->getInfo() == v->getInfo()){
                         restore_weights[p] = p->getWeight();
                         p->setWeight(0.0);
                         break;
@@ -637,27 +664,19 @@ void Menu::Remove_Pipe2(Graph<string> s){
 
             }
             else {
-                for(auto p : v->getAdj()){
-                    if(p->getDest()->getInfo() == e->getDest()->getInfo()){
-                        restore_weights[p] = p->getWeight();
-                        p->setWeight(0.0);
-                        break;
-                    }
-                }
+
+                restore_weights[e] = e->getWeight();
+                e->setWeight(0.0);
             }
             //Solve for EdmondKarp
 
             list<pair<City, double>> r = edmondsKarp(s);
             //Evalute the context
             if (bidirectional) {
-                for(auto p : v->getAdj()){
-                    if(p->getDest()->getInfo() == e->getDest()->getInfo()){
-                        p->setWeight(restore_weights[p]);
-                        break;
-                    }
-                }
+                e->setWeight(restore_weights[e]);
+
                 for(auto p : e->getDest()->getAdj()){
-                    if(p->getDest()->getInfo() == e->getDest()->getInfo()){
+                    if(p->getDest()->getInfo() == v->getInfo()){
                         p->setWeight(restore_weights[p]);
                         break;
                     }
@@ -665,12 +684,7 @@ void Menu::Remove_Pipe2(Graph<string> s){
 
             }
             else {
-                for(auto p : v->getAdj()){
-                    if(p->getDest()->getInfo() == e->getDest()->getInfo()){
-                        p->setWeight(restore_weights[p]);
-                        break;
-                    }
-                }
+                e->setWeight(restore_weights[e]);
             }
             //Print result
             for(auto p : r){
@@ -678,9 +692,13 @@ void Menu::Remove_Pipe2(Graph<string> s){
                     if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) {
                         all_cities[p.first.getNameCity()].push_back(v->getInfo() + "-->" + e->getDest()->getInfo());
                     }
+
                 }
             }
         }
+    }
+    for(auto c : d.getCities()){
+        if(all_cities.find(c.second.getNameCity()) == all_cities.end()) all_cities[c.second.getNameCity()].push_back("This city has no critical pipes!");
     }
     cout << "The critical pipes for each city are: " << endl;
     for (auto it : all_cities) {
