@@ -251,12 +251,11 @@ list<pair<City,double>> Menu::Meet_Costumer_needs(const Graph<string> a){
  * algorithm and the cities which water supply  ended up being affect by this balancing algorithm.
  */
 void Menu::Balance_Load(Graph<string> s) {
-    //pensar melhor nisto
     list<pair<City,double>> l = Meet_Costumer_needs(s);
     set<string> cities_affected;
     for(auto p : l) cities_affected.insert(p.first.getCodeCity());
     unordered_map<string,double> temp;
-    for(auto p : l) temp[p.first.getCodeCity()] = p.second;
+    for(auto p : l) temp[p.first.getCodeCity()] = (p.first.getDemand() - p.second);
     list<pair<City,double>> result;
     result = edmondsKarp(s);
     double counter = 0.0;
@@ -352,7 +351,7 @@ bool Menu::Remove_Water_Reservoir(std::string reservoir_code,Graph<string> s) {
     set<string> cities_affected;
     for(auto p : l) cities_affected.insert(p.first.getCodeCity());
     unordered_map<string,double> temp;
-    for(auto p : l) temp[p.first.getCodeCity()] = p.second;
+    for(auto p : l) temp[p.first.getCodeCity()] = (p.first.getDemand() - p.second);
     unordered_map<Edge<string>*,double> restore_weights;
     Vertex<string>* v = s.findVertex(reservoir_code);
     for(auto e: v->getIncoming()){
@@ -411,7 +410,7 @@ bool Menu::Maintenance_Station(string station_code,const Graph<string> b){
     list<pair<City,double>> l = Meet_Costumer_needs(b);
     unordered_map<string,double> temp;
     for(auto p : l) cities_affected.insert(p.first.getCodeCity());
-    for(auto p : l) temp[p.first.getCodeCity()] = p.second;
+    for(auto p : l) temp[p.first.getCodeCity()] = (p.first.getDemand() - p.second);
     unordered_map<Edge<string>*,double> restore_weights;
 
     auto v = b.findVertex(station_code);
@@ -471,7 +470,7 @@ vector<string> Menu::Remove_Station_noeffect(Graph<string> s){
         list<pair<City, double>> l = Meet_Costumer_needs(s);
         set<string> cities_affected;
         unordered_map<string,double> temp;
-        for(auto p : l) temp[p.first.getCodeCity()] = p.second;
+        for(auto p : l) temp[p.first.getCodeCity()] = (p.first.getDemand() - p.second);
         for (auto p: l) cities_affected.insert(p.first.getCodeCity());
         unordered_map<Edge<string> *, double> restore_weights;
         Vertex<string> *v = s.findVertex(r.first);
@@ -520,7 +519,7 @@ vector<string> Menu::Remove_Station_noeffect(Graph<string> s){
 bool Menu::Remove_Pipe(Graph<string> s,std::string source, std::string target) {
     unordered_map<string,double> temp;
     list<pair<City,double>> l = Meet_Costumer_needs(s);
-    for(auto p : l) temp[p.first.getCodeCity()] = p.second;
+    for(auto p : l) temp[p.first.getCodeCity()] = (p.first.getDemand() - p.second);
     bool bidirectional = false;
     auto v_source = s.findVertex(source);
     auto v_target = s.findVertex(target);
@@ -630,10 +629,14 @@ bool Menu::Remove_Pipe(Graph<string> s,std::string source, std::string target) {
  * @return it outputs directly to the console for each city the pipes that when removed cause an effect on the its supply.
  */
 void Menu::Remove_Pipe2(Graph<string> s){
-    map<string, vector<string>> all_cities{};
+    map<string, vector<string>> all_cities;
     unordered_map<string,double> temp;
     list<pair<City,double>> l = Meet_Costumer_needs(s);
-    for(auto p : l) temp[p.first.getCodeCity()] = p.second;
+    set<string> cities_affected;
+
+    for(auto p : l) cities_affected.insert(p.first.getCodeCity());
+    for(auto p : l) temp[p.first.getCodeCity()] = (p.first.getDemand() - p.second);
+
     for(auto v : s.getVertexSet()){
         for(auto e : v->getAdj()){
             bool bidirectional = false;
@@ -643,13 +646,8 @@ void Menu::Remove_Pipe2(Graph<string> s){
                     break;
                 }
             }
-            list<pair<City, double>> l = Meet_Costumer_needs(s);
-            set<string> cities_affected;
-            for(auto p : l) cities_affected.insert(p.first.getCodeCity());
-            //Check for invalid source or target
             unordered_map<Edge<string>*,double> restore_weights;
             if (bidirectional) {
-
 
                 restore_weights[e] = e->getWeight();
                 e->setWeight(0.0);
@@ -661,17 +659,15 @@ void Menu::Remove_Pipe2(Graph<string> s){
                         break;
                     }
                 }
-
             }
             else {
-
                 restore_weights[e] = e->getWeight();
                 e->setWeight(0.0);
             }
             //Solve for EdmondKarp
-
             list<pair<City, double>> r = edmondsKarp(s);
             //Evalute the context
+
             if (bidirectional) {
                 e->setWeight(restore_weights[e]);
 
@@ -683,6 +679,7 @@ void Menu::Remove_Pipe2(Graph<string> s){
                 }
 
             }
+
             else {
                 e->setWeight(restore_weights[e]);
             }
@@ -697,9 +694,7 @@ void Menu::Remove_Pipe2(Graph<string> s){
             }
         }
     }
-    for(auto c : d.getCities()){
-        if(all_cities.find(c.second.getNameCity()) == all_cities.end()) all_cities[c.second.getNameCity()].push_back("This city has no critical pipes!");
-    }
+
     cout << "The critical pipes for each city are: " << endl;
     for (auto it : all_cities) {
         cout << it.first << ":" << endl;
