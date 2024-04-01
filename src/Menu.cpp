@@ -55,19 +55,20 @@ bool Menu::Max_Amount_Water_specific(string city_code, Graph<string> s){
  * @return it outputs to both a file and directly to the console the max amount of water for each city
  */
 void Menu::Max_Amount_Water(Graph<string> s) {
-    ofstream of;
-    of.open("../../output.txt", ios::app);
+    std::ofstream file("../MaxFlowResult.txt", ios_base::app);
     list<pair<City,double>> r = edmondsKarp(s);
     double total = 0;
     for (auto p : r) {
         cout << p.first.getNameCity() << " - " << p.first.getCodeCity() << " - " << p.second << '\n';
-        of << p.first.getNameCity() << " - " << p.first.getCodeCity() << " - " << p.second << '\n';
+        file << ' ' << p.first.getNameCity() << " - " << p.first.getCodeCity() << " - " << p.second << '\n';
         total += p.second;
-        of.flush();
+
     }
-    cout << "The maxflow for the virtual super sink is: " << total << '\n';
-    of << "The maxflow for the virtual super sink is: " << total << '\n';
-    of.close();
+    cout << " The maxflow for the virtual super sink is: " << total << '\n';
+    file << " The maxflow for the virtual super sink is: " << total << '\n';
+    file << " -------------------------------------------------------------" << '\n';
+    file << '\n';
+    file.close();
 
 }
 
@@ -686,8 +687,12 @@ void Menu::Remove_Pipe2(Graph<string> s){
             //Print result
             for(auto p : r){
                 if(p.second < p.first.getDemand()) {
-                    if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) {
+                    if (cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) {
                         all_cities[p.first.getNameCity()].push_back(v->getInfo() + "-->" + e->getDest()->getInfo());
+                    }
+                    else if(temp[p.first.getCodeCity()] > p.second){
+                        all_cities[p.first.getNameCity()].push_back(v->getInfo() + "-->" + e->getDest()->getInfo());
+
                     }
 
                 }
