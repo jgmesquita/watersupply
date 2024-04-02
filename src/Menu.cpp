@@ -41,12 +41,19 @@ Graph<string> Menu::getSupy(){
  * @return true if the the desired city exits, along with its max amount of water, and false otherwise
  */
 bool Menu::Max_Amount_Water_specific(string city_code, Graph<string> s){
+    std::ofstream file("../MaxFlowResult.txt", ios_base::app);
+
     if(d.getCities().find(city_code) == d.getCities().end()) return false;
     list<pair<City,double>> r = edmondsKarp(s);
     for (auto p : r) {
-        if(p.first.getCodeCity() == city_code)
-            cout << p.first.getNameCity() << " - " << p.first.getCodeCity() << " - " << p.second << '\n';
+        if(p.first.getCodeCity() == city_code){
+            cout << p.first.getNameCity() << " - " << p.first.getCodeCity() << " - " << p.second << " m^3 of water supplied!" << '\n';
+            file << ' ' << p.first.getNameCity() << " - " << p.first.getCodeCity() << " - " << p.second << " m^3 of water supplied!" << '\n';
+        }
     }
+    file << " -------------------------------------------------------------" << '\n';
+    file << '\n';
+    file.close();
     return true;
 }
 /**
@@ -59,12 +66,12 @@ void Menu::Max_Amount_Water(Graph<string> s) {
     list<pair<City,double>> r = edmondsKarp(s);
     double total = 0;
     for (auto p : r) {
-        cout << p.first.getNameCity() << " - " << p.first.getCodeCity() << " - " << p.second << '\n';
-        file << ' ' << p.first.getNameCity() << " - " << p.first.getCodeCity() << " - " << p.second << '\n';
+        cout << p.first.getNameCity() << " - " << p.first.getCodeCity() << " - " << p.second << " m^3 of water supplied!" << '\n';
+        file << ' ' << p.first.getNameCity() << " - " << p.first.getCodeCity() << " - " << p.second << " m^3 of water supplied!" << '\n';
         total += p.second;
 
     }
-    cout << " The maxflow for the virtual super sink is: " << total << '\n';
+    cout << "The maxflow for the virtual super sink is: " << total << '\n';
     file << " The maxflow for the virtual super sink is: " << total << '\n';
     file << " -------------------------------------------------------------" << '\n';
     file << '\n';
@@ -244,12 +251,13 @@ list<pair<City,double>> Menu::Meet_Costumer_needs(const Graph<string> a){
 
 /**
  * function that calculates the maximum difference, the variance and the average of the difference between the capacity and the flow that passes through each pipe,
- * before and after applying a balancing function. This balancing function calculates the average difference between the capacity and flow that
- * passes through the adjacent pipes of each vertex and tries distribute in a way that in each adjacent pipe the difference corresponds to
- * the average of the difference - complexity O(VE^2 + f(n)), where V is the number of vertices, E is the number of edges in the graph s and f(n) the time complexity of the Meet_Costumer_needs() function
+ * before and after applying a balancing function. This balancing function calculates the total flow and capacity for the adjacent edges of each vertex,
+ * then it calculates the proportion of each edge capacity and utilizes that value to find the desire amount of flow for each edge based on the total flow.
+ * Like this it ensures the balancing of the flow across the network and the balancing of the difference between each edge capacity and flow but with
+ * a supply deficit associated with it - complexity O(VE^2 + f(n)), where V is the number of vertices, E is the number of edges in the graph s and f(n) the time complexity of the Meet_Costumer_needs() function
  * @param s graph that contain all the information about the water supply management system
  * @return it outputs directly to the console the before mentioned metrics before and after applying the balancing
- * algorithm and the cities which water supply  ended up being affect by this balancing algorithm.
+ * algorithm and the cities which water supply ended up being affect by this balancing algorithm.
  */
 void Menu::Balance_Load(Graph<string> s) {
     list<pair<City,double>> l = Meet_Costumer_needs(s);
@@ -280,20 +288,15 @@ void Menu::Balance_Load(Graph<string> s) {
     cout << "Average:" << fixed << setprecision(2) << average << ' ' << "Variance:"  << fixed << setprecision(2) << variance << ' ' << "Max-Difference:" << maxdiff << '\n';
     //balancing functioon
     for(auto v : s.getVertexSet()) {
-        double total_diff = 0.0;
-        double n_edges = 0.0;
-        for (auto e: v->getAdj()) {
-            n_edges++;
-            total_diff += (e->getWeight() - e->getFlow());
+        double total_capacity = 0.0;
+        double total_flow = 0.0;
+        for(auto e : v->getAdj()){
+            total_capacity += e->getWeight();
+            total_flow += e->getFlow();
         }
-        if (n_edges != 0) {
-            total_diff /= n_edges;
-            for (auto e: v->getAdj()) {
-                if (e->getWeight() - e->getFlow() > total_diff)
-                    e->setFlow(e->getFlow() + ((e->getWeight() - e->getFlow()) - total_diff));
-                else if (e->getWeight() - e->getFlow() < total_diff)
-                    e->setFlow(e->getFlow() - (total_diff - (e->getWeight() - e->getFlow())));
-            }
+        for(auto e :v->getAdj()){
+            double temp = (e->getWeight() / total_capacity);
+            e->setFlow(temp * total_flow);
         }
 
     }
@@ -334,7 +337,7 @@ void Menu::Balance_Load(Graph<string> s) {
     cout << "The affected cities by the balancing of the network are:\n";
     for(auto p : r){
         if(p.second < p.first.getDemand()) {
-            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << '\n';
+            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << " m^3 of water in deficit!" << '\n';
         }
     }
 
@@ -393,7 +396,7 @@ bool Menu::Remove_Water_Reservoir(std::string reservoir_code,Graph<string> s) {
     cout << "The affected cities by the removal of the Reservoi are:\n";
     for(auto p : r){
         if(p.second < p.first.getDemand()) {
-            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << '\n';
+            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << " m^3 of water in deficit!" << '\n';
         }
     }
     return true;
@@ -453,7 +456,7 @@ bool Menu::Maintenance_Station(string station_code,const Graph<string> b){
     cout << "The affected cities by the removal of the Station are:\n";
     for(auto p : r){
         if(p.second < p.first.getDemand()) {
-            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << '\n';
+            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << " m^3 of water in deficit!" << '\n';
 
         }
     }
@@ -619,7 +622,7 @@ bool Menu::Remove_Pipe(Graph<string> s,std::string source, std::string target) {
     cout << "The affected cities by the removal of the Pipe are:\n";
     for(auto p : r){
         if(p.second < p.first.getDemand()) {
-            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << '\n';
+            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << " m^3 of water in deficit!" << '\n';
         }
     }
     return true;
@@ -629,7 +632,7 @@ bool Menu::Remove_Pipe(Graph<string> s,std::string source, std::string target) {
  * @param s graph that contain all the information about the water supply management system
  * @return it outputs directly to the console for each city the pipes that when removed cause an effect on the its supply.
  */
-void Menu::Remove_Pipe2(Graph<string> s){
+void Menu::Critical_Pipe_allCities(Graph<std::string> s) {
     map<string, vector<string>> all_cities;
     unordered_map<string,double> temp;
     list<pair<City,double>> l = Meet_Costumer_needs(s);
@@ -708,4 +711,89 @@ void Menu::Remove_Pipe2(Graph<string> s){
         }
         cout << endl;
     }
+}
+/**
+ * function that checks for a desired city the pipes that when removed have an effect on its water supply -  complexity O(VE(VE^2 + f(n))), where V is the number of vertices, E is the number of edges in the graph s, f(n) the time complexity of the Meet_Costumer_needs() function and n the number of stations to iterate
+ * @param s graph that contain all the information about the water supply management system
+ * @param city_code code of the specific city that we want to calculate the critical pipes
+ * @return true if the the desired city exits, along with its critical pipes, and false otherwise
+ */
+bool Menu::Critical_Pipe_City(Graph<string> s,string city_code){
+    if(d.getCities().find(city_code) == d.getCities().end()) return false;
+    vector<string> all_cities;
+    unordered_map<string,double> temp;
+    list<pair<City,double>> l = Meet_Costumer_needs(s);
+    set<string> cities_affected;
+
+    for(auto p : l) cities_affected.insert(p.first.getCodeCity());
+    for(auto p : l) temp[p.first.getCodeCity()] = (p.first.getDemand() - p.second);
+
+    for(auto v : s.getVertexSet()){
+        for(auto e : v->getAdj()){
+            bool bidirectional = false;
+            for(auto p : e->getDest()->getAdj()){
+                if(p->getDest()->getInfo() == v->getInfo()){
+                    bidirectional = true;
+                    break;
+                }
+            }
+            unordered_map<Edge<string>*,double> restore_weights;
+            if (bidirectional) {
+
+                restore_weights[e] = e->getWeight();
+                e->setWeight(0.0);
+
+                for(auto p : e->getDest()->getAdj()){
+                    if(p->getDest()->getInfo() == v->getInfo()){
+                        restore_weights[p] = p->getWeight();
+                        p->setWeight(0.0);
+                        break;
+                    }
+                }
+            }
+            else {
+                restore_weights[e] = e->getWeight();
+                e->setWeight(0.0);
+            }
+            //Solve for EdmondKarp
+            list<pair<City, double>> r = edmondsKarp(s);
+            //Evalute the context
+
+            if (bidirectional) {
+                e->setWeight(restore_weights[e]);
+
+                for(auto p : e->getDest()->getAdj()){
+                    if(p->getDest()->getInfo() == v->getInfo()){
+                        p->setWeight(restore_weights[p]);
+                        break;
+                    }
+                }
+
+            }
+
+            else {
+                e->setWeight(restore_weights[e]);
+            }
+            //Print result
+            for(auto p : r){
+                if(p.second < p.first.getDemand() && p.first.getCodeCity() == city_code) {
+                    if (cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) {
+                        all_cities.push_back(v->getInfo() + "-->" + e->getDest()->getInfo());
+                    }
+                    else if(temp[p.first.getCodeCity()] > p.second){
+                        all_cities.push_back(v->getInfo() + "-->" + e->getDest()->getInfo());
+
+                    }
+                    break;
+
+                }
+            }
+        }
+    }
+
+    cout << "The critical pipes for " << d.getCities()[city_code].getNameCity() <<" are: " << endl;
+    for (auto it : all_cities) {
+        cout << it << endl;
+    }
+    return true;
 }

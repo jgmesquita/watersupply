@@ -56,7 +56,7 @@ int main() {
             case 2: {
                 list<pair<City,double>> r = m.Meet_Costumer_needs(s);
                 for(auto temp : r)
-                    cout << temp.first.getNameCity() << " - " << temp.first.getCodeCity() << " - " << temp.second << '\n';
+                    cout << temp.first.getNameCity() << " - " << temp.first.getCodeCity() << " - " << temp.second << " m^3 of water in deficit!" << '\n';
                 break;
             }
             case 3: {
@@ -94,8 +94,24 @@ int main() {
                 break;
             }
             case 8: {
-                m.Remove_Pipe2(s);
+                int opcao;
+                cout << " _________________________________________ " << '\n';
+                cout << "|      Water Supply Management System     |" << '\n';
+                cout << "|                                         |" << '\n';
+                cout << "|1.  Critical pipes of each city          |" << '\n';
+                cout << "|2.  Critical pipes of desired city       |" << '\n';
+                cout << "|_________________________________________|" << "\n";
+                cout << "Please choose the desired option:";
+                cin >> opcao;
+                if(opcao ==1) m.Critical_Pipe_allCities(s);
+                else{
+                    string code_city;
+                    cout << "Please insert the desired city code:";
+                    cin >> code_city;
+                    if(!m.Critical_Pipe_City(s,code_city)) cout << "Not a valid city code!" << '\n';
+                }
                 break;
+
             }
 
             default:
