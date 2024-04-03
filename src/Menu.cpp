@@ -231,6 +231,78 @@ list<pair<City,double>> Menu::edmondsKarp(Graph<string> g) {
 
     return r;
 }
+
+
+/**
+ * function that balances the load across the system based on capacity scaling, it is similar to the EdmondsKarp algorithm, however it finds the paths on a subgraph that contains only edges
+ * with a capacity greater or equal to the current edge max capacity. This max edge capacity initially corresponds to the maximum edge capacity of the graph but it will decrease by half
+ * after every iteration. It ends when there are no more paths between the super source SS
+ * and the super sink ST. Basically this function finds the augmenting paths and calculates the network flow in descending order of edge capacity - complexity O((V + E) * log(delta)), where V is the number of vertices, E is the number of edges, and delta is the initial value of the delta parameter.
+ * @param a graph that contain all the information about the water supply management system
+ * @return
+ */
+void Menu::Balancing_func(Graph<std::string> g) {
+    double delta = 14000;
+    list<pair<City,double>> r;
+    string super_source = "SS";
+    string super_target = "ST";
+    g.addVertex(super_source);
+    g.addVertex(super_target);
+    for(Vertex<string>* v : g.getVertexSet()){
+        if(v->getInfo()[0] == 'R')
+            g.addEdge(super_source,v->getInfo(),d.getReservoirs()[v->getInfo()].getMaxDelivery());
+    }
+    //create s super sink
+    for(Vertex<string>* v : g.getVertexSet()){
+        if(v->getInfo()[0] == 'C') g.addEdge(v->getInfo(),super_target,d.getCities()[v->getInfo()].getDemand());
+    }
+    Vertex<string>* s = g.findVertex(super_source);
+    Vertex<string>* t = g.findVertex(super_target);
+
+    unordered_map<Edge<string>*,double> restore_weights;
+    for (auto v : g.getVertexSet()) {
+        for (auto e: v->getAdj()) {
+            e->setFlow(0);
+        }
+    }
+    while(delta >= 1) {
+        for(auto v : g.getVertexSet()){
+            for(auto e : v->getAdj()){
+                if(e->getWeight() <= delta){
+                    restore_weights[e] = e->getWeight();
+                    e->setWeight(0);
+                }
+            }
+        }
+        while (findAugmentingPath(&g, s, t)) {
+            double f = findMinResidualAlongPath(s, t);
+            augmentFlowAlongPath(s, t, f);
+        }
+        for(auto v : g.getVertexSet()){
+            for(auto e : v->getAdj()){
+                e->setWeight(restore_weights[e]);
+            }
+        }
+        delta /= 2;
+
+    }
+
+    for(Vertex<string>* v : g.getVertexSet()){
+        if(v->getInfo()[0] == 'R')
+            g.removeEdge(super_source,v->getInfo());
+    }
+    //create s super sink
+    for(Vertex<string>* v : g.getVertexSet()){
+        if(v->getInfo()[0] == 'C') g.removeEdge(v->getInfo(),super_target);
+    }
+    g.removeVertex(super_source);
+    g.removeVertex(super_target);
+
+}
+
+
+
+
 /**
  * function that retrieves the cities where there is a deficit in its water demand - complexity O(VE^2), where V is the number of vertices and E is the number of edges in the graph a
  * @param a graph that contain all the information about the water supply management system
@@ -251,13 +323,10 @@ list<pair<City,double>> Menu::Meet_Costumer_needs(const Graph<string> a){
 
 /**
  * function that calculates the maximum difference, the variance and the average of the difference between the capacity and the flow that passes through each pipe,
- * before and after applying a balancing function. This balancing function calculates the total flow and capacity for the adjacent edges of each vertex,
- * then it calculates the proportion of each edge capacity and utilizes that value to find the desire amount of flow for each edge based on the total flow.
- * Like this it ensures the balancing of the flow across the network and the balancing of the difference between each edge capacity and flow but with
- * a supply deficit associated with it - complexity O(VE^2 + f(n)), where V is the number of vertices, E is the number of edges in the graph s and f(n) the time complexity of the Meet_Costumer_needs() function
+ * before and after applying a balancing function. - complexity O((V + E) * log(delta)), where V is the number of vertices, E is the number of edges, and delta is the initial value of the delta parameter
+ * this time complexity corresponds to the balancing function, which is responsible for most of the time consumption and work of this particular function
  * @param s graph that contain all the information about the water supply management system
- * @return it outputs directly to the console the before mentioned metrics before and after applying the balancing
- * algorithm and the cities which water supply ended up being affect by this balancing algorithm.
+ * @return it outputs directly to the console the before mentioned metrics before and after applying the balancing algorithm
  */
 void Menu::Balance_Load(Graph<string> s) {
     list<pair<City,double>> l = Meet_Costumer_needs(s);
@@ -286,20 +355,8 @@ void Menu::Balance_Load(Graph<string> s) {
     variance /= (counter - 1);
     cout << "The inicial metrics are: \n";
     cout << "Average:" << fixed << setprecision(2) << average << ' ' << "Variance:"  << fixed << setprecision(2) << variance << ' ' << "Max-Difference:" << maxdiff << '\n';
-    //balancing functioon
-    for(auto v : s.getVertexSet()) {
-        double total_capacity = 0.0;
-        double total_flow = 0.0;
-        for(auto e : v->getAdj()){
-            total_capacity += e->getWeight();
-            total_flow += e->getFlow();
-        }
-        for(auto e :v->getAdj()){
-            double temp = (e->getWeight() / total_capacity);
-            e->setFlow(temp * total_flow);
-        }
 
-    }
+    Balancing_func(s);
     //final metrics
     variance = 0;
     average = 0;
@@ -322,24 +379,6 @@ void Menu::Balance_Load(Graph<string> s) {
     variance /= (counter - 1);
     cout << "The final metrics are: \n";
     cout << "Average:" << fixed << setprecision(2) << average << ' ' << "Variance:"  << fixed << setprecision(2) << variance << ' ' << "Max-Difference:" << maxdiff << '\n';
-    list<pair<City,double>> r;
-    for(Vertex<string>* v : s.getVertexSet()){
-        if(v->getInfo()[0] == 'C'){
-            double value = 0.0;
-            for(auto e : v->getIncoming()){
-                value += e->getFlow();
-            }
-            City temp = d.getCities()[v->getInfo()];
-            r.push_back(make_pair(temp,value));
-
-        }
-    }
-    cout << "The affected cities by the balancing of the network are:\n";
-    for(auto p : r){
-        if(p.second < p.first.getDemand()) {
-            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << " m^3 of water in deficit!" << '\n';
-        }
-    }
 
 }
 /**

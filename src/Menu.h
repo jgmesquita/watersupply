@@ -34,6 +34,8 @@ public:
     bool findAugmentingPath(Graph<string> *g, Vertex<string> *s, Vertex<string> *t);
     void testAndVisit(std::queue< Vertex<string>*> &q, Edge<string> *e, Vertex<string> *w, double residual);
 
+    void Balancing_func(Graph<string> g);
+
 
 };
 #endif //PROJETO_DA_MENU_H
