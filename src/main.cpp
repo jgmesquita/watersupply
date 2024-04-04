@@ -84,13 +84,44 @@ int main() {
                 break;
             }
             case 7: {
-                string source;
-                cout << "Please insert a valid Source code (Station or Reservoir):\n";
-                cin >> source;
-                string target;
-                cout << "Please insert a valid Target code (Station or City):\n";
-                cin >> target;
-                if(!m.Remove_Pipe(s,source,target)) cout << "Not a valid Pipe!" << '\n';
+                int opcao;
+                cout << " _________________________________________ " << '\n';
+                cout << "|      Water Supply Management System     |" << '\n';
+                cout << "|                                         |" << '\n';
+                cout << "|1.  Remove a single pipe                 |" << '\n';
+                cout << "|2.  Remove multiple pipes                |" << '\n';
+                cout << "|_________________________________________|" << "\n";
+                cout << "Please choose the desired option:";
+                cin >> opcao;
+                if(opcao ==1) {
+                    string source;
+                    cout << "Please insert a valid Source code (Station or Reservoir):\n";
+                    cin >> source;
+                    string target;
+                    cout << "Please insert a valid Target code (Station or City):\n";
+                    cin >> target;
+                    if(!m.Remove_Pipe(s,source,target)) cout << "Not a valid Pipe!" << '\n';
+                }
+                else{
+                    bool temp = true;
+                    set<pair<string,string>> o;
+                    while(temp){
+                        string source;
+                        cout << "Please insert a valid Source code (Station or Reservoir):\n";
+                        cin >> source;
+                        string target;
+                        cout << "Please insert a valid Target code (Station or City):\n";
+                        cin >> target;
+                        o.insert(make_pair(source,target));
+                        temp = false;
+                        string t1;
+                        cout << "To continue removing pipes type C else type any key\n";
+                        cin >> t1;
+                        if(t1 == "C") temp = true;
+
+                    }
+                    if(!m.Remove_Pipe2(s,o)) cout << "There is a invalid Pipe!" << '\n';
+                }
                 break;
             }
             case 8: {

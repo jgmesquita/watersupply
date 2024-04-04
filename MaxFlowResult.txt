@@ -102,3 +102,29 @@
  Aveiro - C_2 - 515 m^3 of water supplied!
  -------------------------------------------------------------
 
+ Porto Moniz - C_1 - 18 m^3 of water supplied!
+ São Vicente - C_2 - 34 m^3 of water supplied!
+ Santana - C_3 - 46 m^3 of water supplied!
+ Machico - C_4 - 137 m^3 of water supplied!
+ Santa Cruz - C_5 - 295 m^3 of water supplied!
+ Funchal - C_6 - 664 m^3 of water supplied!
+ Câmara de Lobos - C_7 - 225 m^3 of water supplied!
+ Ribeira Brava - C_8 - 89 m^3 of water supplied!
+ Ponta do Sol - C_9 - 59 m^3 of water supplied!
+ Calheta - C_10 - 76 m^3 of water supplied!
+ The maxflow for the virtual super sink is: 1643
+ -------------------------------------------------------------
+
+ Porto Moniz - C_1 - 18 m^3 of water supplied!
+ São Vicente - C_2 - 34 m^3 of water supplied!
+ Santana - C_3 - 46 m^3 of water supplied!
+ Machico - C_4 - 137 m^3 of water supplied!
+ Santa Cruz - C_5 - 295 m^3 of water supplied!
+ Funchal - C_6 - 664 m^3 of water supplied!
+ Câmara de Lobos - C_7 - 225 m^3 of water supplied!
+ Ribeira Brava - C_8 - 89 m^3 of water supplied!
+ Ponta do Sol - C_9 - 59 m^3 of water supplied!
+ Calheta - C_10 - 76 m^3 of water supplied!
+ The maxflow for the virtual super sink is: 1643
+ -------------------------------------------------------------
+

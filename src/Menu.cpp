@@ -553,6 +553,114 @@ vector<string> Menu::Remove_Station_noeffect(Graph<string> s){
     return caixa;
 }
 /**
+ * function that restores the capacity of all the removed pipes - complexity O(VE), where V is the number of vertices, E is the number of edges in the graph d
+ * @param d graph that contain all the information about the water supply management system
+ * @param restore_weights an unordered_map that stores the key value pairs of the removed edges and their corresponding initial capacity
+ * @return
+ */
+void Menu::restore_capacities(Graph<string> d,unordered_map<Edge<string>*,double> restore_weights){
+    for(auto v : d.getVertexSet()){
+        for(auto e : v->getAdj()){
+            if(restore_weights.find(e) != restore_weights.end()){
+                e->setWeight(restore_weights[e]);
+            }
+        }
+    }
+}
+
+/**
+ * function that removes a multiple pipes from the system and verifies which cities have their supply affected - complexity O(VE^2 + f(n)), where V is the number of vertices, E is the number of edges in the graph s and f(n) the time complexity of the Meet_Costumer_needs() function
+ * @param s graph that contain all the information about the water supply management system
+ * @param t set that contains the multiple pipes to remove, each pair represents the source and target vertexes of each pipe
+ * @return true if all the given pipes exist and it outputs directly to the console the cities whose supply is affected by this removal and false otherwise
+ */
+bool Menu::Remove_Pipe2(Graph<string> s,set<pair<string,string>> t) {
+    unordered_map<string,double> temp;
+    list<pair<City,double>> l = Meet_Costumer_needs(s);
+    for(auto p : l) temp[p.first.getCodeCity()] = (p.first.getDemand() - p.second);
+    unordered_map<Edge<string> *, double> restore_weights;
+    set<string> cities_affected;
+    for (auto p: l) cities_affected.insert(p.first.getCodeCity());
+    for(auto final : t) {
+        bool bidirectional = false;
+        auto v_source = s.findVertex(final.first);
+        auto v_target = s.findVertex(final.second);
+        bool exits = false;
+        if (v_source == nullptr || v_source == v_target || v_target == nullptr) {
+            return false;
+        }
+
+        for (auto e: v_source->getAdj()) {
+            if (e->getDest()->getInfo() == final.second) {
+                exits = true;
+                break;
+            }
+        }
+        for (auto e: v_target->getAdj()) {
+            if (e->getDest()->getInfo() == final.first) {
+                bidirectional = true;
+                break;
+            }
+        }
+
+
+        if (!exits) return false;
+        //Check for already existent problems with supply
+        //Check for invalid source or target
+
+        if (bidirectional) {
+            for (auto e: v_source->getAdj()) {
+                if (e->getDest()->getInfo() == final.second) {
+                    restore_weights[e] = e->getWeight();
+                    e->setWeight(0.0);
+                    break;
+                }
+            }
+            for (auto e: v_source->getIncoming()) {
+                if (e->getOrig()->getInfo() == final.second) {
+                    restore_weights[e] = e->getWeight();
+                    e->setWeight(0.0);
+                    break;
+                }
+            }
+
+        } else {
+            for (auto e: v_source->getAdj()) {
+                if (e->getDest()->getInfo() == final.second) {
+                    restore_weights[e] = e->getWeight();
+                    e->setWeight(0.0);
+                    break;
+                }
+            }
+        }
+        //Solve for EdmondKarp
+    }
+    list<pair<City, double>> r = edmondsKarp(s);
+    //Evalute the context
+    restore_capacities(s,restore_weights);
+    bool flag = false;
+    for(auto p : r){
+        if(p.second < p.first.getDemand()) {
+            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) {
+                flag = true;
+                break;
+            }
+        }
+    }
+    if (!flag) {
+        cout << "None of the cities were affected by the removal!\n";
+        return true;
+    }
+    //Print result
+    cout << "The affected cities by the removal of the Pipe are:\n";
+    for(auto p : r){
+        if(p.second < p.first.getDemand()) {
+            if ((cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) || (temp[p.first.getCodeCity()] > p.second)) cout << p.first.getNameCity() << ' ' << (p.first.getDemand() - p.second) << " m^3 of water in deficit!" << '\n';
+        }
+    }
+    return true;
+}
+/**
  * function that removes a specific pipe from the system by checking first if it exists and if it is bidirectional or unidirectional pipe and verifies which cities have their supply affected - complexity O(VE^2 + f(n)), where V is the number of vertices, E is the number of edges in the graph s and f(n) the time complexity of the Meet_Costumer_needs() function
  * @param s graph that contain all the information about the water supply management system
  * @param source code of the source vertex of the specific pipe

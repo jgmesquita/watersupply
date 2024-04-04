@@ -26,6 +26,7 @@ public:
     bool Maintenance_Station(string station_code,const Graph<string> a);
     vector<string> Remove_Station_noeffect(Graph<string> s);
     bool Remove_Pipe(Graph<string> s,std::string source, std::string target);
+    bool Remove_Pipe2(Graph<string> s, set<pair<string,string>> temp);
     void Critical_Pipe_allCities(Graph<string> s);
     bool Critical_Pipe_City(Graph<string> s,string city_code);
     list<pair<City,double>> edmondsKarp(Graph<string> g);
@@ -33,7 +34,7 @@ public:
     double findMinResidualAlongPath(Vertex<string> *s, Vertex<string> *t);
     bool findAugmentingPath(Graph<string> *g, Vertex<string> *s, Vertex<string> *t);
     void testAndVisit(std::queue< Vertex<string>*> &q, Edge<string> *e, Vertex<string> *w, double residual);
-
+    void restore_capacities(Graph<string> d,unordered_map<Edge<string>*,double> restore_weights);
     void Balancing_func(Graph<string> g);
 
 

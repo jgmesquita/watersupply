@@ -42,7 +42,7 @@ unordered_map<string,Station> Data::getStations(){
  * - complexity O(N) where N is the number of lines in the file
  */
 void Data::parseReservoir() {
-    ifstream reservoirs("../dataset/Reservoir.csv");
+    ifstream reservoirs("../dataset_madeira/Reservoirs_Madeira.csv");
     string line;
     getline(reservoirs,line); //read and ignore first line
      while (getline(reservoirs, line)) {
@@ -64,7 +64,7 @@ void Data::parseReservoir() {
  * - complexity O(N) where N is the number of lines in the file
  */
 void Data::parseStation() {
-    ifstream stations("../dataset/Stations.csv");
+    ifstream stations("../dataset_madeira/Stations_Madeira.csv");
     string line;
     getline(stations,line); //read and ignore first line
     while (getline(stations, line)) {
@@ -82,7 +82,7 @@ void Data::parseStation() {
  * - complexity O(N) where N is the number of lines in the file
  */
 void Data::parseCity() {
-    ifstream cities("../dataset/Cities.csv");
+    ifstream cities("../dataset_madeira/Cities_Madeira.csv");
     string line;
     getline(cities,line); //read and ignore first line
     while (getline(cities, line)) {
@@ -104,7 +104,7 @@ void Data::parseCity() {
  * - complexity O(N) where N is the number of lines in the file
  */
 void Data::parsePipes() {
-    ifstream pipes("../dataset/Pipes.csv");
+    ifstream pipes("../dataset_madeira/Pipes_Madeira.csv");
     string line;
     getline(pipes,line); //read and ignore first line
     while (getline(pipes, line)) {
