@@ -42,7 +42,7 @@ unordered_map<string,Station> Data::getStations(){
  * - complexity O(N) where N is the number of lines in the file
  */
 void Data::parseReservoir() {
-    ifstream reservoirs("../dataset/Reservoirs.csv");
+    ifstream reservoirs("../dataset/Reservoir.csv");
     string line;
     getline(reservoirs,line); //read and ignore first line
      while (getline(reservoirs, line)) {

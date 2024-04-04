@@ -128,3 +128,53 @@
  The maxflow for the virtual super sink is: 1643
  -------------------------------------------------------------
 
+ Alcacer do Sal - C_1 - 0 m^3 of water supplied!
+ Aveiro - C_2 - 0 m^3 of water supplied!
+ Beja - C_3 - 0 m^3 of water supplied!
+ Braga - C_4 - 0 m^3 of water supplied!
+ Bragança - C_5 - 0 m^3 of water supplied!
+ Castelo Branco - C_6 - 0 m^3 of water supplied!
+ Coimbra - C_7 - 0 m^3 of water supplied!
+ Covilhã - C_8 - 0 m^3 of water supplied!
+ Estremoz - C_9 - 0 m^3 of water supplied!
+ Évora - C_10 - 0 m^3 of water supplied!
+ Faro - C_11 - 0 m^3 of water supplied!
+ Guarda - C_12 - 0 m^3 of water supplied!
+ Lagos - C_13 - 0 m^3 of water supplied!
+ Leiria - C_14 - 0 m^3 of water supplied!
+ Lisboa - C_15 - 0 m^3 of water supplied!
+ Portalegre - C_16 - 0 m^3 of water supplied!
+ Porto - C_17 - 0 m^3 of water supplied!
+ Santarém - C_18 - 0 m^3 of water supplied!
+ Setúbal - C_19 - 0 m^3 of water supplied!
+ Viana do Castelo - C_20 - 0 m^3 of water supplied!
+ Vila real - C_21 - 0 m^3 of water supplied!
+ Viseu - C_22 - 0 m^3 of water supplied!
+ The maxflow for the virtual super sink is: 0
+ -------------------------------------------------------------
+
+ Alcacer do Sal - C_1 - 52 m^3 of water supplied!
+ Aveiro - C_2 - 515 m^3 of water supplied!
+ Beja - C_3 - 110 m^3 of water supplied!
+ Braga - C_4 - 1208 m^3 of water supplied!
+ Bragança - C_5 - 125 m^3 of water supplied!
+ Castelo Branco - C_6 - 230 m^3 of water supplied!
+ Coimbra - C_7 - 896 m^3 of water supplied!
+ Covilhã - C_8 - 100 m^3 of water supplied!
+ Estremoz - C_9 - 53 m^3 of water supplied!
+ Évora - C_10 - 220 m^3 of water supplied!
+ Faro - C_11 - 407 m^3 of water supplied!
+ Guarda - C_12 - 177 m^3 of water supplied!
+ Lagos - C_13 - 123 m^3 of water supplied!
+ Leiria - C_14 - 406 m^3 of water supplied!
+ Lisboa - C_15 - 12250 m^3 of water supplied!
+ Portalegre - C_16 - 96 m^3 of water supplied!
+ Porto - C_17 - 5650 m^3 of water supplied!
+ Santarém - C_18 - 200 m^3 of water supplied!
+ Setúbal - C_19 - 780 m^3 of water supplied!
+ Viana do Castelo - C_20 - 100 m^3 of water supplied!
+ Vila real - C_21 - 135 m^3 of water supplied!
+ Viseu - C_22 - 330 m^3 of water supplied!
+ The maxflow for the virtual super sink is: 24163
+ -------------------------------------------------------------
+
