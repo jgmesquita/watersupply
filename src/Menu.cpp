@@ -804,8 +804,8 @@ void Menu::Critical_Pipe_allCities(Graph<std::string> s) {
                 restore_weights[e] = e->getWeight();
                 e->setWeight(0.0);
 
-                for(auto p : e->getDest()->getAdj()){
-                    if(p->getDest()->getInfo() == v->getInfo()){
+                for(auto p : v->getIncoming()){
+                    if(p->getOrig()->getInfo() == e->getDest()->getInfo()){
                         restore_weights[p] = p->getWeight();
                         p->setWeight(0.0);
                         break;
