@@ -242,7 +242,7 @@ list<pair<City,double>> Menu::edmondsKarp(Graph<string> g) {
  * @return
  */
 void Menu::Balancing_func(Graph<std::string> g) {
-    double delta = 14000;
+    double delta = 750;
     list<pair<City,double>> r;
     string super_source = "SS";
     string super_target = "ST";
@@ -259,16 +259,16 @@ void Menu::Balancing_func(Graph<std::string> g) {
     Vertex<string>* s = g.findVertex(super_source);
     Vertex<string>* t = g.findVertex(super_target);
 
-    unordered_map<Edge<string>*,double> restore_weights;
     for (auto v : g.getVertexSet()) {
         for (auto e: v->getAdj()) {
             e->setFlow(0);
         }
     }
     while(delta >= 1) {
+        unordered_map<Edge<string>*,double> restore_weights;
         for(auto v : g.getVertexSet()){
             for(auto e : v->getAdj()){
-                if(e->getWeight() <= delta){
+                if(e->getWeight() < delta){
                     restore_weights[e] = e->getWeight();
                     e->setWeight(0);
                 }
@@ -278,14 +278,15 @@ void Menu::Balancing_func(Graph<std::string> g) {
             double f = findMinResidualAlongPath(s, t);
             augmentFlowAlongPath(s, t, f);
         }
-        for(auto v : g.getVertexSet()){
-            for(auto e : v->getAdj()){
-                e->setWeight(restore_weights[e]);
-            }
+
+        for(auto p : restore_weights){
+            p.first->setWeight(p.second);
         }
+
         delta /= 2;
 
     }
+
 
     for(Vertex<string>* v : g.getVertexSet()){
         if(v->getInfo()[0] == 'R')
@@ -361,7 +362,7 @@ void Menu::Balance_Load(Graph<string> s) {
     variance = 0;
     average = 0;
     maxdiff = 0;
-
+    counter = 0;
     for(auto v : s.getVertexSet()){
         for(auto e : v->getAdj()){
             if(e->getWeight() - e->getFlow() > maxdiff) maxdiff = (e->getWeight() - e->getFlow());
