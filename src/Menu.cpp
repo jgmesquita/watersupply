@@ -242,7 +242,7 @@ list<pair<City,double>> Menu::edmondsKarp(Graph<string> g) {
  * @return
  */
 void Menu::Balancing_func(Graph<std::string> g) {
-    double delta = 750;
+    double delta = 14000;
     list<pair<City,double>> r;
     string super_source = "SS";
     string super_target = "ST";
@@ -264,8 +264,9 @@ void Menu::Balancing_func(Graph<std::string> g) {
             e->setFlow(0);
         }
     }
+    unordered_map<Edge<string>*,double> restore_weights;
+
     while(delta >= 1) {
-        unordered_map<Edge<string>*,double> restore_weights;
         for(auto v : g.getVertexSet()){
             for(auto e : v->getAdj()){
                 if(e->getWeight() < delta){
