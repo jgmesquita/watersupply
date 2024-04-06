@@ -118,7 +118,9 @@ bool Menu::findAugmentingPath(Graph<string> *g, Vertex<string> *s, Vertex<string
         q.pop();
 // Process outgoing edges
         for(auto e: v->getAdj()) {
+
             testAndVisit(q, e, e->getDest(), e->getWeight() - e->getFlow());
+
         }
 // Process incoming edges
         for(auto e: v->getIncoming()) {
@@ -267,6 +269,7 @@ void Menu::Balancing_func(Graph<std::string> g) {
     unordered_map<Edge<string>*,double> restore_weights;
 
     while(delta >= 1) {
+
         for(auto v : g.getVertexSet()){
             for(auto e : v->getAdj()){
                 if(e->getWeight() < delta){
@@ -341,6 +344,7 @@ void Menu::Balance_Load(Graph<string> s) {
     result = edmondsKarp(s);
     double counter = 0.0;
     double average = 0, variance = 0, maxdiff=0;
+    double total = 0, total_square = 0;
     for(auto v : s.getVertexSet()){
         for(auto e : v->getAdj()){
             if(!e->isSelected()) {
@@ -348,14 +352,20 @@ void Menu::Balance_Load(Graph<string> s) {
                     if (e->getWeight() - e->getFlow() > maxdiff) maxdiff = (e->getWeight() - e->getFlow());
                     average += (e->getWeight() - e->getFlow());
                     e->setSelected(true);
+                    total += e->getWeight() - e->getFlow();
+                    total_square += pow(e->getWeight() - e->getFlow(),2);
                 } else { //if is bidirectional
                     if (e->getFlow() > 0){
                         if (e->getWeight() - e->getFlow() > maxdiff) maxdiff = (e->getWeight() - e->getFlow());
                         average += (e->getWeight() - e->getFlow());
+                        total += e->getWeight() - e->getFlow();
+                        total_square += pow(e->getWeight() - e->getFlow(),2);
                     }
                     else {
                         if (e->getReverse()->getWeight() - e->getReverse()->getFlow() > maxdiff) maxdiff = (e->getReverse()->getWeight() - e->getReverse()->getFlow());
                         average += (e->getReverse()->getWeight() - e->getReverse()->getFlow());
+                        total += e->getReverse()->getWeight() - e->getReverse()->getFlow();
+                        total_square += pow(e->getReverse()->getWeight() - e->getReverse()->getFlow(),2);
                     }
                     e->setSelected(true);
                     e->getReverse()->setSelected(true);
@@ -365,38 +375,15 @@ void Menu::Balance_Load(Graph<string> s) {
         }
     }
     average /= counter;
+    variance = (total_square - (pow(total,2) / counter)) / (counter - 1);
+
     for(auto v : s.getVertexSet()) {
         for (auto e: v->getAdj()) {
             e->setSelected(false);
         }
     }
 
-    for(auto v : s.getVertexSet()){
-        for(auto e : v->getAdj()){
-            if(!e->isSelected()) {
-                if (e->getReverse() == nullptr) { //if not bidirectional
-                    variance += pow((e->getWeight() - e->getFlow()) - average,2);
-                    e->setSelected(true);
-                } else { //if is bidirectional
-                    if (e->getFlow() > 0){
-                        variance += pow((e->getWeight() - e->getFlow()) - average,2);
-                    }
-                    else {
-                        variance += pow((e->getReverse()->getWeight() - e->getReverse()->getFlow()) - average,2);
-                    }
-                    e->setSelected(true);
-                    e->getReverse()->setSelected(true);
-                }
-            }
 
-        }
-    }
-    variance /= (counter - 1);
-    for(auto v : s.getVertexSet()) {
-        for (auto e: v->getAdj()) {
-            e->setSelected(false);
-        }
-    }
     cout << "The inicial metrics are: \n";
     cout << "Average:" << fixed << setprecision(2) << average << ' ' << "Variance:"  << fixed << setprecision(2) << variance << ' ' << "Max-Difference:" << maxdiff << '\n';
 
@@ -406,6 +393,8 @@ void Menu::Balance_Load(Graph<string> s) {
     average = 0;
     maxdiff = 0;
     counter = 0;
+    total = 0;
+    total_square = 0;
     for(auto v : s.getVertexSet()){
         for(auto e : v->getAdj()){
             if(!e->isSelected()) {
@@ -413,14 +402,20 @@ void Menu::Balance_Load(Graph<string> s) {
                     if (e->getWeight() - e->getFlow() > maxdiff) maxdiff = (e->getWeight() - e->getFlow());
                     average += (e->getWeight() - e->getFlow());
                     e->setSelected(true);
+                    total += e->getWeight() - e->getFlow();
+                    total_square += pow(e->getWeight() - e->getFlow(),2);
                 } else { //if is bidirectional
                     if (e->getFlow() > 0){
                         if (e->getWeight() - e->getFlow() > maxdiff) maxdiff = (e->getWeight() - e->getFlow());
                         average += (e->getWeight() - e->getFlow());
+                        total += e->getWeight() - e->getFlow();
+                        total_square += pow(e->getWeight() - e->getFlow(),2);
                     }
                     else {
                         if (e->getReverse()->getWeight() - e->getReverse()->getFlow() > maxdiff) maxdiff = (e->getReverse()->getWeight() - e->getReverse()->getFlow());
                         average += (e->getReverse()->getWeight() - e->getReverse()->getFlow());
+                        total += e->getReverse()->getWeight() - e->getReverse()->getFlow();
+                        total_square += pow(e->getReverse()->getWeight() - e->getReverse()->getFlow(),2);
                     }
                     e->setSelected(true);
                     e->getReverse()->setSelected(true);
@@ -430,33 +425,8 @@ void Menu::Balance_Load(Graph<string> s) {
         }
     }
     average /= counter;
-    for(auto v : s.getVertexSet()) {
-        for (auto e: v->getAdj()) {
-            e->setSelected(false);
-        }
-    }
+    variance = (total_square - (pow(total,2) / counter)) / (counter - 1);
 
-    for(auto v : s.getVertexSet()){
-        for(auto e : v->getAdj()){
-            if(!e->isSelected()) {
-                if (e->getReverse() == nullptr) { //if not bidirectional
-                    variance += pow((e->getWeight() - e->getFlow()) - average,2);
-                    e->setSelected(true);
-                } else { //if is bidirectional
-                    if (e->getFlow() > 0){
-                        variance += pow((e->getWeight() - e->getFlow()) - average,2);
-                    }
-                    else {
-                        variance += pow((e->getReverse()->getWeight() - e->getReverse()->getFlow()) - average,2);
-                    }
-                    e->setSelected(true);
-                    e->getReverse()->setSelected(true);
-                }
-            }
-
-        }
-    }
-    variance /= (counter - 1);
     for(auto v : s.getVertexSet()) {
         for (auto e: v->getAdj()) {
             e->setSelected(false);

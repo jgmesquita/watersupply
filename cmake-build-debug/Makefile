@@ -128,6 +128,19 @@ Projeto_DA/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projeto_DA.dir\build.make CMakeFiles/Projeto_DA.dir/build
 .PHONY : Projeto_DA/fast
 
+#=============================================================================
+# Target rules for targets named Doxygen
+
+# Build rule for target.
+Doxygen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 Doxygen
+.PHONY : Doxygen
+
+# fast build rule for target.
+Doxygen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Doxygen.dir\build.make CMakeFiles/Doxygen.dir/build
+.PHONY : Doxygen/fast
+
 src/City.obj: src/City.cpp.obj
 .PHONY : src/City.obj
 
@@ -280,6 +293,7 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... Doxygen
 	@echo ... Projeto_DA
 	@echo ... src/City.obj
 	@echo ... src/City.i
