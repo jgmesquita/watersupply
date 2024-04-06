@@ -1,4 +1,4 @@
-C:/Users/afdom/OneDrive/Ambiente de Trabalho/DA/Project/watersupply/cmake-build-debug/CMakeFiles/Projeto_DA.dir
-C:/Users/afdom/OneDrive/Ambiente de Trabalho/DA/Project/watersupply/cmake-build-debug/CMakeFiles/Doxygen.dir
-C:/Users/afdom/OneDrive/Ambiente de Trabalho/DA/Project/watersupply/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/afdom/OneDrive/Ambiente de Trabalho/DA/Project/watersupply/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/jorge/Desktop/temp/cmake-build-debug/CMakeFiles/Projeto_DA.dir
+C:/Users/jorge/Desktop/temp/cmake-build-debug/CMakeFiles/Doxygen.dir
+C:/Users/jorge/Desktop/temp/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/jorge/Desktop/temp/cmake-build-debug/CMakeFiles/rebuild_cache.dir

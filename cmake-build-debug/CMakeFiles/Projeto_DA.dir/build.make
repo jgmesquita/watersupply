@@ -52,10 +52,10 @@ RM = "C:\Program Files\JetBrains\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe"
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply"
+CMAKE_SOURCE_DIR = C:\Users\jorge\Desktop\temp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\cmake-build-debug"
+CMAKE_BINARY_DIR = C:\Users\jorge\Desktop\temp\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Projeto_DA.dir/depend.make
@@ -69,88 +69,88 @@ include CMakeFiles/Projeto_DA.dir/progress.make
 include CMakeFiles/Projeto_DA.dir/flags.make
 
 CMakeFiles/Projeto_DA.dir/src/main.cpp.obj: CMakeFiles/Projeto_DA.dir/flags.make
-CMakeFiles/Projeto_DA.dir/src/main.cpp.obj: C:/Users/afdom/OneDrive/Ambiente\ de\ Trabalho/DA/Project/watersupply/src/main.cpp
+CMakeFiles/Projeto_DA.dir/src/main.cpp.obj: C:/Users/jorge/Desktop/temp/src/main.cpp
 CMakeFiles/Projeto_DA.dir/src/main.cpp.obj: CMakeFiles/Projeto_DA.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Projeto_DA.dir/src/main.cpp.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Projeto_DA.dir/src/main.cpp.obj -MF CMakeFiles\Projeto_DA.dir\src\main.cpp.obj.d -o CMakeFiles\Projeto_DA.dir\src\main.cpp.obj -c "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\src\main.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\jorge\Desktop\temp\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Projeto_DA.dir/src/main.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Projeto_DA.dir/src/main.cpp.obj -MF CMakeFiles\Projeto_DA.dir\src\main.cpp.obj.d -o CMakeFiles\Projeto_DA.dir\src\main.cpp.obj -c C:\Users\jorge\Desktop\temp\src\main.cpp
 
 CMakeFiles/Projeto_DA.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Projeto_DA.dir/src/main.cpp.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\src\main.cpp" > CMakeFiles\Projeto_DA.dir\src\main.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\jorge\Desktop\temp\src\main.cpp > CMakeFiles\Projeto_DA.dir\src\main.cpp.i
 
 CMakeFiles/Projeto_DA.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Projeto_DA.dir/src/main.cpp.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\src\main.cpp" -o CMakeFiles\Projeto_DA.dir\src\main.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\jorge\Desktop\temp\src\main.cpp -o CMakeFiles\Projeto_DA.dir\src\main.cpp.s
 
 CMakeFiles/Projeto_DA.dir/src/Reservoir.cpp.obj: CMakeFiles/Projeto_DA.dir/flags.make
-CMakeFiles/Projeto_DA.dir/src/Reservoir.cpp.obj: C:/Users/afdom/OneDrive/Ambiente\ de\ Trabalho/DA/Project/watersupply/src/Reservoir.cpp
+CMakeFiles/Projeto_DA.dir/src/Reservoir.cpp.obj: C:/Users/jorge/Desktop/temp/src/Reservoir.cpp
 CMakeFiles/Projeto_DA.dir/src/Reservoir.cpp.obj: CMakeFiles/Projeto_DA.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Projeto_DA.dir/src/Reservoir.cpp.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Projeto_DA.dir/src/Reservoir.cpp.obj -MF CMakeFiles\Projeto_DA.dir\src\Reservoir.cpp.obj.d -o CMakeFiles\Projeto_DA.dir\src\Reservoir.cpp.obj -c "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\src\Reservoir.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\jorge\Desktop\temp\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Projeto_DA.dir/src/Reservoir.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Projeto_DA.dir/src/Reservoir.cpp.obj -MF CMakeFiles\Projeto_DA.dir\src\Reservoir.cpp.obj.d -o CMakeFiles\Projeto_DA.dir\src\Reservoir.cpp.obj -c C:\Users\jorge\Desktop\temp\src\Reservoir.cpp
 
 CMakeFiles/Projeto_DA.dir/src/Reservoir.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Projeto_DA.dir/src/Reservoir.cpp.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\src\Reservoir.cpp" > CMakeFiles\Projeto_DA.dir\src\Reservoir.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\jorge\Desktop\temp\src\Reservoir.cpp > CMakeFiles\Projeto_DA.dir\src\Reservoir.cpp.i
 
 CMakeFiles/Projeto_DA.dir/src/Reservoir.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Projeto_DA.dir/src/Reservoir.cpp.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\src\Reservoir.cpp" -o CMakeFiles\Projeto_DA.dir\src\Reservoir.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\jorge\Desktop\temp\src\Reservoir.cpp -o CMakeFiles\Projeto_DA.dir\src\Reservoir.cpp.s
 
 CMakeFiles/Projeto_DA.dir/src/Station.cpp.obj: CMakeFiles/Projeto_DA.dir/flags.make
-CMakeFiles/Projeto_DA.dir/src/Station.cpp.obj: C:/Users/afdom/OneDrive/Ambiente\ de\ Trabalho/DA/Project/watersupply/src/Station.cpp
+CMakeFiles/Projeto_DA.dir/src/Station.cpp.obj: C:/Users/jorge/Desktop/temp/src/Station.cpp
 CMakeFiles/Projeto_DA.dir/src/Station.cpp.obj: CMakeFiles/Projeto_DA.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Projeto_DA.dir/src/Station.cpp.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Projeto_DA.dir/src/Station.cpp.obj -MF CMakeFiles\Projeto_DA.dir\src\Station.cpp.obj.d -o CMakeFiles\Projeto_DA.dir\src\Station.cpp.obj -c "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\src\Station.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\jorge\Desktop\temp\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Projeto_DA.dir/src/Station.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Projeto_DA.dir/src/Station.cpp.obj -MF CMakeFiles\Projeto_DA.dir\src\Station.cpp.obj.d -o CMakeFiles\Projeto_DA.dir\src\Station.cpp.obj -c C:\Users\jorge\Desktop\temp\src\Station.cpp
 
 CMakeFiles/Projeto_DA.dir/src/Station.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Projeto_DA.dir/src/Station.cpp.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\src\Station.cpp" > CMakeFiles\Projeto_DA.dir\src\Station.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\jorge\Desktop\temp\src\Station.cpp > CMakeFiles\Projeto_DA.dir\src\Station.cpp.i
 
 CMakeFiles/Projeto_DA.dir/src/Station.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Projeto_DA.dir/src/Station.cpp.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\src\Station.cpp" -o CMakeFiles\Projeto_DA.dir\src\Station.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\jorge\Desktop\temp\src\Station.cpp -o CMakeFiles\Projeto_DA.dir\src\Station.cpp.s
 
 CMakeFiles/Projeto_DA.dir/src/City.cpp.obj: CMakeFiles/Projeto_DA.dir/flags.make
-CMakeFiles/Projeto_DA.dir/src/City.cpp.obj: C:/Users/afdom/OneDrive/Ambiente\ de\ Trabalho/DA/Project/watersupply/src/City.cpp
+CMakeFiles/Projeto_DA.dir/src/City.cpp.obj: C:/Users/jorge/Desktop/temp/src/City.cpp
 CMakeFiles/Projeto_DA.dir/src/City.cpp.obj: CMakeFiles/Projeto_DA.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Projeto_DA.dir/src/City.cpp.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Projeto_DA.dir/src/City.cpp.obj -MF CMakeFiles\Projeto_DA.dir\src\City.cpp.obj.d -o CMakeFiles\Projeto_DA.dir\src\City.cpp.obj -c "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\src\City.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\jorge\Desktop\temp\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Projeto_DA.dir/src/City.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Projeto_DA.dir/src/City.cpp.obj -MF CMakeFiles\Projeto_DA.dir\src\City.cpp.obj.d -o CMakeFiles\Projeto_DA.dir\src\City.cpp.obj -c C:\Users\jorge\Desktop\temp\src\City.cpp
 
 CMakeFiles/Projeto_DA.dir/src/City.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Projeto_DA.dir/src/City.cpp.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\src\City.cpp" > CMakeFiles\Projeto_DA.dir\src\City.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\jorge\Desktop\temp\src\City.cpp > CMakeFiles\Projeto_DA.dir\src\City.cpp.i
 
 CMakeFiles/Projeto_DA.dir/src/City.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Projeto_DA.dir/src/City.cpp.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\src\City.cpp" -o CMakeFiles\Projeto_DA.dir\src\City.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\jorge\Desktop\temp\src\City.cpp -o CMakeFiles\Projeto_DA.dir\src\City.cpp.s
 
 CMakeFiles/Projeto_DA.dir/src/Data.cpp.obj: CMakeFiles/Projeto_DA.dir/flags.make
-CMakeFiles/Projeto_DA.dir/src/Data.cpp.obj: C:/Users/afdom/OneDrive/Ambiente\ de\ Trabalho/DA/Project/watersupply/src/Data.cpp
+CMakeFiles/Projeto_DA.dir/src/Data.cpp.obj: C:/Users/jorge/Desktop/temp/src/Data.cpp
 CMakeFiles/Projeto_DA.dir/src/Data.cpp.obj: CMakeFiles/Projeto_DA.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Projeto_DA.dir/src/Data.cpp.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Projeto_DA.dir/src/Data.cpp.obj -MF CMakeFiles\Projeto_DA.dir\src\Data.cpp.obj.d -o CMakeFiles\Projeto_DA.dir\src\Data.cpp.obj -c "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\src\Data.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\jorge\Desktop\temp\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Projeto_DA.dir/src/Data.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Projeto_DA.dir/src/Data.cpp.obj -MF CMakeFiles\Projeto_DA.dir\src\Data.cpp.obj.d -o CMakeFiles\Projeto_DA.dir\src\Data.cpp.obj -c C:\Users\jorge\Desktop\temp\src\Data.cpp
 
 CMakeFiles/Projeto_DA.dir/src/Data.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Projeto_DA.dir/src/Data.cpp.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\src\Data.cpp" > CMakeFiles\Projeto_DA.dir\src\Data.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\jorge\Desktop\temp\src\Data.cpp > CMakeFiles\Projeto_DA.dir\src\Data.cpp.i
 
 CMakeFiles/Projeto_DA.dir/src/Data.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Projeto_DA.dir/src/Data.cpp.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\src\Data.cpp" -o CMakeFiles\Projeto_DA.dir\src\Data.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\jorge\Desktop\temp\src\Data.cpp -o CMakeFiles\Projeto_DA.dir\src\Data.cpp.s
 
 CMakeFiles/Projeto_DA.dir/src/Menu.cpp.obj: CMakeFiles/Projeto_DA.dir/flags.make
-CMakeFiles/Projeto_DA.dir/src/Menu.cpp.obj: C:/Users/afdom/OneDrive/Ambiente\ de\ Trabalho/DA/Project/watersupply/src/Menu.cpp
+CMakeFiles/Projeto_DA.dir/src/Menu.cpp.obj: C:/Users/jorge/Desktop/temp/src/Menu.cpp
 CMakeFiles/Projeto_DA.dir/src/Menu.cpp.obj: CMakeFiles/Projeto_DA.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Projeto_DA.dir/src/Menu.cpp.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Projeto_DA.dir/src/Menu.cpp.obj -MF CMakeFiles\Projeto_DA.dir\src\Menu.cpp.obj.d -o CMakeFiles\Projeto_DA.dir\src\Menu.cpp.obj -c "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\src\Menu.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\jorge\Desktop\temp\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Projeto_DA.dir/src/Menu.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Projeto_DA.dir/src/Menu.cpp.obj -MF CMakeFiles\Projeto_DA.dir\src\Menu.cpp.obj.d -o CMakeFiles\Projeto_DA.dir\src\Menu.cpp.obj -c C:\Users\jorge\Desktop\temp\src\Menu.cpp
 
 CMakeFiles/Projeto_DA.dir/src/Menu.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Projeto_DA.dir/src/Menu.cpp.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\src\Menu.cpp" > CMakeFiles\Projeto_DA.dir\src\Menu.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\jorge\Desktop\temp\src\Menu.cpp > CMakeFiles\Projeto_DA.dir\src\Menu.cpp.i
 
 CMakeFiles/Projeto_DA.dir/src/Menu.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Projeto_DA.dir/src/Menu.cpp.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\src\Menu.cpp" -o CMakeFiles\Projeto_DA.dir\src\Menu.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\jorge\Desktop\temp\src\Menu.cpp -o CMakeFiles\Projeto_DA.dir\src\Menu.cpp.s
 
 # Object files for target Projeto_DA
 Projeto_DA_OBJECTS = \
@@ -174,7 +174,7 @@ Projeto_DA.exe: CMakeFiles/Projeto_DA.dir/build.make
 Projeto_DA.exe: CMakeFiles/Projeto_DA.dir/linkLibs.rsp
 Projeto_DA.exe: CMakeFiles/Projeto_DA.dir/objects1.rsp
 Projeto_DA.exe: CMakeFiles/Projeto_DA.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable Projeto_DA.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\jorge\Desktop\temp\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable Projeto_DA.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Projeto_DA.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -186,6 +186,6 @@ CMakeFiles/Projeto_DA.dir/clean:
 .PHONY : CMakeFiles/Projeto_DA.dir/clean
 
 CMakeFiles/Projeto_DA.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply" "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply" "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\cmake-build-debug" "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\cmake-build-debug" "C:\Users\afdom\OneDrive\Ambiente de Trabalho\DA\Project\watersupply\cmake-build-debug\CMakeFiles\Projeto_DA.dir\DependInfo.cmake" --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\jorge\Desktop\temp C:\Users\jorge\Desktop\temp C:\Users\jorge\Desktop\temp\cmake-build-debug C:\Users\jorge\Desktop\temp\cmake-build-debug C:\Users\jorge\Desktop\temp\cmake-build-debug\CMakeFiles\Projeto_DA.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Projeto_DA.dir/depend
 
