@@ -337,24 +337,66 @@ void Menu::Balance_Load(Graph<string> s) {
     unordered_map<string,double> temp;
     for(auto p : l) temp[p.first.getCodeCity()] = (p.first.getDemand() - p.second);
     list<pair<City,double>> result;
+    bool bidirectional = false;
     result = edmondsKarp(s);
     double counter = 0.0;
     double average = 0, variance = 0, maxdiff=0;
     for(auto v : s.getVertexSet()){
         for(auto e : v->getAdj()){
-            if(e->getWeight() - e->getFlow() > maxdiff) maxdiff = (e->getWeight() - e->getFlow());
-            average += (e->getWeight() - e->getFlow());
-            counter++;
+            if(!e->isSelected()) {
+                if (e->getReverse() == nullptr) { //if not bidirectional
+                    if (e->getWeight() - e->getFlow() > maxdiff) maxdiff = (e->getWeight() - e->getFlow());
+                    average += (e->getWeight() - e->getFlow());
+                    e->setSelected(true);
+                } else { //if is bidirectional
+                    if (e->getFlow() > 0){
+                        if (e->getWeight() - e->getFlow() > maxdiff) maxdiff = (e->getWeight() - e->getFlow());
+                        average += (e->getWeight() - e->getFlow());
+                    }
+                    else {
+                        if (e->getReverse()->getWeight() - e->getReverse()->getFlow() > maxdiff) maxdiff = (e->getReverse()->getWeight() - e->getReverse()->getFlow());
+                        average += (e->getReverse()->getWeight() - e->getReverse()->getFlow());
+                    }
+                    e->setSelected(true);
+                    e->getReverse()->setSelected(true);
+                }
+                counter++;
+            }
         }
     }
     average /= counter;
+    for(auto v : s.getVertexSet()) {
+        for (auto e: v->getAdj()) {
+            e->setSelected(false);
+        }
+    }
+
     for(auto v : s.getVertexSet()){
         for(auto e : v->getAdj()){
-            variance += pow((e->getWeight() - e->getFlow()) - average,2);
+            if(!e->isSelected()) {
+                if (e->getReverse() == nullptr) { //if not bidirectional
+                    variance += pow((e->getWeight() - e->getFlow()) - average,2);
+                    e->setSelected(true);
+                } else { //if is bidirectional
+                    if (e->getFlow() > 0){
+                        variance += pow((e->getWeight() - e->getFlow()) - average,2);
+                    }
+                    else {
+                        variance += pow((e->getReverse()->getWeight() - e->getReverse()->getFlow()) - average,2);
+                    }
+                    e->setSelected(true);
+                    e->getReverse()->setSelected(true);
+                }
+            }
 
         }
     }
     variance /= (counter - 1);
+    for(auto v : s.getVertexSet()) {
+        for (auto e: v->getAdj()) {
+            e->setSelected(false);
+        }
+    }
     cout << "The inicial metrics are: \n";
     cout << "Average:" << fixed << setprecision(2) << average << ' ' << "Variance:"  << fixed << setprecision(2) << variance << ' ' << "Max-Difference:" << maxdiff << '\n';
 
@@ -366,19 +408,60 @@ void Menu::Balance_Load(Graph<string> s) {
     counter = 0;
     for(auto v : s.getVertexSet()){
         for(auto e : v->getAdj()){
-            if(e->getWeight() - e->getFlow() > maxdiff) maxdiff = (e->getWeight() - e->getFlow());
-            average += (e->getWeight() - e->getFlow());
-            counter++;
+            if(!e->isSelected()) {
+                if (e->getReverse() == nullptr) { //if not bidirectional
+                    if (e->getWeight() - e->getFlow() > maxdiff) maxdiff = (e->getWeight() - e->getFlow());
+                    average += (e->getWeight() - e->getFlow());
+                    e->setSelected(true);
+                } else { //if is bidirectional
+                    if (e->getFlow() > 0){
+                        if (e->getWeight() - e->getFlow() > maxdiff) maxdiff = (e->getWeight() - e->getFlow());
+                        average += (e->getWeight() - e->getFlow());
+                    }
+                    else {
+                        if (e->getReverse()->getWeight() - e->getReverse()->getFlow() > maxdiff) maxdiff = (e->getReverse()->getWeight() - e->getReverse()->getFlow());
+                        average += (e->getReverse()->getWeight() - e->getReverse()->getFlow());
+                    }
+                    e->setSelected(true);
+                    e->getReverse()->setSelected(true);
+                }
+                counter++;
+            }
         }
     }
     average /= counter;
+    for(auto v : s.getVertexSet()) {
+        for (auto e: v->getAdj()) {
+            e->setSelected(false);
+        }
+    }
+
     for(auto v : s.getVertexSet()){
         for(auto e : v->getAdj()){
-            variance += pow((e->getWeight() - e->getFlow()) - average,2);
+            if(!e->isSelected()) {
+                if (e->getReverse() == nullptr) { //if not bidirectional
+                    variance += pow((e->getWeight() - e->getFlow()) - average,2);
+                    e->setSelected(true);
+                } else { //if is bidirectional
+                    if (e->getFlow() > 0){
+                        variance += pow((e->getWeight() - e->getFlow()) - average,2);
+                    }
+                    else {
+                        variance += pow((e->getReverse()->getWeight() - e->getReverse()->getFlow()) - average,2);
+                    }
+                    e->setSelected(true);
+                    e->getReverse()->setSelected(true);
+                }
+            }
 
         }
     }
     variance /= (counter - 1);
+    for(auto v : s.getVertexSet()) {
+        for (auto e: v->getAdj()) {
+            e->setSelected(false);
+        }
+    }
     cout << "The final metrics are: \n";
     cout << "Average:" << fixed << setprecision(2) << average << ' ' << "Variance:"  << fixed << setprecision(2) << variance << ' ' << "Max-Difference:" << maxdiff << '\n';
 
@@ -792,62 +875,53 @@ void Menu::Critical_Pipe_allCities(Graph<std::string> s) {
 
     for(auto v : s.getVertexSet()){
         for(auto e : v->getAdj()){
-            bool bidirectional = false;
-            for(auto p : e->getDest()->getAdj()){
-                if(p->getDest()->getInfo() == v->getInfo()){
-                    bidirectional = true;
-                    break;
+            if(!e->isSelected()) {
+                bool bidirectional = false;
+                if (e->getReverse() != nullptr) bidirectional = true;
+                unordered_map < Edge < string > *, double > restore_weights;
+                if (bidirectional) {
+
+                    restore_weights[e] = e->getWeight();
+                    e->setWeight(0.0);
+
+
+                    restore_weights[e->getReverse()] = e->getReverse()->getWeight();
+                    e->getReverse()->setWeight(0.0);
+
+
+
+                } else {
+                    restore_weights[e] = e->getWeight();
+                    e->setWeight(0.0);
                 }
-            }
-            unordered_map<Edge<string>*,double> restore_weights;
-            if (bidirectional) {
+                //Solve for EdmondKarp
+                list <pair<City, double>> r = edmondsKarp(s);
+                //Evalute the context
 
-                restore_weights[e] = e->getWeight();
-                e->setWeight(0.0);
+                if (bidirectional) {
+                    e->setWeight(restore_weights[e]);
+                    e->getReverse()->setWeight(restore_weights[e->getReverse()]);
 
-                for(auto p : v->getIncoming()){
-                    if(p->getOrig()->getInfo() == e->getDest()->getInfo()){
-                        restore_weights[p] = p->getWeight();
-                        p->setWeight(0.0);
-                        break;
+
+                    e->setSelected(true);
+                    e->getReverse()->setSelected(true);
+                } else {
+                    e->setWeight(restore_weights[e]);
+                    e->setSelected(true);
+                }
+                //Print result
+                for (auto p: r) {
+                    if (p.second < p.first.getDemand()) {
+                        if (cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) {
+                            all_cities[p.first.getNameCity()].push_back(v->getInfo() + "-->" + e->getDest()->getInfo());
+                        } else if (temp[p.first.getCodeCity()] > p.second) {
+                            all_cities[p.first.getNameCity()].push_back(v->getInfo() + "-->" + e->getDest()->getInfo());
+
+                        }
+
                     }
                 }
-            }
-            else {
-                restore_weights[e] = e->getWeight();
-                e->setWeight(0.0);
-            }
-            //Solve for EdmondKarp
-            list<pair<City, double>> r = edmondsKarp(s);
-            //Evalute the context
 
-            if (bidirectional) {
-                e->setWeight(restore_weights[e]);
-
-                for(auto p : e->getDest()->getAdj()){
-                    if(p->getDest()->getInfo() == v->getInfo()){
-                        p->setWeight(restore_weights[p]);
-                        break;
-                    }
-                }
-
-            }
-
-            else {
-                e->setWeight(restore_weights[e]);
-            }
-            //Print result
-            for(auto p : r){
-                if(p.second < p.first.getDemand()) {
-                    if (cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) {
-                        all_cities[p.first.getNameCity()].push_back(v->getInfo() + "-->" + e->getDest()->getInfo());
-                    }
-                    else if(temp[p.first.getCodeCity()] > p.second){
-                        all_cities[p.first.getNameCity()].push_back(v->getInfo() + "-->" + e->getDest()->getInfo());
-
-                    }
-
-                }
             }
         }
     }
@@ -879,62 +953,49 @@ bool Menu::Critical_Pipe_City(Graph<string> s,string city_code){
 
     for(auto v : s.getVertexSet()){
         for(auto e : v->getAdj()){
-            bool bidirectional = false;
-            for(auto p : e->getDest()->getAdj()){
-                if(p->getDest()->getInfo() == v->getInfo()){
-                    bidirectional = true;
-                    break;
+            if(!e->isSelected()) {
+                bool bidirectional = false;
+                if (e->getReverse() != nullptr) bidirectional = true;
+                unordered_map < Edge < string > *, double > restore_weights;
+                if (bidirectional) {
+
+                    restore_weights[e] = e->getWeight();
+                    e->setWeight(0.0);
+
+                    restore_weights[e->getReverse()] = e->getReverse()->getWeight();
+                    e->getReverse()->setWeight(0.0);
+
+                } else {
+                    restore_weights[e] = e->getWeight();
+                    e->setWeight(0.0);
                 }
-            }
-            unordered_map<Edge<string>*,double> restore_weights;
-            if (bidirectional) {
+                //Solve for EdmondKarp
+                list <pair<City, double>> r = edmondsKarp(s);
+                //Evalute the context
 
-                restore_weights[e] = e->getWeight();
-                e->setWeight(0.0);
+                if (bidirectional) {
+                    e->setWeight(restore_weights[e]);
 
-                for(auto p : e->getDest()->getAdj()){
-                    if(p->getDest()->getInfo() == v->getInfo()){
-                        restore_weights[p] = p->getWeight();
-                        p->setWeight(0.0);
+                    e->getReverse()->setWeight(restore_weights[e->getReverse()]);
+                    e->setSelected(true);
+                    e->getReverse()->setSelected(true);
+
+                } else {
+                    e->setWeight(restore_weights[e]);
+                    e->setSelected(true);
+                }
+                //Print result
+                for (auto p: r) {
+                    if (p.second < p.first.getDemand() && p.first.getCodeCity() == city_code) {
+                        if (cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) {
+                            all_cities.push_back(v->getInfo() + "-->" + e->getDest()->getInfo());
+                        } else if (temp[p.first.getCodeCity()] > p.second) {
+                            all_cities.push_back(v->getInfo() + "-->" + e->getDest()->getInfo());
+
+                        }
                         break;
-                    }
-                }
-            }
-            else {
-                restore_weights[e] = e->getWeight();
-                e->setWeight(0.0);
-            }
-            //Solve for EdmondKarp
-            list<pair<City, double>> r = edmondsKarp(s);
-            //Evalute the context
-
-            if (bidirectional) {
-                e->setWeight(restore_weights[e]);
-
-                for(auto p : e->getDest()->getAdj()){
-                    if(p->getDest()->getInfo() == v->getInfo()){
-                        p->setWeight(restore_weights[p]);
-                        break;
-                    }
-                }
-
-            }
-
-            else {
-                e->setWeight(restore_weights[e]);
-            }
-            //Print result
-            for(auto p : r){
-                if(p.second < p.first.getDemand() && p.first.getCodeCity() == city_code) {
-                    if (cities_affected.find(p.first.getCodeCity()) == cities_affected.end()) {
-                        all_cities.push_back(v->getInfo() + "-->" + e->getDest()->getInfo());
-                    }
-                    else if(temp[p.first.getCodeCity()] > p.second){
-                        all_cities.push_back(v->getInfo() + "-->" + e->getDest()->getInfo());
 
                     }
-                    break;
-
                 }
             }
         }
