@@ -18,7 +18,7 @@ int main() {
     Graph<string> s = m.getSupy();
     while (true) {
         cout << " __________________________________________ " << '\n';
-        cout << "|      Water Supply Management System      |" << '\n';
+        cout << "|      WATER SUPPLY MANAGEMENT SYSTEM      |" << '\n';
         cout << "|                                          |" << '\n';
         cout << "| [1]  Maximum flow                        |" << '\n';
         cout << "| [2]  Costumer water needs                |" << '\n';
@@ -36,7 +36,7 @@ int main() {
             case 1: {
                 int opcao;
                 cout << " __________________________________________ " << '\n';
-                cout << "|      Water Supply Management System      |" << '\n';
+                cout << "|      WATER SUPPLY MANAGEMENT SYSTEM      |" << '\n';
                 cout << "|                                          |" << '\n';
                 cout << "| [1]  Maximum flow of each city           |" << '\n';
                 cout << "| [2]  Maximum flow of desired city        |" << '\n';
@@ -86,7 +86,7 @@ int main() {
             case 7: {
                 int opcao;
                 cout << " __________________________________________ " << '\n';
-                cout << "|      Water Supply Management System      |" << '\n';
+                cout << "|      WATER SUPPLY MANAGEMENT SYSTEM      |" << '\n';
                 cout << "|                                          |" << '\n';
                 cout << "| [1]  Remove a single pipe                |" << '\n';
                 cout << "| [2]  Remove multiple pipes               |" << '\n';
@@ -127,7 +127,7 @@ int main() {
             case 8: {
                 int opcao;
                 cout << " __________________________________________ " << '\n';
-                cout << "|      Water Supply Management System      |" << '\n';
+                cout << "|      WATER SUPPLY MANAGEMENT SYSTEM      |" << '\n';
                 cout << "|                                          |" << '\n';
                 cout << "| [1]  Critical pipes of each city         |" << '\n';
                 cout << "| [2]  Critical pipes of desired city      |" << '\n';
