@@ -1,0 +1,40 @@
+\doxysection{Menu.\+h}
+\hypertarget{_menu_8h_source}{}\label{_menu_8h_source}\mbox{\hyperlink{_menu_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ afdom\ on\ 16/03/2024.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ PROJETO\_DA\_MENU\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ PROJETO\_DA\_MENU\_H}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_data_8h}{Data.h}}"{}}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_menu}{Menu}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_data}{Data}}\ d;}
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_menu_ad466dd83355124a6ed958430450bfe94}{Menu}}();}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a4b964ed1d1bdaf0cc0c69226e8df5585}{Max\_Amount\_Water}}(\mbox{\hyperlink{class_edge}{Graph<string>}}\ \mbox{\hyperlink{class_edge}{s}});}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_menu_a0c8426626277045941f5418d1d0c081b}{Max\_Amount\_Water\_specific}}(\textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_edge}{city\_code}},\mbox{\hyperlink{class_edge}{Graph<string>}}\ \mbox{\hyperlink{class_edge}{s}});}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_edge}{Graph<string>}}\ \mbox{\hyperlink{class_menu_a511bdb4de2006e009df746ae686c3b2e}{getSupy}}();}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{class_edge}{list<pair<City,double>}}>\ \mbox{\hyperlink{class_menu_acbb80a3d28d30b2270f9fe034692e6d7}{Meet\_Costumer\_needs}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_edge}{Graph<string>}}\ supply);}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a39617d545a1a8e6ceb0798123936d809}{Balance\_Load}}(\mbox{\hyperlink{class_edge}{Graph<string>}}\ \mbox{\hyperlink{class_edge}{s}});}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_menu_afc73803b6b043d03a787f6c836b308c6}{Remove\_Water\_Reservoir}}(\textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_edge}{reservoi\_code}},\mbox{\hyperlink{class_edge}{Graph<string>}}\ \mbox{\hyperlink{class_edge}{s}});}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_menu_aa4a21530153660adc47a0f989b3a772f}{Maintenance\_Station}}(\textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_edge}{station\_code}},\textcolor{keyword}{const}\ \mbox{\hyperlink{class_edge}{Graph<string>}}\ \mbox{\hyperlink{class_edge}{a}});}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{class_edge}{vector<string>}}\ \mbox{\hyperlink{class_menu_a189a1f61d0685e5045b4333db838929c}{Remove\_Station\_noeffect}}(\mbox{\hyperlink{class_edge}{Graph<string>}}\ \mbox{\hyperlink{class_edge}{s}});}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_menu_a67944d1de3656c42b485afe56ddd0d61}{Remove\_Pipe}}(\mbox{\hyperlink{class_edge}{Graph<string>}}\ \mbox{\hyperlink{class_edge}{s}},std::string\ \mbox{\hyperlink{class_edge}{source}},\ std::string\ \mbox{\hyperlink{class_edge}{target}});}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_menu_a6c995a1598c8dba991167b479a664e0c}{Remove\_Pipe2}}(\mbox{\hyperlink{class_edge}{Graph<string>}}\ \mbox{\hyperlink{class_edge}{s}},\ set<\mbox{\hyperlink{class_edge}{pair<string,string>}}>\ \mbox{\hyperlink{class_edge}{temp}});}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a61ab59ba3bf80cf19cddb26b01b48305}{Critical\_Pipe\_allCities}}(\mbox{\hyperlink{class_edge}{Graph<string>}}\ \mbox{\hyperlink{class_edge}{s}});}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_menu_a9ac0e943c454d0d3f3c66787f82b821f}{Critical\_Pipe\_City}}(\mbox{\hyperlink{class_edge}{Graph<string>}}\ \mbox{\hyperlink{class_edge}{s}},\textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_edge}{city\_code}});}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_edge}{list<pair<City,double>}}>\ \mbox{\hyperlink{class_menu_a3c559f83f5481c0d5fe4459c6998f781}{edmondsKarp}}(\mbox{\hyperlink{class_edge}{Graph<string>}}\ \mbox{\hyperlink{class_edge}{g}});}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a94b92dac1909cedf2b487e327b11a08b}{augmentFlowAlongPath}}(\mbox{\hyperlink{class_edge}{Vertex<string>}}\ *\mbox{\hyperlink{class_edge}{s}},\ \mbox{\hyperlink{class_edge}{Vertex<string>}}\ *\mbox{\hyperlink{class_edge}{t}},\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_edge}{f}});}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_menu_a603b231b111c33915c782f9ca4275e49}{findMinResidualAlongPath}}(\mbox{\hyperlink{class_edge}{Vertex<string>}}\ *\mbox{\hyperlink{class_edge}{s}},\ \mbox{\hyperlink{class_edge}{Vertex<string>}}\ *\mbox{\hyperlink{class_edge}{t}});}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_menu_abf88b8dfd3f240ff17faf8dd47bd4afc}{findAugmentingPath}}(\mbox{\hyperlink{class_edge}{Graph<string>}}\ *\mbox{\hyperlink{class_edge}{g}},\ \mbox{\hyperlink{class_edge}{Vertex<string>}}\ *\mbox{\hyperlink{class_edge}{s}},\ \mbox{\hyperlink{class_edge}{Vertex<string>}}\ *\mbox{\hyperlink{class_edge}{t}});}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a4a903b2983eca18be9c227ad5700f3de}{testAndVisit}}(std::queue<\ \mbox{\hyperlink{class_edge}{Vertex<string>}}*>\ \&\mbox{\hyperlink{class_edge}{q}},\ \mbox{\hyperlink{class_edge}{Edge<string>}}\ *\mbox{\hyperlink{class_edge}{e}},\ \mbox{\hyperlink{class_edge}{Vertex<string>}}\ *\mbox{\hyperlink{class_edge}{w}},\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_edge}{residual}});}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a440ca1f16ec2810356cc9db1376e0a6a}{restore\_capacities}}(\mbox{\hyperlink{class_edge}{Graph<string>}}\ d,\mbox{\hyperlink{class_edge}{unordered\_map}}<\mbox{\hyperlink{class_edge}{Edge<string>}}*,\textcolor{keywordtype}{double}>\ \mbox{\hyperlink{class_edge}{restore\_weights}});}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a87155c135b38fe2afaec98120e1312bd}{Balancing\_func}}(\mbox{\hyperlink{class_edge}{Graph<string>}}\ \mbox{\hyperlink{class_edge}{g}});}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \};}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PROJETO\_DA\_MENU\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,36 @@
+\doxysection{Reservoir.\+h}
+\hypertarget{_reservoir_8h_source}{}\label{_reservoir_8h_source}\mbox{\hyperlink{_reservoir_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ afdom\ on\ 16/03/2024.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ PROJETO\_DA\_RESERVOIR\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ PROJETO\_DA\_RESERVOIR\_H}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}iostream"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}string"{}}}
+\DoxyCodeLine{00009\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_reservoir}{Reservoir}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ name\_;}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ municipality\_;}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ id\_;}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ maxDelivery\_;}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ code\_;}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_reservoir_a8ac8c6af7db655aaa5fd64d0eec42539}{Reservoir}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_reservoir_a16069ce04ac729a65eaae209479ca593}{Reservoir}}(\textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_edge}{name}},\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_edge}{municipality}},\ \textcolor{keywordtype}{string}\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_edge}{maxDelivery}},\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_edge}{code}});}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_reservoir_a7e431c5119d97cd0451de04e18b581e1}{getName}}();}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_reservoir_a63f280a2ae41a4cada4ff7fe0d923b7a}{getMunicipality}}();}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_reservoir_a3745f6f14f3652b6082913ae5961b121}{getIdReservoir}}();}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_reservoir_a24e6002b3d73f5d32104267c1450dea8}{getCodeReservoir}}();}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_reservoir_ab5478d62b960d3bbfbdfb231ecd8820c}{getMaxDelivery}}();}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_reservoir_a6e84eda51ae3feea056e5ad420546ab5}{operator\ <\ }}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_reservoir}{Reservoir}}\ \&\mbox{\hyperlink{class_edge}{a2}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>id\_\ <\ \mbox{\hyperlink{class_edge}{a2}}.id\_;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00033\ \};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PROJETO\_DA\_RESERVOIR\_H}}
+
+\end{DoxyCode}

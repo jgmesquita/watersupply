@@ -1,0 +1,44 @@
+\doxysection{Data.\+h}
+\hypertarget{_data_8h_source}{}\label{_data_8h_source}\mbox{\hyperlink{_data_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ afdom\ on\ 16/03/2024.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ PROJETO\_DA\_DATA\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ PROJETO\_DA\_DATA\_H}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_graph_8h}{Graph.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}string"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}sstream"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}fstream"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_city_8h}{City.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_station_8h}{Station.h}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_reservoir_8h}{Reservoir.h}}"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}unordered\_map"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}list"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}set"{}}}
+\DoxyCodeLine{00018\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_data}{Data}}\ \{}
+\DoxyCodeLine{00024\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{class_graph}{Graph<string>}}\ supply;}
+\DoxyCodeLine{00026\ \ \ \ \ unordered\_map<string,Reservoir>\ reservoirs\_;}
+\DoxyCodeLine{00027\ \ \ \ \ unordered\_map<string,City>\ cities\_;}
+\DoxyCodeLine{00028\ \ \ \ \ unordered\_map<string,Station>\ stations\_;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_data_af5bc3008f4fca7035c047a03d2aef3d3}{parseReservoir}}();}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_data_a36f0467d31540017e0b25988626ecc62}{parseCity}}();}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_data_a5790bfa1a8d986fdc98adb5cd1edf178}{parseStation}}();}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_data_a11825ed6446d346493ee8665ed9913b3}{parsePipes}}();}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{class_graph}{Graph<string>}}\ \mbox{\hyperlink{class_data_a5643f51cbc05103ae2ebd72a9f055945}{getSupply}}();}
+\DoxyCodeLine{00036\ \ \ \ \ unordered\_map<string,City>\ \mbox{\hyperlink{class_data_ad1c42761a49631e46be6d7bf11d58d5d}{getCities}}();}
+\DoxyCodeLine{00037\ \ \ \ \ unordered\_map<string,Reservoir>\ \mbox{\hyperlink{class_data_abfe55d16c055fba60d60ba2d64984a20}{getReservoirs}}();}
+\DoxyCodeLine{00038\ \ \ \ \ unordered\_map<string,Station>\ \mbox{\hyperlink{class_data_aa5bc70476b7878a75e8545dc884be09b}{getStations}}();}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PROJETO\_DA\_DATA\_H}}
+
+\end{DoxyCode}

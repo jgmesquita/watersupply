@@ -1,0 +1,368 @@
+\doxysection{Menu Class Reference}
+\hypertarget{class_menu}{}\label{class_menu}\index{Menu@{Menu}}
+
+
+Represents the user-\/friendly interface for the water supply management system. It shows available functionalities and their corresponding outputs in a clear, organized, and logical manner, facilitating seamless program utilization and straightforward result interpretation.  
+
+
+
+
+{\ttfamily \#include $<$Menu.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_menu_ad466dd83355124a6ed958430450bfe94}{Menu}} ()
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_menu_a4b964ed1d1bdaf0cc0c69226e8df5585}{Max\+\_\+\+Amount\+\_\+\+Water}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \mbox{\hyperlink{class_edge}{s}})
+\item 
+\mbox{\hyperlink{class_edge}{bool}} \mbox{\hyperlink{class_menu_a0c8426626277045941f5418d1d0c081b}{Max\+\_\+\+Amount\+\_\+\+Water\+\_\+specific}} (\mbox{\hyperlink{class_edge}{string}} \mbox{\hyperlink{class_edge}{city\+\_\+code}}, \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \mbox{\hyperlink{class_edge}{s}})
+\item 
+\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \mbox{\hyperlink{class_menu_a511bdb4de2006e009df746ae686c3b2e}{get\+Supy}} ()
+\item 
+\mbox{\hyperlink{class_edge}{list}}$<$ \mbox{\hyperlink{class_edge}{pair}}$<$ \mbox{\hyperlink{class_city}{City}}, \mbox{\hyperlink{class_edge}{double}} $>$ $>$ \mbox{\hyperlink{class_menu_acbb80a3d28d30b2270f9fe034692e6d7}{Meet\+\_\+\+Costumer\+\_\+needs}} (\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ supply)
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_menu_a39617d545a1a8e6ceb0798123936d809}{Balance\+\_\+\+Load}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \mbox{\hyperlink{class_edge}{s}})
+\item 
+\mbox{\hyperlink{class_edge}{bool}} \mbox{\hyperlink{class_menu_afc73803b6b043d03a787f6c836b308c6}{Remove\+\_\+\+Water\+\_\+\+Reservoir}} (\mbox{\hyperlink{class_edge}{string}} \mbox{\hyperlink{class_edge}{reservoi\+\_\+code}}, \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \mbox{\hyperlink{class_edge}{s}})
+\item 
+\mbox{\hyperlink{class_edge}{bool}} \mbox{\hyperlink{class_menu_aa4a21530153660adc47a0f989b3a772f}{Maintenance\+\_\+\+Station}} (\mbox{\hyperlink{class_edge}{string}} \mbox{\hyperlink{class_edge}{station\+\_\+code}}, \mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \mbox{\hyperlink{class_edge}{a}})
+\item 
+\mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \mbox{\hyperlink{class_menu_a189a1f61d0685e5045b4333db838929c}{Remove\+\_\+\+Station\+\_\+noeffect}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \mbox{\hyperlink{class_edge}{s}})
+\item 
+\mbox{\hyperlink{class_edge}{bool}} \mbox{\hyperlink{class_menu_a67944d1de3656c42b485afe56ddd0d61}{Remove\+\_\+\+Pipe}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \mbox{\hyperlink{class_edge}{s}}, std\+::string \mbox{\hyperlink{class_edge}{source}}, std\+::string \mbox{\hyperlink{class_edge}{target}})
+\item 
+\mbox{\hyperlink{class_edge}{bool}} \mbox{\hyperlink{class_menu_a6c995a1598c8dba991167b479a664e0c}{Remove\+\_\+\+Pipe2}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \mbox{\hyperlink{class_edge}{s}}, set$<$ \mbox{\hyperlink{class_edge}{pair}}$<$ \mbox{\hyperlink{class_edge}{string}}, \mbox{\hyperlink{class_edge}{string}} $>$ $>$ \mbox{\hyperlink{class_edge}{temp}})
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_menu_a61ab59ba3bf80cf19cddb26b01b48305}{Critical\+\_\+\+Pipe\+\_\+all\+Cities}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \mbox{\hyperlink{class_edge}{s}})
+\item 
+\mbox{\hyperlink{class_edge}{bool}} \mbox{\hyperlink{class_menu_a9ac0e943c454d0d3f3c66787f82b821f}{Critical\+\_\+\+Pipe\+\_\+\+City}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \mbox{\hyperlink{class_edge}{s}}, \mbox{\hyperlink{class_edge}{string}} \mbox{\hyperlink{class_edge}{city\+\_\+code}})
+\item 
+\mbox{\hyperlink{class_edge}{list}}$<$ \mbox{\hyperlink{class_edge}{pair}}$<$ \mbox{\hyperlink{class_city}{City}}, \mbox{\hyperlink{class_edge}{double}} $>$ $>$ \mbox{\hyperlink{class_menu_a3c559f83f5481c0d5fe4459c6998f781}{edmonds\+Karp}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \mbox{\hyperlink{class_edge}{g}})
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_menu_a94b92dac1909cedf2b487e327b11a08b}{augment\+Flow\+Along\+Path}} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{s}}, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{t}}, \mbox{\hyperlink{class_edge}{double}} \mbox{\hyperlink{class_edge}{f}})
+\item 
+\mbox{\hyperlink{class_edge}{double}} \mbox{\hyperlink{class_menu_a603b231b111c33915c782f9ca4275e49}{find\+Min\+Residual\+Along\+Path}} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{s}}, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{t}})
+\item 
+\mbox{\hyperlink{class_edge}{bool}} \mbox{\hyperlink{class_menu_abf88b8dfd3f240ff17faf8dd47bd4afc}{find\+Augmenting\+Path}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{g}}, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{s}}, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{t}})
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_menu_a4a903b2983eca18be9c227ad5700f3de}{test\+And\+Visit}} (std\+::queue$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{class_edge}{q}}, \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{e}}, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{w}}, \mbox{\hyperlink{class_edge}{double}} \mbox{\hyperlink{class_edge}{residual}})
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_menu_a440ca1f16ec2810356cc9db1376e0a6a}{restore\+\_\+capacities}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ d, \mbox{\hyperlink{class_edge}{unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{class_edge}{double}} $>$ \mbox{\hyperlink{class_edge}{restore\+\_\+weights}})
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_menu_a87155c135b38fe2afaec98120e1312bd}{Balancing\+\_\+func}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \mbox{\hyperlink{class_edge}{g}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the user-\/friendly interface for the water supply management system. It shows available functionalities and their corresponding outputs in a clear, organized, and logical manner, facilitating seamless program utilization and straightforward result interpretation. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_menu_ad466dd83355124a6ed958430450bfe94}\label{class_menu_ad466dd83355124a6ed958430450bfe94} 
+\index{Menu@{Menu}!Menu@{Menu}}
+\index{Menu@{Menu}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{Menu()}{Menu()}}
+{\footnotesize\ttfamily Menu\+::\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\doxylink{class_menu}{Menu} constructor -\/ creates a \doxylink{class_data}{Data} object and parse the csv files 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_menu_a94b92dac1909cedf2b487e327b11a08b}\label{class_menu_a94b92dac1909cedf2b487e327b11a08b} 
+\index{Menu@{Menu}!augmentFlowAlongPath@{augmentFlowAlongPath}}
+\index{augmentFlowAlongPath@{augmentFlowAlongPath}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{augmentFlowAlongPath()}{augmentFlowAlongPath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Menu\+::augment\+Flow\+Along\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}}]{s,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}}]{t,  }\item[{\mbox{\hyperlink{class_edge}{double}}}]{f }\end{DoxyParamCaption})}
+
+auxiliary function to the edmonds\+Karp algorithm that updates the flow along an augmenting path-\/ complexity O(\+V), where V is the number of vertices int the graph g 
+\begin{DoxyParams}{Parameters}
+{\em s} & is the virtual super source of the graph \\
+\hline
+{\em t} & is the virtual super sink of the graph \\
+\hline
+{\em f} & is the minimum residual capacity along an augmenting path used to update the flow of the edges that compose the path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{class_menu_a39617d545a1a8e6ceb0798123936d809}\label{class_menu_a39617d545a1a8e6ceb0798123936d809} 
+\index{Menu@{Menu}!Balance\_Load@{Balance\_Load}}
+\index{Balance\_Load@{Balance\_Load}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{Balance\_Load()}{Balance\_Load()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Menu\+::\+Balance\+\_\+\+Load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$}]{s }\end{DoxyParamCaption})}
+
+function that calculates the maximum difference, the variance and the average of the difference between the capacity and the flow that passes through each pipe, before and after applying a balancing function. -\/ complexity O((V + E) \texorpdfstring{$\ast$}{*} log(delta)), where V is the number of vertices, E is the number of edges, and delta is the initial value of the delta parameter this time complexity corresponds to the balancing function, which is responsible for most of the time consumption and work of this particular function 
+\begin{DoxyParams}{Parameters}
+{\em s} & graph that contain all the information about the water supply management system \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+it outputs directly to the console the before mentioned metrics before and after applying the balancing algorithm 
+\end{DoxyReturn}
+\Hypertarget{class_menu_a87155c135b38fe2afaec98120e1312bd}\label{class_menu_a87155c135b38fe2afaec98120e1312bd} 
+\index{Menu@{Menu}!Balancing\_func@{Balancing\_func}}
+\index{Balancing\_func@{Balancing\_func}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{Balancing\_func()}{Balancing\_func()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Menu\+::\+Balancing\+\_\+func (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$}]{g }\end{DoxyParamCaption})}
+
+function that balances the load across the system based on capacity scaling, it is similar to the Edmonds\+Karp algorithm, however it finds the paths on a subgraph that contains only edges with a capacity greater or equal to the current edge max capacity. This max edge capacity initially corresponds to the maximum edge capacity of the graph but it will decrease by half after every iteration. It ends when there are no more paths between the super source SS and the super sink ST. Basically this function finds the augmenting paths and calculates the network flow in descending order of edge capacity -\/ complexity O((V + E) \texorpdfstring{$\ast$}{*} log(delta)), where V is the number of vertices, E is the number of edges, and delta is the initial value of the delta parameter. 
+\begin{DoxyParams}{Parameters}
+{\em a} & graph that contain all the information about the water supply management system \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{class_menu_a61ab59ba3bf80cf19cddb26b01b48305}\label{class_menu_a61ab59ba3bf80cf19cddb26b01b48305} 
+\index{Menu@{Menu}!Critical\_Pipe\_allCities@{Critical\_Pipe\_allCities}}
+\index{Critical\_Pipe\_allCities@{Critical\_Pipe\_allCities}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{Critical\_Pipe\_allCities()}{Critical\_Pipe\_allCities()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Menu\+::\+Critical\+\_\+\+Pipe\+\_\+all\+Cities (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$}]{s }\end{DoxyParamCaption})}
+
+function that checks for each city the pipes that when removed have an effect on its water supply -\/ complexity O(VE(VE\texorpdfstring{$^\wedge$}{\string^}2 + f(n))), where V is the number of vertices, E is the number of edges in the graph s, f(n) the time complexity of the \doxylink{class_menu_acbb80a3d28d30b2270f9fe034692e6d7}{Meet\+\_\+\+Costumer\+\_\+needs()} function and n the number of stations to iterate 
+\begin{DoxyParams}{Parameters}
+{\em s} & graph that contain all the information about the water supply management system \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+it outputs directly to the console for each city the pipes that when removed cause an effect on the its supply. 
+\end{DoxyReturn}
+\Hypertarget{class_menu_a9ac0e943c454d0d3f3c66787f82b821f}\label{class_menu_a9ac0e943c454d0d3f3c66787f82b821f} 
+\index{Menu@{Menu}!Critical\_Pipe\_City@{Critical\_Pipe\_City}}
+\index{Critical\_Pipe\_City@{Critical\_Pipe\_City}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{Critical\_Pipe\_City()}{Critical\_Pipe\_City()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{bool}} Menu\+::\+Critical\+\_\+\+Pipe\+\_\+\+City (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$}]{s,  }\item[{\mbox{\hyperlink{class_edge}{string}}}]{city\+\_\+code }\end{DoxyParamCaption})}
+
+function that checks for a desired city the pipes that when removed have an effect on its water supply -\/ complexity O(VE(VE\texorpdfstring{$^\wedge$}{\string^}2 + f(n))), where V is the number of vertices, E is the number of edges in the graph s, f(n) the time complexity of the \doxylink{class_menu_acbb80a3d28d30b2270f9fe034692e6d7}{Meet\+\_\+\+Costumer\+\_\+needs()} function and n the number of stations to iterate 
+\begin{DoxyParams}{Parameters}
+{\em s} & graph that contain all the information about the water supply management system \\
+\hline
+{\em city\+\_\+code} & code of the specific city that we want to calculate the critical pipes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the the desired city exits, along with its critical pipes, and false otherwise 
+\end{DoxyReturn}
+\Hypertarget{class_menu_a3c559f83f5481c0d5fe4459c6998f781}\label{class_menu_a3c559f83f5481c0d5fe4459c6998f781} 
+\index{Menu@{Menu}!edmondsKarp@{edmondsKarp}}
+\index{edmondsKarp@{edmondsKarp}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{edmondsKarp()}{edmondsKarp()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{list}}$<$ \mbox{\hyperlink{class_edge}{pair}}$<$ \mbox{\hyperlink{class_city}{City}}, \mbox{\hyperlink{class_edge}{double}} $>$ $>$ Menu\+::edmonds\+Karp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$}]{g }\end{DoxyParamCaption})}
+
+function that applies the edmonds\+Karp algorithm to system graph in order to find the flow that passes/gets to the different structures of the water supply system-\/ complexity O(\+VE\texorpdfstring{$^\wedge$}{\string^}2), where V is the number of vertices and E is the number of edges in the graph g 
+\begin{DoxyParams}{Parameters}
+{\em g} & graph that contain all the information about the water supply management system \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a list of pairs of each city and its corresponding supply of water 
+\end{DoxyReturn}
+\Hypertarget{class_menu_abf88b8dfd3f240ff17faf8dd47bd4afc}\label{class_menu_abf88b8dfd3f240ff17faf8dd47bd4afc} 
+\index{Menu@{Menu}!findAugmentingPath@{findAugmentingPath}}
+\index{findAugmentingPath@{findAugmentingPath}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{findAugmentingPath()}{findAugmentingPath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{bool}} Menu\+::find\+Augmenting\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}}]{g,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}}]{s,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}}]{t }\end{DoxyParamCaption})}
+
+auxiliary function to the edmonds\+Karp algorithm that finds the shortest unvisited augmenting path of the graph g-\/ complexity O(V + E), where V is the number of vertices and E is the number of edges in the graph g 
+\begin{DoxyParams}{Parameters}
+{\em g} & graph that contain all the information about the water supply management system \\
+\hline
+{\em s} & is the virtual super source of the graph \\
+\hline
+{\em t} & is the virtual super sink of the graph \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if it finds a new shortest path and false otherwise 
+\end{DoxyReturn}
+\Hypertarget{class_menu_a603b231b111c33915c782f9ca4275e49}\label{class_menu_a603b231b111c33915c782f9ca4275e49} 
+\index{Menu@{Menu}!findMinResidualAlongPath@{findMinResidualAlongPath}}
+\index{findMinResidualAlongPath@{findMinResidualAlongPath}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{findMinResidualAlongPath()}{findMinResidualAlongPath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{double}} Menu\+::find\+Min\+Residual\+Along\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}}]{s,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}}]{t }\end{DoxyParamCaption})}
+
+auxiliary function to the edmonds\+Karp algorithm that finds the minimum residual capacity along an augmenting path-\/ complexity O(\+V), where V is the number of vertices in the graph g 
+\begin{DoxyParams}{Parameters}
+{\em s} & is the virtual super source of the graph \\
+\hline
+{\em t} & is the virtual super sink of the graph \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the minimum residual capacity along an augmenting path 
+\end{DoxyReturn}
+\Hypertarget{class_menu_a511bdb4de2006e009df746ae686c3b2e}\label{class_menu_a511bdb4de2006e009df746ae686c3b2e} 
+\index{Menu@{Menu}!getSupy@{getSupy}}
+\index{getSupy@{getSupy}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{getSupy()}{getSupy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ Menu\+::get\+Supy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+function that retrieves the graph that contains all the information about the water supply management system -\/ complexity O(1) \begin{DoxyReturn}{Returns}
+graph whose vertexes correspond to any of the structures (\doxylink{class_city}{City}, Reservoirs or Pumping stations) and the Edges to pipes 
+\end{DoxyReturn}
+\Hypertarget{class_menu_aa4a21530153660adc47a0f989b3a772f}\label{class_menu_aa4a21530153660adc47a0f989b3a772f} 
+\index{Menu@{Menu}!Maintenance\_Station@{Maintenance\_Station}}
+\index{Maintenance\_Station@{Maintenance\_Station}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{Maintenance\_Station()}{Maintenance\_Station()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{bool}} Menu\+::\+Maintenance\+\_\+\+Station (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{string}}}]{station\+\_\+code,  }\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$}]{b }\end{DoxyParamCaption})}
+
+function that removes a specific pumping station from the system and verifies which cities have their supply affected -\/ complexity O(VE\texorpdfstring{$^\wedge$}{\string^}2 + f(n)), where V is the number of vertices, E is the number of edges in the graph b and f(n) the time complexity of the \doxylink{class_menu_acbb80a3d28d30b2270f9fe034692e6d7}{Meet\+\_\+\+Costumer\+\_\+needs()} function 
+\begin{DoxyParams}{Parameters}
+{\em b} & graph that contain all the information about the water supply management system \\
+\hline
+{\em station\+\_\+code} & code of the specific pumping station that will be removed from the system \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the given pumping station exists and it outputs directly to the console the cities whose supply is affected by this removal and false otherwise 
+\end{DoxyReturn}
+\Hypertarget{class_menu_a4b964ed1d1bdaf0cc0c69226e8df5585}\label{class_menu_a4b964ed1d1bdaf0cc0c69226e8df5585} 
+\index{Menu@{Menu}!Max\_Amount\_Water@{Max\_Amount\_Water}}
+\index{Max\_Amount\_Water@{Max\_Amount\_Water}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{Max\_Amount\_Water()}{Max\_Amount\_Water()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Menu\+::\+Max\+\_\+\+Amount\+\_\+\+Water (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$}]{s }\end{DoxyParamCaption})}
+
+calculates the max amount of water that can reach any city -\/ complexity O(\+VE\texorpdfstring{$^\wedge$}{\string^}2), where V is the number of vertices and E is the number of edges in the graph s 
+\begin{DoxyParams}{Parameters}
+{\em s} & graph that contain all the information about the water supply management system \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+it outputs to both a file and directly to the console the max amount of water for each city 
+\end{DoxyReturn}
+\Hypertarget{class_menu_a0c8426626277045941f5418d1d0c081b}\label{class_menu_a0c8426626277045941f5418d1d0c081b} 
+\index{Menu@{Menu}!Max\_Amount\_Water\_specific@{Max\_Amount\_Water\_specific}}
+\index{Max\_Amount\_Water\_specific@{Max\_Amount\_Water\_specific}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{Max\_Amount\_Water\_specific()}{Max\_Amount\_Water\_specific()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{bool}} Menu\+::\+Max\+\_\+\+Amount\+\_\+\+Water\+\_\+specific (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{string}}}]{city\+\_\+code,  }\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$}]{s }\end{DoxyParamCaption})}
+
+calculates the max amount of water that can reach a specif city -\/ complexity O(\+VE\texorpdfstring{$^\wedge$}{\string^}2), where V is the number of vertices and E is the number of edges in the graph s 
+\begin{DoxyParams}{Parameters}
+{\em s} & graph that contain all the information about the water supply management system \\
+\hline
+{\em city\+\_\+code} & code of the specific city that we want to calculate the max amount of water that reaching it \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the the desired city exits, along with its max amount of water, and false otherwise 
+\end{DoxyReturn}
+\Hypertarget{class_menu_acbb80a3d28d30b2270f9fe034692e6d7}\label{class_menu_acbb80a3d28d30b2270f9fe034692e6d7} 
+\index{Menu@{Menu}!Meet\_Costumer\_needs@{Meet\_Costumer\_needs}}
+\index{Meet\_Costumer\_needs@{Meet\_Costumer\_needs}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{Meet\_Costumer\_needs()}{Meet\_Costumer\_needs()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{list}}$<$ \mbox{\hyperlink{class_edge}{pair}}$<$ \mbox{\hyperlink{class_city}{City}}, \mbox{\hyperlink{class_edge}{double}} $>$ $>$ Menu\+::\+Meet\+\_\+\+Costumer\+\_\+needs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$}]{a }\end{DoxyParamCaption})}
+
+function that retrieves the cities where there is a deficit in its water demand -\/ complexity O(\+VE\texorpdfstring{$^\wedge$}{\string^}2), where V is the number of vertices and E is the number of edges in the graph a 
+\begin{DoxyParams}{Parameters}
+{\em a} & graph that contain all the information about the water supply management system \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a list of pairs of each city where there is a deficit in its water demand and its corresponding water deficit 
+\end{DoxyReturn}
+\Hypertarget{class_menu_a67944d1de3656c42b485afe56ddd0d61}\label{class_menu_a67944d1de3656c42b485afe56ddd0d61} 
+\index{Menu@{Menu}!Remove\_Pipe@{Remove\_Pipe}}
+\index{Remove\_Pipe@{Remove\_Pipe}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{Remove\_Pipe()}{Remove\_Pipe()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{bool}} Menu\+::\+Remove\+\_\+\+Pipe (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$}]{s,  }\item[{std\+::string}]{source,  }\item[{std\+::string}]{target }\end{DoxyParamCaption})}
+
+function that removes a specific pipe from the system by checking first if it exists and if it is bidirectional or unidirectional pipe and verifies which cities have their supply affected -\/ complexity O(VE\texorpdfstring{$^\wedge$}{\string^}2 + f(n)), where V is the number of vertices, E is the number of edges in the graph s and f(n) the time complexity of the \doxylink{class_menu_acbb80a3d28d30b2270f9fe034692e6d7}{Meet\+\_\+\+Costumer\+\_\+needs()} function 
+\begin{DoxyParams}{Parameters}
+{\em s} & graph that contain all the information about the water supply management system \\
+\hline
+{\em source} & code of the source vertex of the specific pipe \\
+\hline
+{\em target} & code of the target vertex of the specific pipe \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the given pipe exists and it outputs directly to the console the cities whose supply is affected by this removal and false otherwise 
+\end{DoxyReturn}
+\Hypertarget{class_menu_a6c995a1598c8dba991167b479a664e0c}\label{class_menu_a6c995a1598c8dba991167b479a664e0c} 
+\index{Menu@{Menu}!Remove\_Pipe2@{Remove\_Pipe2}}
+\index{Remove\_Pipe2@{Remove\_Pipe2}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{Remove\_Pipe2()}{Remove\_Pipe2()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{bool}} Menu\+::\+Remove\+\_\+\+Pipe2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$}]{s,  }\item[{set$<$ \mbox{\hyperlink{class_edge}{pair}}$<$ \mbox{\hyperlink{class_edge}{string}}, \mbox{\hyperlink{class_edge}{string}} $>$ $>$}]{t }\end{DoxyParamCaption})}
+
+function that removes a multiple pipes from the system and verifies which cities have their supply affected -\/ complexity O(VE\texorpdfstring{$^\wedge$}{\string^}2 + f(n)), where V is the number of vertices, E is the number of edges in the graph s and f(n) the time complexity of the \doxylink{class_menu_acbb80a3d28d30b2270f9fe034692e6d7}{Meet\+\_\+\+Costumer\+\_\+needs()} function 
+\begin{DoxyParams}{Parameters}
+{\em s} & graph that contain all the information about the water supply management system \\
+\hline
+{\em t} & set that contains the multiple pipes to remove, each pair represents the source and target vertexes of each pipe \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if all the given pipes exist and it outputs directly to the console the cities whose supply is affected by this removal and false otherwise 
+\end{DoxyReturn}
+\Hypertarget{class_menu_a189a1f61d0685e5045b4333db838929c}\label{class_menu_a189a1f61d0685e5045b4333db838929c} 
+\index{Menu@{Menu}!Remove\_Station\_noeffect@{Remove\_Station\_noeffect}}
+\index{Remove\_Station\_noeffect@{Remove\_Station\_noeffect}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{Remove\_Station\_noeffect()}{Remove\_Station\_noeffect()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ Menu\+::\+Remove\+\_\+\+Station\+\_\+noeffect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$}]{s }\end{DoxyParamCaption})}
+
+function that checks which of the pumping stations can be removed without having any effect on the system -\/ complexity O(n(VE\texorpdfstring{$^\wedge$}{\string^}2 + f(n))), where V is the number of vertices, E is the number of edges in the graph s, f(n) the time complexity of the \doxylink{class_menu_acbb80a3d28d30b2270f9fe034692e6d7}{Meet\+\_\+\+Costumer\+\_\+needs()} function and n the number of stations to iterate 
+\begin{DoxyParams}{Parameters}
+{\em s} & graph that contain all the information about the water supply management system \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a vector of the Pumping stations codes whose removal doesnt affect the system delivery capacity 
+\end{DoxyReturn}
+\Hypertarget{class_menu_afc73803b6b043d03a787f6c836b308c6}\label{class_menu_afc73803b6b043d03a787f6c836b308c6} 
+\index{Menu@{Menu}!Remove\_Water\_Reservoir@{Remove\_Water\_Reservoir}}
+\index{Remove\_Water\_Reservoir@{Remove\_Water\_Reservoir}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{Remove\_Water\_Reservoir()}{Remove\_Water\_Reservoir()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{bool}} Menu\+::\+Remove\+\_\+\+Water\+\_\+\+Reservoir (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{string}}}]{reservoi\+\_\+code,  }\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$}]{s }\end{DoxyParamCaption})}
+
+function that removes a specific reservoir from the system and verifies which cities have their supply affected -\/ complexity O(VE\texorpdfstring{$^\wedge$}{\string^}2 + f(n)), where V is the number of vertices, E is the number of edges in the graph s and f(n) the time complexity of the \doxylink{class_menu_acbb80a3d28d30b2270f9fe034692e6d7}{Meet\+\_\+\+Costumer\+\_\+needs()} function 
+\begin{DoxyParams}{Parameters}
+{\em s} & graph that contain all the information about the water supply management system \\
+\hline
+{\em reservoir\+\_\+code} & code of the specific reservoir that will be removed from the system \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the given reservoir exists and it outputs directly to the console the cities whose supply is affected by this removal and false otherwise 
+\end{DoxyReturn}
+\Hypertarget{class_menu_a440ca1f16ec2810356cc9db1376e0a6a}\label{class_menu_a440ca1f16ec2810356cc9db1376e0a6a} 
+\index{Menu@{Menu}!restore\_capacities@{restore\_capacities}}
+\index{restore\_capacities@{restore\_capacities}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{restore\_capacities()}{restore\_capacities()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Menu\+::restore\+\_\+capacities (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$}]{d,  }\item[{\mbox{\hyperlink{class_edge}{unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{class_edge}{double}} $>$}]{restore\+\_\+weights }\end{DoxyParamCaption})}
+
+function that restores the capacity of all the removed pipes -\/ complexity O(\+VE), where V is the number of vertices, E is the number of edges in the graph d 
+\begin{DoxyParams}{Parameters}
+{\em d} & graph that contain all the information about the water supply management system \\
+\hline
+{\em restore\+\_\+weights} & an unordered\+\_\+map that stores the key value pairs of the removed edges and their corresponding initial capacity \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{class_menu_a4a903b2983eca18be9c227ad5700f3de}\label{class_menu_a4a903b2983eca18be9c227ad5700f3de} 
+\index{Menu@{Menu}!testAndVisit@{testAndVisit}}
+\index{testAndVisit@{testAndVisit}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{testAndVisit()}{testAndVisit()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Menu\+::test\+And\+Visit (\begin{DoxyParamCaption}\item[{std\+::queue$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&}]{q,  }\item[{\mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}}]{e,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \texorpdfstring{$\ast$}{*}}]{w,  }\item[{\mbox{\hyperlink{class_edge}{double}}}]{residual }\end{DoxyParamCaption})}
+
+auxiliary function to the edmonds\+Karp algorithm that checks if a vertex has been visited and if the residual capacity of an edge is not null-\/ complexity O(1) 
+\begin{DoxyParams}{Parameters}
+{\em q} & queue of the vertexes that belong to the augmenting path \\
+\hline
+{\em w} & vertex of an augmenting path that is verified if it has not been visited \\
+\hline
+{\em residual} & is the edge residual capacity \\
+\hline
+{\em e} & edge of a augmenting path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_menu_8h}{Menu.\+h}}\item 
+\mbox{\hyperlink{_menu_8cpp}{Menu.\+cpp}}\end{DoxyCompactItemize}
