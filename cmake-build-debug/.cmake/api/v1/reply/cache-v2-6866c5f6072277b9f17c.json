@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/afdom/OneDrive/Ambiente de Trabalho/DA/Project/watersupply/cmake-build-debug"
+			"value" : "c:/Users/jorge/Desktop/temp/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -643,7 +643,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/afdom/OneDrive/Ambiente de Trabalho/DA/Project/watersupply/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/jorge/Desktop/temp/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -715,7 +715,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/afdom/OneDrive/Ambiente de Trabalho/DA/Project/watersupply"
+			"value" : "C:/Users/jorge/Desktop/temp"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1335,7 +1335,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/afdom/OneDrive/Ambiente de Trabalho/DA/Project/watersupply/cmake-build-debug"
+			"value" : "C:/Users/jorge/Desktop/temp/cmake-build-debug"
 		},
 		{
 			"name" : "Projeto_DA_IS_TOP_LEVEL",
@@ -1359,7 +1359,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/afdom/OneDrive/Ambiente de Trabalho/DA/Project/watersupply"
+			"value" : "C:/Users/jorge/Desktop/temp"
 		},
 		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",

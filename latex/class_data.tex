@@ -1,0 +1,114 @@
+\doxysection{Data Class Reference}
+\hypertarget{class_data}{}\label{class_data}\index{Data@{Data}}
+
+
+Represents the data that was parsed from the csv files.  
+
+
+
+
+{\ttfamily \#include $<$Data.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_data_af5bc3008f4fca7035c047a03d2aef3d3}{parse\+Reservoir}} ()
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_data_a36f0467d31540017e0b25988626ecc62}{parse\+City}} ()
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_data_a5790bfa1a8d986fdc98adb5cd1edf178}{parse\+Station}} ()
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_data_a11825ed6446d346493ee8665ed9913b3}{parse\+Pipes}} ()
+\item 
+\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ \mbox{\hyperlink{class_data_a5643f51cbc05103ae2ebd72a9f055945}{get\+Supply}} ()
+\item 
+\mbox{\hyperlink{class_edge}{unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge}{string}}, \mbox{\hyperlink{class_city}{City}} $>$ \mbox{\hyperlink{class_data_ad1c42761a49631e46be6d7bf11d58d5d}{get\+Cities}} ()
+\item 
+\mbox{\hyperlink{class_edge}{unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge}{string}}, \mbox{\hyperlink{class_reservoir}{Reservoir}} $>$ \mbox{\hyperlink{class_data_abfe55d16c055fba60d60ba2d64984a20}{get\+Reservoirs}} ()
+\item 
+\mbox{\hyperlink{class_edge}{unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge}{string}}, \mbox{\hyperlink{class_station}{Station}} $>$ \mbox{\hyperlink{class_data_aa5bc70476b7878a75e8545dc884be09b}{get\+Stations}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the data that was parsed from the csv files. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_data_ad1c42761a49631e46be6d7bf11d58d5d}\label{class_data_ad1c42761a49631e46be6d7bf11d58d5d} 
+\index{Data@{Data}!getCities@{getCities}}
+\index{getCities@{getCities}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{getCities()}{getCities()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge}{string}}, \mbox{\hyperlink{class_city}{City}} $>$ Data\+::get\+Cities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+function that retrieves an unordered\+\_\+map that stores key value pairs of city codes and their corresponding Cities, allowing for constant lookup of Cities by their code -\/ complexity O(1) \begin{DoxyReturn}{Returns}
+unordered\+\_\+map that stores key value pairs of city codes and their corresponding Cities 
+\end{DoxyReturn}
+\Hypertarget{class_data_abfe55d16c055fba60d60ba2d64984a20}\label{class_data_abfe55d16c055fba60d60ba2d64984a20} 
+\index{Data@{Data}!getReservoirs@{getReservoirs}}
+\index{getReservoirs@{getReservoirs}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{getReservoirs()}{getReservoirs()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge}{string}}, \mbox{\hyperlink{class_reservoir}{Reservoir}} $>$ Data\+::get\+Reservoirs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+function that retrieves an unordered\+\_\+map that stores key value pairs of reservoir codes and their corresponding Reservoirs, allowing for constant lookup of Reservoirs by their code -\/ complexity O(1) \begin{DoxyReturn}{Returns}
+unordered\+\_\+map that stores key value pairs of reservoir codes and their corresponding Reservoirs 
+\end{DoxyReturn}
+\Hypertarget{class_data_aa5bc70476b7878a75e8545dc884be09b}\label{class_data_aa5bc70476b7878a75e8545dc884be09b} 
+\index{Data@{Data}!getStations@{getStations}}
+\index{getStations@{getStations}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{getStations()}{getStations()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge}{string}}, \mbox{\hyperlink{class_station}{Station}} $>$ Data\+::get\+Stations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+function that retrieves an unordered\+\_\+map that stores key value pairs of Pumping \doxylink{class_station}{Station} codes and their corresponding Pumping Stations, allowing for constant lookup of Pumping Stations by their code -\/ complexity O(1) \begin{DoxyReturn}{Returns}
+unordered\+\_\+map that stores key value pairs of Pumping Stations codes and their corresponding Pumping Stations 
+\end{DoxyReturn}
+\Hypertarget{class_data_a5643f51cbc05103ae2ebd72a9f055945}\label{class_data_a5643f51cbc05103ae2ebd72a9f055945} 
+\index{Data@{Data}!getSupply@{getSupply}}
+\index{getSupply@{getSupply}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{getSupply()}{getSupply()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{string}} $>$ Data\+::get\+Supply (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+function that retrieves the graph that contains all the information about the water supply management system -\/ complexity O(1) \begin{DoxyReturn}{Returns}
+graph whose vertexes correspond to any of the structures (\doxylink{class_city}{City}, Reservoirs or Pumping stations) and the Edges to pipes 
+\end{DoxyReturn}
+\Hypertarget{class_data_a36f0467d31540017e0b25988626ecc62}\label{class_data_a36f0467d31540017e0b25988626ecc62} 
+\index{Data@{Data}!parseCity@{parseCity}}
+\index{parseCity@{parseCity}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{parseCity()}{parseCity()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Data\+::parse\+City (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+function that parses the data from the \doxylink{class_edge_ab976213419283ed754f42f57b195a288}{Cities.\+csv} file and uses it to build a graph accordingly
+\begin{DoxyItemize}
+\item complexity O(\+N) where N is the number of lines in the file 
+\end{DoxyItemize}\Hypertarget{class_data_a11825ed6446d346493ee8665ed9913b3}\label{class_data_a11825ed6446d346493ee8665ed9913b3} 
+\index{Data@{Data}!parsePipes@{parsePipes}}
+\index{parsePipes@{parsePipes}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{parsePipes()}{parsePipes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Data\+::parse\+Pipes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+function that parses the data from the \doxylink{class_edge_ab976213419283ed754f42f57b195a288}{Pipes.\+csv} file and uses it to build a graph accordingly
+\begin{DoxyItemize}
+\item complexity O(\+N) where N is the number of lines in the file 
+\end{DoxyItemize}\Hypertarget{class_data_af5bc3008f4fca7035c047a03d2aef3d3}\label{class_data_af5bc3008f4fca7035c047a03d2aef3d3} 
+\index{Data@{Data}!parseReservoir@{parseReservoir}}
+\index{parseReservoir@{parseReservoir}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{parseReservoir()}{parseReservoir()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Data\+::parse\+Reservoir (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+function that parses the data from the Reservoir.\+csv file and uses it to build a graph accordingly
+\begin{DoxyItemize}
+\item complexity O(\+N) where N is the number of lines in the file 
+\end{DoxyItemize}\Hypertarget{class_data_a5790bfa1a8d986fdc98adb5cd1edf178}\label{class_data_a5790bfa1a8d986fdc98adb5cd1edf178} 
+\index{Data@{Data}!parseStation@{parseStation}}
+\index{parseStation@{parseStation}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{parseStation()}{parseStation()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Data\+::parse\+Station (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+function that parses the data from the \doxylink{class_edge_ab976213419283ed754f42f57b195a288}{Stations.\+csv} file and uses it to build a graph accordingly
+\begin{DoxyItemize}
+\item complexity O(\+N) where N is the number of lines in the file 
+\end{DoxyItemize}
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_data_8h}{Data.\+h}}\item 
+\mbox{\hyperlink{_data_8cpp}{Data.\+cpp}}\end{DoxyCompactItemize}

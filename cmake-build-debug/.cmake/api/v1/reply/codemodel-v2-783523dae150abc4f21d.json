@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/afdom/OneDrive/Ambiente de Trabalho/DA/Project/watersupply/cmake-build-debug",
-		"source" : "C:/Users/afdom/OneDrive/Ambiente de Trabalho/DA/Project/watersupply"
+		"build" : "C:/Users/jorge/Desktop/temp/cmake-build-debug",
+		"source" : "C:/Users/jorge/Desktop/temp"
 	},
 	"version" : 
 	{
