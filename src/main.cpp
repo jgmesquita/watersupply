@@ -17,30 +17,30 @@ int main() {
     Menu m = Menu();
     Graph<string> s = m.getSupy();
     while (true) {
-        cout << " _________________________________________ " << '\n';
-        cout << "|      Water Supply Management System     |" << '\n';
-        cout << "|                                         |" << '\n';
-        cout << "|1.  Maximum flow                         |" << '\n';
-        cout << "|2.  Costumer water needs                 |" << '\n';
-        cout << "|3.  Balance Load across network          |" << '\n';
-        cout << "|4.  Remove Water Reservoir               |" << '\n';
-        cout << "|5.  Pumping Station Maintenance          |" << '\n';
-        cout << "|6.  Station Maintenance - no effect      |" << '\n';
-        cout << "|7.  Remove Pipe                          |" << '\n';
-        cout << "|8.  Key pipes for each city              |" << '\n';
-        cout << "|_________________________________________|" << "\n";
+        cout << " __________________________________________ " << '\n';
+        cout << "|      Water Supply Management System      |" << '\n';
+        cout << "|                                          |" << '\n';
+        cout << "| [1]  Maximum flow                        |" << '\n';
+        cout << "| [2]  Costumer water needs                |" << '\n';
+        cout << "| [3]  Balance Load across network         |" << '\n';
+        cout << "| [4]  Remove Water Reservoir              |" << '\n';
+        cout << "| [5]  Pumping Station Maintenance         |" << '\n';
+        cout << "| [6]  Station Maintenance - no effect     |" << '\n';
+        cout << "| [7]  Remove Pipe                         |" << '\n';
+        cout << "| [8]  Key pipes for each city             |" << '\n';
+        cout << "|__________________________________________|" << "\n";
         cout << "Please enter your choice:";
         cin >> choice;
 
         switch (choice) {
             case 1: {
                 int opcao;
-                cout << " _________________________________________ " << '\n';
-                cout << "|      Water Supply Management System     |" << '\n';
-                cout << "|                                         |" << '\n';
-                cout << "|1.  Maximum flow of each city            |" << '\n';
-                cout << "|2.  Maximum flow of desired city         |" << '\n';
-                cout << "|_________________________________________|" << "\n";
+                cout << " __________________________________________ " << '\n';
+                cout << "|      Water Supply Management System      |" << '\n';
+                cout << "|                                          |" << '\n';
+                cout << "| [1]  Maximum flow of each city           |" << '\n';
+                cout << "| [2]  Maximum flow of desired city        |" << '\n';
+                cout << "|__________________________________________|" << "\n";
                 cout << "Please choose the desired option:";
                 cin >> opcao;
                 if(opcao ==1) m.Max_Amount_Water(s);
@@ -85,12 +85,12 @@ int main() {
             }
             case 7: {
                 int opcao;
-                cout << " _________________________________________ " << '\n';
-                cout << "|      Water Supply Management System     |" << '\n';
-                cout << "|                                         |" << '\n';
-                cout << "|1.  Remove a single pipe                 |" << '\n';
-                cout << "|2.  Remove multiple pipes                |" << '\n';
-                cout << "|_________________________________________|" << "\n";
+                cout << " __________________________________________ " << '\n';
+                cout << "|      Water Supply Management System      |" << '\n';
+                cout << "|                                          |" << '\n';
+                cout << "| [1]  Remove a single pipe                |" << '\n';
+                cout << "| [2]  Remove multiple pipes               |" << '\n';
+                cout << "|__________________________________________|" << "\n";
                 cout << "Please choose the desired option:";
                 cin >> opcao;
                 if(opcao ==1) {
@@ -126,12 +126,12 @@ int main() {
             }
             case 8: {
                 int opcao;
-                cout << " _________________________________________ " << '\n';
-                cout << "|      Water Supply Management System     |" << '\n';
-                cout << "|                                         |" << '\n';
-                cout << "|[1]  Critical pipes of each city         |" << '\n';
-                cout << "|[2]  Critical pipes of desired city      |" << '\n';
-                cout << "|_________________________________________|" << "\n";
+                cout << " __________________________________________ " << '\n';
+                cout << "|      Water Supply Management System      |" << '\n';
+                cout << "|                                          |" << '\n';
+                cout << "| [1]  Critical pipes of each city         |" << '\n';
+                cout << "| [2]  Critical pipes of desired city      |" << '\n';
+                cout << "|__________________________________________|" << "\n";
                 cout << "Please choose the desired option:";
                 cin >> opcao;
                 if(opcao ==1) m.Critical_Pipe_allCities(s);
