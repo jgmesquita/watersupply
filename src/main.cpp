@@ -129,8 +129,8 @@ int main() {
                 cout << " _________________________________________ " << '\n';
                 cout << "|      Water Supply Management System     |" << '\n';
                 cout << "|                                         |" << '\n';
-                cout << "|1.  Critical pipes of each city          |" << '\n';
-                cout << "|2.  Critical pipes of desired city       |" << '\n';
+                cout << "|[1]  Critical pipes of each city         |" << '\n';
+                cout << "|[2]  Critical pipes of desired city      |" << '\n';
                 cout << "|_________________________________________|" << "\n";
                 cout << "Please choose the desired option:";
                 cin >> opcao;
